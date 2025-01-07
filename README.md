@@ -81,17 +81,6 @@ A modern Next.js 14 application serving as the digital platform for Aveiro's sma
 - **Performance:** Optimized with proper image optimization and code splitting
 - **State:** Global state management with Zustand, URL state with nuqs
 
-## Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com/docs)
-- [Shadcn UI](https://ui.shadcn.com)
-- [Radix UI](https://www.radix-ui.com)
-- [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
-
-## Deployment
-
-The application is deployed on Vercel with automatic deployments from the main branch.
 
 ## Codebase
 
