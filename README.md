@@ -11,20 +11,6 @@ A modern Next.js 14 application serving as the digital platform for Aveiro's sma
 - **Maps:** Mapbox GL JS
 - **Font:** Inter (Variable Font)
 
-## Project Structure
-
-```
-├── app/
-│   ├── fonts/
-│   │   ├── GeistMonoVF.woff
-│   │   └── GeistVF.woff
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── globals.css
-├── components/
-├── styles/
-└── public/
-```
 
 ## Features
 
