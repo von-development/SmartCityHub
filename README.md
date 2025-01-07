@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aveiro Smart City Platform
 
-## Getting Started
+A modern Next.js 14 application serving as the digital platform for Aveiro's smart city initiatives, providing citizens with easy access to municipal services, events, and city information.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework:** Next.js 14 (App Router)
+- **Styling:** Tailwind CSS, Stylus Modules
+- **UI Components:** Shadcn UI, Radix UI
+- **State Management:** Zustand
+- **Maps:** Mapbox GL JS
+- **Font:** Inter (Variable Font)
+
+## Project Structure
+
+```
+├── app/
+│   ├── fonts/
+│   │   ├── GeistMonoVF.woff
+│   │   └── GeistVF.woff
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── globals.css
+├── components/
+├── styles/
+└── public/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 🏛️ **Municipal Services:** Comprehensive access to city services and information
+- 🗺️ **Interactive City Map:** Explore Aveiro with Mapbox integration
+- 📅 **Event Management:** Browse and search city events
+- 🤖 **AI Assistant:** Smart chatbot for city-related queries
+- 📱 **Responsive Design:** Mobile-first approach with Tailwind CSS
+- 🎨 **Modern UI:** Built with Shadcn UI and Radix UI
+- 🔄 **State Management:** Efficient state handling with Zustand
+- ⚡ **Performance:** Optimized for Core Web Vitals
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Development Checklist
+
+- [x] Project setup with Next.js 14
+- [x] UI components implementation
+- [x] Responsive layout design
+- [x] Map integration with Mapbox
+- [x] Events listing and filtering
+- [x] Chat interface implementation
+- [ ] Backend API integration
+- [ ] Authentication system
+- [ ] User preferences
+- [ ] Service workers for offline support
+- [ ] Analytics integration
+- [ ] E2E testing setup
+- [ ] CI/CD pipeline
+- [ ] Language server integration
+- [ ] Monitoring and error tracking
+
+## TODO
+
+### High Priority
+- [ ] Integrate with language server for enhanced development
+- [ ] Complete API endpoints for events system
+- [ ] Implement user authentication
+- [ ] Add error boundaries and fallbacks
+
+### Medium Priority
+- [ ] Add more interactive map features
+- [ ] Enhance chat AI capabilities
+- [ ] Implement service worker
+- [ ] Add PWA support
+
+### Low Priority
+- [ ] Add more language options
+- [ ] Implement advanced search features
+- [ ] Add more city service integrations
+
+## Development
+
+- **Styling:** Hybrid approach with Tailwind CSS for utilities and Stylus Modules for components
+- **Components:** React Server Components (RSC) by default, with 'use client' directives only where necessary
+- **Performance:** Optimized with proper image optimization and code splitting
+- **State:** Global state management with Zustand, URL state with nuqs
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Shadcn UI](https://ui.shadcn.com)
+- [Radix UI](https://www.radix-ui.com)
+- [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The application is deployed on Vercel with automatic deployments from the main branch.
 
-## Deploy on Vercel
+## Codebase
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is part of the Aveiro Tech City initiative, aiming to modernize municipal services through digital transformation.
