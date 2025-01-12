@@ -1,9 +1,0 @@
-1 - Home Page	Categories, personalized services, highlights, most accessed.
-2 - Categories Page	List of service categories with expandable service sections.
-3 - Personalized Services	Tailored events and services for user profiles (e.g., Jovem).
-4 - Event Agenda	Categorized events with cards linking to details.
-5 - Event Details	Full event details, maps, navigation links, and external sites.
-6 - Search Page	Search bar, voice input, and specialist chat cards.
-7 - Map Page	Interactive map with filters, pins for services and events.
-8 - Service Details	Specific service actions with external integrations.
-9 - LLMs para diversos servicos como servicos online, eventos, recomendacoes, investidores, etc.

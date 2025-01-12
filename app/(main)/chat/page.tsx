@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { ChatList } from './_components/chat-list'
 
 export default function ChatPage() {
-  redirect("/chat/events");
+  return <ChatList />
 } 

@@ -1,38 +1,35 @@
-import { OpenAI } from 'langchain/llms/openai'
-import { BufferMemory } from 'langchain/memory'
-import { ConversationChain } from 'langchain/chains'
 import type { Message } from '@/types/agent'
-
-const model = new OpenAI({
-  modelName: 'gpt-4-turbo-preview',
-  temperature: 0.7,
-  openAIApiKey: process.env.OPENAI_API_KEY
-})
-
-const memory = new BufferMemory()
-
-const chain = new ConversationChain({
-  llm: model,
-  memory: memory
-})
+import { agents } from '.'
 
 export async function generateResponse(
   messages: Message[],
-  systemPrompt: string
+  agentId: string
 ): Promise<string> {
-  const formattedHistory = messages
-    .map(msg => `${msg.role}: ${msg.content}`)
-    .join('\n')
+  console.log('Generating response for agent:', agentId)
+  console.log('Messages:', messages)
 
-  const response = await chain.call({
-    input: `
-      System: ${systemPrompt}
-      
-      Previous conversation:
-      ${formattedHistory}
-      
-      Assistant: `
-  })
+  const agent = agents.find(a => a.id === agentId)
+  if (!agent) {
+    console.error('Agent not found:', agentId)
+    throw new Error('Agent not found')
+  }
 
-  return response.response
+  const lastMessage = messages[messages.length - 1]
+  
+  try {
+    console.log('Invoking agent executor...')
+    const response = await agent.executor.invoke({
+      input: lastMessage.content,
+      chat_history: messages.slice(0, -1).map(m => ({
+        role: m.role,
+        content: m.content
+      }))
+    })
+    console.log('Response:', response)
+
+    return response.output
+  } catch (error) {
+    console.error('Error generating response:', error)
+    return 'Desculpe, ocorreu um erro ao processar sua solicitação.'
+  }
 } 
