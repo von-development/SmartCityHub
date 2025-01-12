@@ -1,73 +1,73 @@
-# Aveiro Smart City Platform
+# Plataforma Aveiro Smart City
 
-A modern Next.js 14 application serving as the digital platform for Aveiro's smart city initiatives, providing citizens with easy access to municipal services, events, and city information.
+Uma aplicação moderna em Next.js 14 que serve como plataforma digital para as iniciativas de cidade inteligente de Aveiro, proporcionando aos cidadãos acesso fácil aos serviços municipais, eventos e informações da cidade.
 
-## Tech Stack
+## Stack Tecnológica
 
 - **Framework:** Next.js 14 (App Router)
-- **Styling:** Tailwind CSS, Stylus Modules
-- **UI Components:** Shadcn UI, Radix UI
-- **State Management:** Zustand
-- **Maps:** Mapbox GL JS
-- **Font:** Inter (Variable Font)
+- **Estilização:** Tailwind CSS, Módulos Stylus
+- **Componentes UI:** Shadcn UI, Radix UI
+- **Gerenciamento de Estado:** Zustand
+- **Mapas:** Mapbox GL JS
+- **Fonte:** Inter (Fonte Variável)
 
+## Funcionalidades
 
-## Features
+- 🏛️ **Serviços Municipais:** Acesso abrangente aos serviços e informações da cidade
+- 🗺️ **Mapa Interativo:** Explore Aveiro com integração Mapbox
+- 📅 **Gestão de Eventos:** Navegue e pesquise eventos da cidade
+- 🤖 **Assistente Virtual:** Chatbot inteligente para consultas relacionadas à cidade
+- 📱 **Design Responsivo:** Abordagem mobile-first com Tailwind CSS
+- 🎨 **Interface Moderna:** Construída com Shadcn UI e Radix UI
+- 🔄 **Gestão de Estado:** Gerenciamento eficiente com Zustand
+- ⚡ **Performance:** Otimizada para Core Web Vitals
 
-- 🏛️ **Municipal Services:** Comprehensive access to city services and information
-- 🗺️ **Interactive City Map:** Explore Aveiro with Mapbox integration
-- 📅 **Event Management:** Browse and search city events
-- 🤖 **AI Assistant:** Smart chatbot for city-related queries
-- 📱 **Responsive Design:** Mobile-first approach with Tailwind CSS
-- 🎨 **Modern UI:** Built with Shadcn UI and Radix UI
-- 🔄 **State Management:** Efficient state handling with Zustand
-- ⚡ **Performance:** Optimized for Core Web Vitals
+## Checklist de Desenvolvimento
 
-## Development Checklist
+- [x] Configuração do projeto com Next.js 14
+- [x] Implementação dos componentes UI
+- [x] Design de layout responsivo
+- [x] Integração de mapas com Mapbox
+- [x] Listagem e filtragem de eventos
+- [x] Implementação da interface de chat
+- [ ] Integração com API backend
+- [ ] Sistema de autenticação
+- [ ] Preferências do usuário
+- [ ] Service workers para suporte offline
+- [ ] Integração de analytics
+- [ ] Configuração de testes E2E
+- [ ] Pipeline de CI/CD
+- [ ] Integração com servidor de linguagem
+- [ ] Monitoramento e rastreamento de erros
 
-- [x] Project setup with Next.js 14
-- [x] UI components implementation
-- [x] Responsive layout design
-- [x] Map integration with Mapbox
-- [x] Events listing and filtering
-- [x] Chat interface implementation
-- [ ] Backend API integration
-- [ ] Authentication system
-- [ ] User preferences
-- [ ] Service workers for offline support
-- [ ] Analytics integration
-- [ ] E2E testing setup
-- [ ] CI/CD pipeline
-- [ ] Language server integration
-- [ ] Monitoring and error tracking
+## Tarefas Pendentes
 
-## TODO
+### Alta Prioridade
+- [ ] Integrar com servidor de linguagem para desenvolvimento aprimorado
+- [ ] Completar endpoints da API para sistema de eventos
+- [ ] Implementar autenticação de usuários
+- [ ] Adicionar limites de erro e fallbacks
 
-### High Priority
-- [ ] Integrate with language server for enhanced development
-- [ ] Complete API endpoints for events system
-- [ ] Implement user authentication
-- [ ] Add error boundaries and fallbacks
+### Média Prioridade
+- [ ] Adicionar mais recursos interativos ao mapa
+- [ ] Aprimorar capacidades da IA do chat
+- [ ] Implementar service worker
+- [ ] Adicionar suporte a PWA
 
-### Medium Priority
-- [ ] Add more interactive map features
-- [ ] Enhance chat AI capabilities
-- [ ] Implement service worker
-- [ ] Add PWA support
+### Baixa Prioridade
+- [ ] Adicionar mais opções de idiomas
+- [ ] Implementar recursos avançados de busca
+- [ ] Adicionar mais integrações de serviços municipais
 
-### Low Priority
-- [ ] Add more language options
-- [ ] Implement advanced search features
-- [ ] Add more city service integrations
+## Desenvolvimento
 
-## Development
+- **Estilização:** Abordagem híbrida com Tailwind CSS para utilitários e Módulos Stylus para componentes
+- **Componentes:** React Server Components (RSC) por padrão, com diretivas 'use client' apenas quando necessário
+- **Performance:** Otimizada com otimização adequada de imagens e divisão de código
+- **Estado:** Gerenciamento de estado global com Zustand, estado de URL com nuqs
 
-- **Styling:** Hybrid approach with Tailwind CSS for utilities and Stylus Modules for components
-- **Components:** React Server Components (RSC) by default, with 'use client' directives only where necessary
-- **Performance:** Optimized with proper image optimization and code splitting
-- **State:** Global state management with Zustand, URL state with nuqs
+## Base de Código
 
+Este projeto faz parte da iniciativa Aveiro Tech City, visando modernizar os serviços municipais através da transformação digital.
 
-## Codebase
-
-This project is part of the Aveiro Tech City initiative, aiming to modernize municipal services through digital transformation.
+### Estrutura do Projeto
