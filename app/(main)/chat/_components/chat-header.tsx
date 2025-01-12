@@ -1,51 +1,37 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui";
-import { Bot, MoreHorizontal, RefreshCcw } from "lucide-react";
-import { motion } from "framer-motion";
+import type { Agent } from '@/types/agent'
+import { agents } from '@/lib/agents'
+import { ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
 interface ChatHeaderProps {
-  onReset: () => void;
-  isConnected: boolean;
+  agentId: string
 }
 
-export function ChatHeader({ onReset, isConnected }: ChatHeaderProps) {
+export function ChatHeader({ agentId }: ChatHeaderProps) {
+  const agent = agents.find(a => a.id === agentId)
+  if (!agent) return null
+
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="flex items-center justify-between p-4 border-b"
-    >
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-          <Bot className="w-6 h-6 text-primary" />
-        </div>
+    <div className="border-b p-4">
+      <div className="flex items-center gap-4">
+        <Link 
+          href="/chat"
+          className="p-2 rounded-lg hover:bg-zinc-100 transition-colors"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Link>
+        <Avatar className="h-12 w-12 ring-2 ring-primary/10">
+          <AvatarImage src={agent.avatar} alt={agent.name} />
+          <AvatarFallback>{agent.name[0]}</AvatarFallback>
+        </Avatar>
         <div>
-          <h2 className="font-semibold">Assistente de Eventos</h2>
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-yellow-500'}`} />
-            <p className="text-sm text-muted-foreground">
-              {isConnected ? 'Online' : 'Conectando...'}
-            </p>
-          </div>
+          <h2 className="font-semibold">{agent.name}</h2>
+          <p className="text-sm text-muted-foreground">{agent.description}</p>
         </div>
       </div>
-      <div className="flex items-center gap-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onReset}
-          title="Reiniciar conversa"
-        >
-          <RefreshCcw className="w-4 h-4" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-        >
-          <MoreHorizontal className="w-4 h-4" />
-        </Button>
-      </div>
-    </motion.div>
-  );
+    </div>
+  )
 } 

@@ -1,43 +1,27 @@
-import { notFound } from "next/navigation";
-import { ChatWindow } from "@/app/(main)/chat/_components/chat-window";
+'use client'
 
-interface ChatAgentPageProps {
-  params: {
-    agentId: string;
-  };
-}
+import { useEffect } from 'react'
+import { useAgentStore } from '@/stores/use-agent-store'
+import { ChatInput } from '../_components/chat-input'
+import { ChatMessages } from '../_components/chat-messages'
+import { ChatHeader } from '../_components/chat-header'
 
-const agents = {
-  events: {
-    name: "Assistente de Eventos",
-    description: "Ajuda a encontrar eventos em Aveiro",
-  },
-  // Add other agents here when needed
-};
+export default function AgentChatPage({
+  params
+}: {
+  params: { agentId: string }
+}) {
+  const { setCurrentAgent } = useAgentStore()
 
-export default function ChatAgentPage({ params }: ChatAgentPageProps) {
-  const agent = agents[params.agentId as keyof typeof agents];
-
-  if (!agent) {
-    notFound();
-  }
+  useEffect(() => {
+    setCurrentAgent(params.agentId)
+  }, [params.agentId, setCurrentAgent])
 
   return (
-    <div className="container py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold">{agent.name}</h1>
-          <p className="text-muted-foreground">{agent.description}</p>
-        </div>
-        <ChatWindow />
-      </div>
-    </div>
-  );
-}
-
-// Generate static params for known agents
-export function generateStaticParams() {
-  return Object.keys(agents).map((agentId) => ({
-    agentId,
-  }));
+    <>
+      <ChatHeader agentId={params.agentId} />
+      <ChatMessages />
+      <ChatInput />
+    </>
+  )
 } 

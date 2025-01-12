@@ -2,16 +2,15 @@ export interface CurrentWeather {
   temperature: number;
   feels_like: number;
   humidity: number;
+  wind_speed: number;
   description: string;
   icon: string;
-  wind_speed: number;
 }
 
 export interface ForecastDay {
-  date: string;
-  temp_max: number;
+  date: number;
   temp_min: number;
-  description: string;
+  temp_max: number;
   icon: string;
 }
 

@@ -1,55 +1,46 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui";
-import { Loader2, Send } from "lucide-react";
-import { useState } from "react";
-import { ChatSuggestions } from "./chat-suggestions";
+import { useState } from 'react'
+import { useAgentStore } from '@/stores/use-agent-store'
+import { SendHorizontal } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Loader2 } from 'lucide-react'
 
-interface ChatInputProps {
-  onSendMessage: (message: string) => void;
-  isLoading: boolean;
-}
+export function ChatInput() {
+  const [input, setInput] = useState('')
+  const { sendMessage, isLoading } = useAgentStore()
 
-export function ChatInput({ onSendMessage, isLoading }: ChatInputProps) {
-  const [message, setMessage] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (message.trim() && !isLoading) {
-      onSendMessage(message);
-      setMessage('');
-      setShowSuggestions(false);
-    }
-  }
-
-  function handleSuggestionClick(suggestion: string) {
-    onSendMessage(suggestion);
-    setShowSuggestions(false);
+    await sendMessage(input)
+    setInput('')
   }
 
   return (
-    <div className="space-y-4">
-      {showSuggestions && (
-        <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
-      )}
-      <form onSubmit={handleSubmit} className="flex gap-2">
+    <form onSubmit={handleSubmit} className="border-t p-4">
+      <div className="flex items-center gap-2">
         <input
           type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Pergunte sobre eventos em Aveiro..."
-          className="flex-1 rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Digite sua mensagem..."
+          className="flex-1 p-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-primary"
           disabled={isLoading}
         />
-        <Button type="submit" disabled={isLoading}>
+        <Button 
+          type="submit"
+          disabled={!input.trim() || isLoading}
+          className="p-3 rounded-xl bg-primary text-white hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        >
           {isLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <Loader2 className="h-5 w-5 animate-spin" />
           ) : (
-            <Send className="h-4 w-4" />
+            <SendHorizontal className="h-5 w-5" />
           )}
         </Button>
-      </form>
-    </div>
-  );
+      </div>
+    </form>
+  )
 } 

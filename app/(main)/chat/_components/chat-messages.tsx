@@ -1,131 +1,79 @@
-"use client";
+'use client'
 
-import { Message } from "@/types/chat";
-import { motion } from "framer-motion";
-import { Bot, User, ExternalLink, Info, Calendar, Newspaper, Link2 } from "lucide-react";
-import ReactMarkdown from 'react-markdown';
-import { Card } from "@/components/ui";
-import { ResumoSection, EventosSection, NoticiasSection, LinksSection, EventItem } from './sections';
+import { useAgentStore } from '@/stores/use-agent-store'
+import { motion } from 'framer-motion'
+import { User } from 'lucide-react'
+import { Markdown } from '@/components/markdown'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { agents } from '@/lib/agents'
+import { Loader2 } from 'lucide-react'
 
-interface ChatMessagesProps {
-  messages: Message[];
-}
+export function ChatMessages() {
+  const { messages, currentAgent, isLoading } = useAgentStore()
+  const agent = agents.find(a => a.id === currentAgent)
 
-function getSourceIcon(url: string) {
-  try {
-    const domain = new URL(url).hostname;
-    if (domain.includes('cm-aveiro')) return 'Câmara Municipal';
-    if (domain.includes('aveiro2024')) return 'Aveiro 2024';
-    if (domain.includes('noticiasdeaveiro')) return 'Notícias';
-    if (domain.includes('diarioaveiro')) return 'Diário';
-    return 'Link';
-  } catch {
-    return 'Link';
-  }
-}
-
-export function ChatMessages({ messages }: ChatMessagesProps) {
   return (
-    <div className="space-y-6">
-      {messages.map((message, index) => (
+    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {messages.map((message) => (
         <motion.div
           key={message.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1 }}
-          className={`flex gap-3 ${
-            message.role === 'user' ? 'justify-end' : 'justify-start'
+          className={`flex items-start gap-3 ${
+            message.role === 'assistant' ? 'flex-row' : 'flex-row-reverse'
           }`}
         >
-          {message.role === 'assistant' && (
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-              <Bot className="w-5 h-5 text-primary" />
+          {message.role === 'assistant' ? (
+            <Avatar className="h-10 w-10 ring-2 ring-primary/10">
+              <AvatarImage 
+                src={agent?.avatar} 
+                alt={agent?.name || 'AI Assistant'} 
+              />
+              <AvatarFallback>{agent?.name?.[0] || 'AI'}</AvatarFallback>
+            </Avatar>
+          ) : (
+            <div className="p-2 rounded-lg bg-black">
+              <User className="h-5 w-5 text-white" />
             </div>
           )}
-          <div className={`flex flex-col gap-3 max-w-[85%] ${
-            message.role === 'user' ? 'items-end' : 'items-start'
+          <div className={`flex-1 p-4 rounded-2xl ${
+            message.role === 'assistant' 
+              ? 'bg-zinc-50 prose prose-zinc max-w-none' 
+              : 'bg-black text-white'
           }`}>
-            <Card className={`p-4 w-full ${
-              message.role === 'user' 
-                ? 'bg-primary text-primary-foreground border-0' 
-                : 'bg-background border'
-            }`}>
-              {message.role === 'assistant' ? (
-                <ReactMarkdown
-                  components={{
-                    h3: ({ children }) => {
-                      const content = String(children);
-                      if (content.includes('Resumo')) {
-                        return <ResumoSection>{children}</ResumoSection>;
-                      }
-                      if (content.includes('Eventos')) {
-                        return <EventosSection>{children}</EventosSection>;
-                      }
-                      if (content.includes('Notícias')) {
-                        return <NoticiasSection>{children}</NoticiasSection>;
-                      }
-                      if (content.includes('Links')) {
-                        return <LinksSection>{children}</LinksSection>;
-                      }
-                      return <div>{children}</div>;
-                    },
-                    p: ({ children }) => (
-                      <p className="text-sm text-foreground leading-relaxed mb-4 last:mb-0">
-                        {children}
-                      </p>
-                    ),
-                    strong: ({ children }) => (
-                      <strong className="font-medium text-primary">
-                        {children}
-                      </strong>
-                    ),
-                    ul: ({ children }) => (
-                      <ul className="space-y-2 mb-4 last:mb-0 ml-2">
-                        {children}
-                      </ul>
-                    ),
-                    li: ({ children }) => (
-                      <EventItem>
-                        <div className="flex items-start gap-2 text-sm text-foreground">
-                          <span className="flex-1">{children}</span>
-                        </div>
-                      </EventItem>
-                    ),
-                    a: ({ href, children }) => {
-                      if (!href) return <span>{children}</span>;
-                      
-                      return (
-                        <a 
-                          href={href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-sm px-2 py-1.5 -mx-2 rounded hover:bg-primary/5 text-primary transition-colors group"
-                        >
-                          <ExternalLink className="w-4 h-4 text-primary/50 group-hover:text-primary transition-colors" />
-                          <span className="flex-1">{children}</span>
-                          <span className="text-xs text-muted-foreground">
-                            {getSourceIcon(href)}
-                          </span>
-                        </a>
-                      );
-                    },
-                  }}
-                  className="space-y-6"
-                >
-                  {message.content}
-                </ReactMarkdown>
-              ) : (
-                <p className="text-sm">{message.content}</p>
-              )}
-            </Card>
+            {message.role === 'assistant' ? (
+              <Markdown>{message.content}</Markdown>
+            ) : (
+              <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                {message.content}
+              </p>
+            )}
           </div>
-          {message.role === 'user' && (
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-              <User className="w-5 h-5 text-primary-foreground" />
-            </div>
-          )}
         </motion.div>
       ))}
+      {isLoading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex items-start gap-3"
+        >
+          <Avatar className="h-10 w-10 ring-2 ring-primary/10">
+            <AvatarImage 
+              src={agent?.avatar} 
+              alt={agent?.name || 'AI Assistant'} 
+            />
+            <AvatarFallback>{agent?.name?.[0] || 'AI'}</AvatarFallback>
+          </Avatar>
+          <div className="flex-1 p-4 rounded-2xl bg-zinc-50">
+            <div className="flex items-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              <span className="text-sm text-muted-foreground">
+                Gerando resposta...
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      )}
     </div>
-  );
+  )
 } 
