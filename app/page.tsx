@@ -3,8 +3,20 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles, FileText } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
+  const [particles, setParticles] = useState<Array<{ x: number, y: number }>>([])
+
+  useEffect(() => {
+    // Initialize particles only after component mounts (client-side)
+    const particlesArray = [...Array(20)].map(() => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight
+    }))
+    setParticles(particlesArray)
+  }, [])
+
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center p-24 overflow-hidden bg-white">
       {/* Background Elements */}
@@ -73,18 +85,18 @@ export default function Home() {
 
         {/* Floating 3D Objects */}
         <div className="absolute inset-0 pointer-events-none">
-          {[...Array(20)].map((_, i) => (
+          {particles.map((particle, i) => (
             <motion.div
               key={i}
               initial={{ 
                 opacity: 0,
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight
+                x: particle.x,
+                y: particle.y
               }}
               animate={{ 
                 opacity: [0, 1, 0],
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight
+                x: Math.random() * (particle.x + 200),
+                y: Math.random() * (particle.y + 200)
               }}
               transition={{
                 duration: Math.random() * 10 + 10,
