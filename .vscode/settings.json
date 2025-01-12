@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.css": "postcss"
+  },
+  "css.validate": false,
+  "tailwindCSS.validate": true
+} 

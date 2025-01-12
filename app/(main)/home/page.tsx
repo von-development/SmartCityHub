@@ -3,6 +3,7 @@ import { FeaturedHighlights } from "./_components/featured-highlights";
 import { PopularServices } from "./_components/popular-services";
 import { ServiceCategories } from "./_components/service-categories";
 import { UserCategories } from "./_components/user-categories";
+import { AIAgents } from './_components/ai-agents'
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <PopularServices />
       <ServiceCategories />
       <UserCategories />
+      <AIAgents />
     </div>
   );
 } 
