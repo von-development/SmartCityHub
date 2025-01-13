@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 interface WeatherIconProps {
   icon: string;
   description: string;
@@ -6,7 +8,7 @@ interface WeatherIconProps {
 
 export function WeatherIcon({ icon, description, className }: WeatherIconProps) {
   return (
-    <img
+    <Image
       src={`http://openweathermap.org/img/w/${icon}.png`}
       alt={description}
       className={className}

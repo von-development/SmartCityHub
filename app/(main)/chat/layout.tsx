@@ -1,14 +1,5 @@
 'use client'
 
-import { agents } from '@/lib/agents'
-import { useAgentStore } from '@/stores/use-agent-store'
-import { motion } from 'framer-motion'
-import { Card } from '@/components/ui'
-import { MessageSquare } from 'lucide-react'
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-
 interface ChatLayoutProps {
   children: React.ReactNode
 }

@@ -69,4 +69,9 @@ export async function search(input: { query: string }) {
   }
 
   return JSON.stringify(res.organic_results?.slice(0, 5) || 'No results found')
+}
+
+export async function searchEvents(query: string) {
+  // Remove unused parameter if not needed
+  // Implementation
 } 

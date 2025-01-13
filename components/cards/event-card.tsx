@@ -1,40 +1,56 @@
 "use client";
 
-import { Card, CardHeader, CardFooter } from "@/components/ui";
-import { Calendar, MapPin, Image as ImageIcon } from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui";
+import { Calendar, MapPin } from "lucide-react";
+import Image from "next/image";
 import type { Event } from "@/types";
+import { motion } from "framer-motion";
 
 interface EventCardProps {
   event: Event;
-  className?: string;
 }
 
-export function EventCard({ event, className }: EventCardProps) {
+export function EventCard({ event }: EventCardProps) {
+  const imageSrc = event.image || '/img/placeholder.jpg';
+
   return (
-    <Card className={cn("flex flex-col overflow-hidden group", className)}>
-      <Link href={`/events/${event.id}`}>
-        <div className="relative aspect-[16/9] overflow-hidden bg-muted flex items-center justify-center">
-          <ImageIcon className="h-12 w-12 text-muted-foreground" />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="group"
+    >
+      <Card className="overflow-hidden">
+        <div className="relative h-[300px] overflow-hidden">
+          <Image
+            src={imageSrc}
+            alt={event.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+          />
         </div>
-        <CardHeader>
-          <h3 className="font-semibold line-clamp-1">{event.title}</h3>
-          <p className="text-sm text-muted-foreground line-clamp-2">
-            {event.description}
-          </p>
-        </CardHeader>
-        <CardFooter className="flex gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <Calendar className="h-4 w-4" />
-            {new Date(event.date).toLocaleDateString()}
+        <div className="p-4 space-y-4">
+          <div>
+            <h3 className="font-semibold text-lg line-clamp-2 group-hover:text-primary transition-colors">
+              {event.title}
+            </h3>
+            <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+              {event.description}
+            </p>
           </div>
-          <div className="flex items-center gap-1">
-            <MapPin className="h-4 w-4" />
-            {event.location}
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              <span>{event.date}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPin className="h-4 w-4" />
+              <span>{event.location}</span>
+            </div>
           </div>
-        </CardFooter>
-      </Link>
-    </Card>
+        </div>
+      </Card>
+    </motion.div>
   );
 } 

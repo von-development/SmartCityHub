@@ -12,11 +12,11 @@ export function EventsHeader() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl"
         >
-          <h1 className="text-3xl font-bold mb-4">Events in Aveiro</h1>
+          <h1 className="text-3xl font-bold mb-4">Eventos em Aveiro</h1>
           <p className="text-muted-foreground">
-            Discover cultural events, festivals, exhibitions, and more happening in
-            Aveiro. Filter by date, category, or location to find the perfect event
-            for you.
+            Descubra eventos culturais, festivais, exposições e muito mais acontecendo em 
+            Aveiro. Filtre por data, categoria ou localização para encontrar o evento 
+            perfeito para você.
           </p>
         </motion.div>
       </div>

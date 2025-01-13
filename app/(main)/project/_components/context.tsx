@@ -7,19 +7,19 @@ import { ArrowRight, Target, AlertTriangle, TrendingUp, FileText } from 'lucide-
 const contextPoints = [
   {
     title: 'Problema',
-    description: 'Os aplicativos atuais de Aveiro não oferecem uma experiência eficiente, intuitiva ou personalizada. A ausência de integração de dados, personalização de conteúdo e recursos de inteligência artificial impacta a experiência do usuário.',
+    description: 'A fragmentação dos serviços digitais em Aveiro dificulta o acesso dos cidadãos aos recursos municipais. A falta de uma plataforma centralizada e intuitiva resulta em processos burocráticos lentos, informações desatualizadas e uma experiência frustrante para moradores e visitantes.',
     icon: AlertTriangle,
     gradient: 'from-rose-500 to-pink-500'
   },
   {
     title: 'Objetivo',
-    description: 'Desenvolver uma plataforma inovadora que centralize serviços municipais, integre dados em tempo real e ofereça uma experiência personalizada através de inteligência artificial.',
+    description: 'Criar uma plataforma unificada que simplifique a interação com serviços municipais através de assistentes virtuais especializados, mapas interativos e um sistema inteligente de recomendações. Nosso foco é tornar Aveiro mais acessível e eficiente para todos.',
     icon: Target,
     gradient: 'from-blue-500 to-indigo-500'
   },
   {
     title: 'Impacto',
-    description: 'Melhorar a qualidade de vida dos cidadãos, impulsionar o turismo e o desenvolvimento econômico através de uma cidade mais conectada e inteligente.',
+    description: 'Transformar a experiência digital dos cidadãos, reduzindo tempo em processos burocráticos, facilitando o acesso à informação e promovendo maior engajamento com a cidade. A plataforma também impulsiona o turismo e desenvolvimento local através de recomendações personalizadas.',
     icon: TrendingUp,
     gradient: 'from-emerald-500 to-teal-500'
   }
@@ -45,8 +45,8 @@ export function Context() {
               Entendendo o Cenário
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              A falta de integração de serviços e dados, aliada à ausência de inovação, 
-              limita o potencial econômico e freia o crescimento do turismo e dos negócios locais.
+              Aveiro busca se tornar uma cidade mais inteligente e conectada, mas enfrenta desafios 
+              na integração digital de seus serviços e na experiência oferecida aos cidadãos.
             </p>
           </motion.div>
         </div>

@@ -4,21 +4,13 @@ import { Check, Copy } from 'lucide-react'
 import { useState } from 'react'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import type { ComponentPropsWithoutRef } from 'react'
 
-interface CodeBlockProps {
-  node?: any
+interface CodeProps extends ComponentPropsWithoutRef<'code'> {
   inline?: boolean
-  className?: string
-  children: any
 }
 
-export function CodeBlock({
-  node,
-  inline,
-  className,
-  children,
-  ...props
-}: CodeBlockProps) {
+export function CodeBlock({ inline, className, children }: CodeProps) {
   const [copied, setCopied] = useState(false)
   const match = /language-(\w+)/.exec(className || '')
   const code = String(children).replace(/\n$/, '')
@@ -42,7 +34,6 @@ export function CodeBlock({
         )}
       </button>
       <SyntaxHighlighter
-        {...props}
         style={oneDark}
         language={match[1]}
         PreTag="div"
@@ -52,7 +43,7 @@ export function CodeBlock({
       </SyntaxHighlighter>
     </div>
   ) : (
-    <code {...props} className={className}>
+    <code className={className}>
       {children}
     </code>
   )
