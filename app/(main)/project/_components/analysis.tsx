@@ -117,7 +117,7 @@ const platforms: Platform[] = [
 export function Analysis() {
   return (
     <section className="w-full py-24">
-      <div className="max-w-[1800px] mx-auto px-8">
+      <div className="max-w-[1800px] mx-auto px-4 sm:px-8">
         <div className="mb-16">
           <motion.h2
             initial={{ opacity: 0, x: -20 }}
@@ -143,8 +143,8 @@ export function Analysis() {
                 transition={{ delay: index * 0.1 }}
                 className="group"
               >
-                <Card className="p-8 flex flex-row gap-8 bg-white shadow-xl rounded-3xl border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl">
-                  <div className="flex-shrink-0 space-y-4 w-72">
+                <Card className="p-4 sm:p-8 flex flex-col lg:flex-row gap-4 sm:gap-8 bg-white shadow-xl rounded-3xl border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl">
+                  <div className="flex-shrink-0 space-y-4 lg:w-72">
                     <div className="flex items-center gap-4">
                       <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
                         <Icon className="h-6 w-6 text-primary" />
@@ -173,8 +173,8 @@ export function Analysis() {
                     </div>
                   </div>
 
-                  <div className="flex-1 grid grid-cols-2 gap-8">
-                    <div className="bg-emerald-50/50 rounded-2xl p-6">
+                  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+                    <div className="bg-emerald-50/50 rounded-2xl p-4 sm:p-6">
                       <div className="flex items-center gap-2 mb-4 text-emerald-600">
                         <div className="p-1.5 rounded-full bg-emerald-600/10">
                           <CheckCircle className="h-4 w-4" />
@@ -191,7 +191,7 @@ export function Analysis() {
                       </ul>
                     </div>
 
-                    <div className="bg-red-50/50 rounded-2xl p-6">
+                    <div className="bg-red-50/50 rounded-2xl p-4 sm:p-6">
                       <div className="flex items-center gap-2 mb-4 text-red-500">
                         <div className="p-1.5 rounded-full bg-red-500/10">
                           <AlertCircle className="h-4 w-4" />

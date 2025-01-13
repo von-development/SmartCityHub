@@ -1,73 +1,87 @@
-# Plataforma Aveiro Smart City
+# SmartCity Hub — Aveiro
 
-Uma aplicação moderna em Next.js 14 que serve como plataforma digital para as iniciativas de cidade inteligente de Aveiro, proporcionando aos cidadãos acesso fácil aos serviços municipais, eventos e informações da cidade.
+Centraliza serviços municipais, informações turísticas e eventos de Aveiro em uma única plataforma. Usa IA para personalizar a experiência de moradores, turistas e empreendedores.
 
-## Stack Tecnológica
+[**Acessar Versão Demo**](https://frontend-smart-city-4q6eg9aqd-victor-von-sohstens-projects.vercel.app/project)
 
-- **Framework:** Next.js 14 (App Router)
-- **Estilização:** Tailwind CSS, Módulos Stylus
-- **Componentes UI:** Shadcn UI, Radix UI
-- **Gerenciamento de Estado:** Zustand
-- **Mapas:** Mapbox GL JS
-- **Fonte:** Inter (Fonte Variável)
 
-## Funcionalidades
+## Visão Geral
 
-- 🏛️ **Serviços Municipais:** Acesso abrangente aos serviços e informações da cidade
-- 🗺️ **Mapa Interativo:** Explore Aveiro com integração Mapbox
-- 📅 **Gestão de Eventos:** Navegue e pesquise eventos da cidade
-- 🤖 **Assistente Virtual:** Chatbot inteligente para consultas relacionadas à cidade
-- 📱 **Design Responsivo:** Abordagem mobile-first com Tailwind CSS
-- 🎨 **Interface Moderna:** Construída com Shadcn UI e Radix UI
-- 🔄 **Gestão de Estado:** Gerenciamento eficiente com Zustand
-- ⚡ **Performance:** Otimizada para Core Web Vitals
+O **SmartCity Hub** simplifica o acesso a informações e serviços de Aveiro:
+- **Integração de Dados**: unifica dados municipais (transporte, eventos, serviços, etc.)
+- **Assistentes Virtuais IA**: cada agente tem foco específico (serviços públicos, turismo, empregos, licenciamento urbanístico, capacitação, startups e outros).
+- **Personalização**: recomendações e notificações adequadas ao perfil de cada usuário.
 
-## Checklist de Desenvolvimento
+## Documentação
 
-- [x] Configuração do projeto com Next.js 14
-- [x] Implementação dos componentes UI
-- [x] Design de layout responsivo
-- [x] Integração de mapas com Mapbox
-- [x] Listagem e filtragem de eventos
-- [x] Implementação da interface de chat
-- [ ] Integração com API backend
-- [ ] Sistema de autenticação
-- [ ] Preferências do usuário
-- [ ] Service workers para suporte offline
-- [ ] Integração de analytics
-- [ ] Configuração de testes E2E
-- [ ] Pipeline de CI/CD
-- [ ] Integração com servidor de linguagem
-- [ ] Monitoramento e rastreamento de erros
+- [Estudo de Caso e Análise](./docs/overview_projeto.md) - Visão geral do projeto e análise das soluções existentes
+- [Requisitos do Produto](./docs/prd.md) - Detalhamento técnico e funcional do produto
+- [Estrutura do Banco de Dados](./docs/db_overview.md) - Modelagem e arquitetura dos dados
 
-## Tarefas Pendentes
+---
 
-### Alta Prioridade
-- [ ] Integrar com servidor de linguagem para desenvolvimento aprimorado
-- [ ] Completar endpoints da API para sistema de eventos
-- [ ] Implementar autenticação de usuários
-- [ ] Adicionar limites de erro e fallbacks
+## Funcionalidades (MVP)
 
-### Média Prioridade
-- [ ] Adicionar mais recursos interativos ao mapa
-- [ ] Aprimorar capacidades da IA do chat
-- [ ] Implementar service worker
-- [ ] Adicionar suporte a PWA
+1. **Interface Responsiva**  
+   - Layout otimizado para desktop e mobile.
+2. **Mapa Interativo**  
+   - Exibição de pontos de interesse e localizações relevantes.
+3. **Sistema de Eventos e Notícias**  
+   - Informações atualizadas sobre o que acontece em Aveiro.
+4. **Assistentes Virtuais**  
+   - **Ana** (Serviços Públicos e Eventos)  
+   - **João** (Guia Turístico)  
+   - **Carlos** (Oportunidades de Trabalho)  
+   - **Miguel** (Licenciamento Urbanístico)  
+   - **Julia** (Capacitação)  
+   - **Lucas** (Startups)  
+5. **Previsão do Tempo**  
+   - Dados atualizados via OpenWeatherMap.
+6. **Documentação**  
+   - Guia de uso e referências técnicas.
 
-### Baixa Prioridade
-- [ ] Adicionar mais opções de idiomas
-- [ ] Implementar recursos avançados de busca
-- [ ] Adicionar mais integrações de serviços municipais
+**Os agentes da versao demo nao sao os agentes correc**
 
-## Desenvolvimento
+---
 
-- **Estilização:** Abordagem híbrida com Tailwind CSS para utilitários e Módulos Stylus para componentes
-- **Componentes:** React Server Components (RSC) por padrão, com diretivas 'use client' apenas quando necessário
-- **Performance:** Otimizada com otimização adequada de imagens e divisão de código
-- **Estado:** Gerenciamento de estado global com Zustand, estado de URL com nuqs
+## Próximos Passos
 
-## Base de Código
+### Validação com Stakeholders
+- Apresentação do MVP para gestores municipais
+- Coleta de feedback sobre funcionalidades implementadas
+- Identificação de necessidades específicas dos departamentos
+- Alinhamento com iniciativas existentes da cidade
 
-Este projeto faz parte da iniciativa Aveiro Tech City, visando modernizar os serviços municipais através da transformação digital.
+### Análise de Impacto
+- Avaliação da integração com sistemas atuais
+- Levantamento de recursos necessários
+- Estudo de viabilidade técnica
+- Definição de métricas de sucesso
 
-### Estrutura do Projeto
+### Planejamento de Implementação
+- Priorização de funcionalidades baseada no feedback
+- Definição de cronograma realista
+- Estabelecimento de parcerias estratégicas
+- Plano de treinamento para servidores
+
+---
+
+## Tecnologias
+
+- **Next.js 14**  
+- **React**  
+- **TypeScript**  
+- **Tailwind CSS**  
+- **OpenAI API**  
+- **OpenWeatherMap API**
+- **PostgreSQL**
+
+---
+
+## Nota Importante
+
+Os agentes disponíveis na versão de demonstração são simplificados e não representam a implementação completa do sistema. Para acesso aos agentes com lógica avançada e ferramentas completas do projeto, entre em contato:
+
+📧 **vondevelopment@gmail.com**
+
+---
