@@ -24,11 +24,13 @@
     "cmdk": "^1.0.0",
     "framer-motion": "^11.14.4",
     "langchain": "^0.3.11",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.468.0",
     "mapbox-gl": "^3.8.0",
     "next": "14.2.16",
     "react": "^18",
     "react-dom": "^18",
+    "react-leaflet": "^4.2.1",
     "react-markdown": "^9.0.3",
     "react-syntax-highlighter": "^15.6.1",
     "remark-gfm": "^4.0.0",
@@ -38,6 +40,7 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.16",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

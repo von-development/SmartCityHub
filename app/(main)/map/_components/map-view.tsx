@@ -1,56 +1,60 @@
-// "use client";
+'use client'
 
-// import { useEffect, useRef } from "react";
-// import mapboxgl from "mapbox-gl";
-// import "mapbox-gl/dist/mapbox-gl.css";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
+import { useEffect } from 'react'
+import L from 'leaflet'
+import type { LatLngExpression } from 'leaflet'
 
-// // The type is now properly inferred
-// const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+// Fix for default markers
+const icon = L.icon({
+  iconUrl: '/img/markers/marker-icon.png',
+  shadowUrl: '/img/markers/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41]
+})
 
-// // Set the access token
-// mapboxgl.accessToken = MAPBOX_TOKEN;
+const AVEIRO_CENTER = {
+  lat: 40.6405,
+  lng: -8.6537,
+  zoom: 14
+} as const
 
-// const AVEIRO_CENTER = {
-//   lng: -8.6537,
-//   lat: 40.6405,
-//   zoom: 14,
-// } as const;
+const center: LatLngExpression = [AVEIRO_CENTER.lat, AVEIRO_CENTER.lng]
 
-// export function MapView() {
-//   const mapContainer = useRef<HTMLDivElement>(null);
-//   const map = useRef<mapboxgl.Map | null>(null);
+export function MapView() {
+  useEffect(() => {
+    // Fix for SSR
+    delete (L.Icon.Default.prototype as any)._getIconUrl
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: '/img/markers/marker-icon-2x.png',
+      iconUrl: '/img/markers/marker-icon.png',
+      shadowUrl: '/img/markers/marker-shadow.png',
+    })
+  }, [])
 
-//   useEffect(() => {
-//     if (!mapContainer.current || map.current) return;
-
-//     try {
-//       const newMap = new mapboxgl.Map({
-//         container: mapContainer.current,
-//         style: "mapbox://styles/mapbox/light-v11",
-//         center: [AVEIRO_CENTER.lng, AVEIRO_CENTER.lat],
-//         zoom: AVEIRO_CENTER.zoom,
-//       });
-
-//       // Add navigation controls
-//       newMap.addControl(new mapboxgl.NavigationControl(), "top-right");
-
-//       // Store the map instance
-//       map.current = newMap;
-//     } catch (error) {
-//       console.error("Error initializing map:", error);
-//     }
-
-//     return () => {
-//       if (map.current) {
-//         map.current.remove();
-//         map.current = null;
-//       }
-//     };
-//   }, []);
-
-//   return (
-//     <div className="flex-1 relative">
-//       <div ref={mapContainer} className="absolute inset-0" />
-//     </div>
-//   );
-// } 
+  return (
+    <div className="flex-1 relative">
+      <MapContainer
+        center={center}
+        zoom={AVEIRO_CENTER.zoom}
+        className="h-full w-full"
+        zoomControl={false}
+        scrollWheelZoom={true}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <Marker 
+          position={center} 
+          icon={icon}
+        >
+          <Popup>
+            Centro de Aveiro
+          </Popup>
+        </Marker>
+      </MapContainer>
+    </div>
+  )
+} 
