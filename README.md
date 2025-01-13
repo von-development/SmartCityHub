@@ -2,7 +2,7 @@
 
 Centraliza serviços municipais, informações turísticas e eventos de Aveiro em uma única plataforma. Usa IA para personalizar a experiência de moradores, turistas e empreendedores.
 
-[**Acessar Versão Demo**](https://frontend-smart-city-4q6eg9aqd-victor-von-sohstens-projects.vercel.app/project)
+[**Acessar Versão Demo**](https://frontend-smart-city-4q6eg9aqd-victor-von-sohstens-projects.vercel.app/)
 
 
 ## Visão Geral
