@@ -1,8 +1,17 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { MapHeader } from "./_components/map-header";
-import { MapView } from "./_components/map-view";
 import { MapSidebar } from "./_components/map-sidebar";
+
+// Dynamically import MapView with no SSR
+const MapView = dynamic(
+  () => import('./_components/map-view').then(mod => mod.MapView),
+  { 
+    ssr: false, // This is important
+    loading: () => <div className="flex-1 bg-muted" /> // Optional loading state
+  }
+)
 
 export default function MapPage() {
   return (

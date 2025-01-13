@@ -30,7 +30,7 @@ Nosso objetivo é criar uma solução escalável e aplicável a qualquer cidade,
 
 ## 2. Ponto de Inflexão: Qual é o Problema?
 
-> **Sugestão de imagem:** Mapa interativo de Aveiro destacando os pontos de serviços públicos fragmentados
+
 
 Com o avanço tecnológico e a digitalização crescente de serviços públicos ao redor do mundo, muitas cidades já implementaram soluções inteligentes para otimizar a gestão urbana e melhorar a experiência dos cidadãos. No entanto, Aveiro ainda enfrenta desafios críticos na integração eficiente de serviços municipais, na facilidade de acesso a informações essenciais e na promoção de uma experiência inclusiva e intuitiva para moradores, turistas e empreendedores.
 
@@ -145,7 +145,7 @@ Turistas não conseguem montar roteiros práticos e atualizados.
 Empreendedores encontram barreiras para formalizar negócios e divulgar serviços locais.
 Economia Local perde força, pois eventos e comércios não recebem a mesma visibilidade.
 Gestão Pública coleta dados de forma dispersa, prejudicando a tomada de decisões.
-Em termos de indicadores, relatos de baixa adesão aos portais oficiais reforçam a necessidade de uma solução unificada. Muitos cidadãos preferem informações em redes sociais, sem garantias de veracidade ou atualização.
+
 
 ### 2.3. Impactos Diretos na Experiência Urbana
 
@@ -263,7 +263,7 @@ Apesar do avanço tecnológico e das iniciativas locais para modernizar os servi
 
 ### 3.2. Principais Limitações das Soluções Existentes
 
-> **Sugestão de dados:** Gráfico comparativo das avaliações dos usuários nas lojas de aplicativos
+
 
 #### Interface Pouco Acessível e Não Intuitiva (UI/UX)
 - Os aplicativos não oferecem uma experiência de navegação fluida, tornando o uso frustrante
@@ -339,7 +339,7 @@ A ausência de uma solução tecnológica eficiente traz consequências negativa
 
 
 
-Os aplicativos atuais de Aveiro (Aveiro Tourism e Aveiro Câmara Municipal) não oferecem uma experiência eficiente, intuitiva ou personalizada. A falta de integração de dados, personalização de conteúdo e atualizações em tempo real prejudica a experiência dos usuários e limita o potencial de desenvolvimento econômico e turístico da cidade.
+Os aplicativos atuais de Aveiro não oferecem uma experiência eficiente, intuitiva ou personalizada. A falta de integração de dados, personalização de conteúdo e atualizações, IA e  a experiência dos usuários e limita o potencial de desenvolvimento econômico e turístico da cidade.
 
 Essa análise evidencia a necessidade urgente de uma solução completa e inovadora, capaz de centralizar serviços, integrar informações em tempo real e oferecer uma experiência acessível e personalizada.
 

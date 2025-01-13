@@ -13,7 +13,6 @@ import {
   Heart,
   Landmark,
   Bike,
-  Ticket,
   PawPrint,
   Building,
   Scale,

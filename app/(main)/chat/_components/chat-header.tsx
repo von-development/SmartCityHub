@@ -1,6 +1,6 @@
 'use client'
 
-import type { Agent } from '@/types/agent'
+
 import { agents } from '@/lib/agents'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'

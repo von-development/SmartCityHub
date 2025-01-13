@@ -12,6 +12,7 @@ export interface ForecastDay {
   temp_min: number;
   temp_max: number;
   icon: string;
+  description: string;
 }
 
 export interface WeatherResponse {

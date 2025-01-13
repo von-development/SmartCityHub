@@ -30,6 +30,7 @@ interface OpenWeatherForecastResponse {
     };
     weather: Array<{
       icon: string;
+      description: string;
     }>;
   }>;
 }
@@ -75,7 +76,8 @@ export async function getWeatherForecast(): Promise<ForecastDay[]> {
         date: forecast.dt * 1000,
         temp_min: forecast.main.temp_min,
         temp_max: forecast.main.temp_max,
-        icon: forecast.weather[0].icon
+        icon: forecast.weather[0].icon,
+        description: forecast.weather[0].description
       };
     } else {
       acc[date].temp_min = Math.min(acc[date].temp_min, forecast.main.temp_min);

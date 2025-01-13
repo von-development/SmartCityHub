@@ -11,7 +11,6 @@ import {
   CloudRain,
   CloudSnow,
   Droplets,
-  Snowflake,
   Sun,
   Thermometer,
   Umbrella,

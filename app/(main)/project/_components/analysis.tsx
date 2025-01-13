@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
-import { Globe, Bus, Building2, Smartphone, MapPin, AlertCircle, CheckCircle, Search, ArrowRight } from 'lucide-react'
+import { Globe, Bus, Building2, Smartphone, MapPin, AlertCircle, CheckCircle } from 'lucide-react'
 
 interface Platform {
   name: string

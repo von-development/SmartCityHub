@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui";
-import { MapPin, FileText, Car, Building2 } from "lucide-react";
+import { MapPin, Car, Building2 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
