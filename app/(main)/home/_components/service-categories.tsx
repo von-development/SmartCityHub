@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/components/ui";
+import { Card } from "@/components/ui/card";
 import {
   Building2,
   FileText,
@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ScrollArea, ScrollBar } from "@/components/ui";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const categories = [
   {

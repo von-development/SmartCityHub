@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Calendar, Search } from 'lucide-react'
-import { Button } from '@/components/ui'
+import { Button } from '@/components/ui/button'
 
 export default function EventsNotFound() {
   return (

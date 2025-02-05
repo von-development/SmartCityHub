@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Card } from '@/components/ui'
+import { Card } from '@/components/ui/card'
 import { Building2, ArrowRight, Globe } from 'lucide-react'
 import Image from 'next/image'
 

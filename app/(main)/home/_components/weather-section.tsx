@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/components/ui";
+import { Card } from "@/components/ui/card";
 import { useCurrentWeather } from "@/hooks/weather/use-current-weather";
 import { useWeatherForecast } from "@/hooks/weather/use-weather-forecast";
 import {

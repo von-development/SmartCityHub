@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Card } from '@/components/ui'
+import { Card } from '@/components/ui/card'
 import { TrendingUp, Building2, Users, Rocket, ChartBar, ArrowRight } from 'lucide-react'
 
 const impactPoints = [

@@ -7,13 +7,4 @@ export interface Event {
   location: string;
 }
 
-export interface Agent {
-  name: string;
-  avatar: string;
-  greeting: string;
-}
-
-export interface Message {
-  role: "user" | "assistant";
-  content: string;
-} 
+ 

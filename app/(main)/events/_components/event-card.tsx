@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/components/ui";
+import { Card } from "@/components/ui/card";
 import { Calendar, MapPin } from "lucide-react";
 import Image from "next/image";
 import type { Event } from "@/types";

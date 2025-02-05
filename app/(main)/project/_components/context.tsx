@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Card } from '@/components/ui'
+import { Card } from '@/components/ui/card'
 import { ArrowRight, Target, AlertTriangle, TrendingUp, FileText } from 'lucide-react'
 
 const contextPoints = [

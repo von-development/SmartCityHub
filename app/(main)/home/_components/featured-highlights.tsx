@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/components/ui";
+import { Card } from "@/components/ui/card";
 import { ArrowRight, MapPin, Calendar, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";

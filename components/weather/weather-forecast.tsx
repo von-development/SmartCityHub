@@ -1,7 +1,7 @@
 "use client";
 
 import { useWeatherForecast } from "@/hooks/weather/use-weather-forecast";
-import { Card } from "@/components/ui";
+import { Card } from "@/components/ui/card";
 import { WeatherIcon } from "./weather-icon";
 import type { ForecastDay } from "@/types/weather";
 

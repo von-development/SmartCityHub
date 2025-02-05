@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui";
+import { Card, CardContent } from "@/components/ui/card";
 import { Landmark, Waves, Ship, Coffee } from "lucide-react";
 import { motion } from "framer-motion";
 

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { ArrowRight, LayoutDashboard, ListTree, UserCircle, Calendar, Map, Search, MessageSquareMore, Info, Sparkles } from 'lucide-react'
-import { Card } from '@/components/ui'
+import { Card } from '@/components/ui/card'
 
 const features = [
   {
