@@ -18,16 +18,16 @@ const agentConfigs = {
     endpoint: "/api/chat/event_agent"
   },
   tourism: {
-    title: "Guia Turístico",
+    title: "Aveiro Servico online",
     description: "Explore pontos turísticos e receba recomendações personalizadas",
     emoji: "🗺️",
-    endpoint: "/api/chat/tourism_agent"
+    endpoint: "/api/chat/servicon_agent"
   },
   transport: {
-    title: "Assistente de Mobilidade",
+    title: "TESTA ESSE AQUI",
     description: "Informações sobre transporte público e mobilidade urbana",
     emoji: "🚌",
-    endpoint: "/api/chat/transport_agent"
+    endpoint: "/api/chat/servico_online"
   },
   services: {
     title: "Assistente de Serviços",
