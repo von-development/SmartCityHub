@@ -5,35 +5,53 @@ import { GuideInfoBox } from "@/components/guide/GuideInfoBox";
 import { useParams } from "next/navigation";
 
 const agentConfigs = {
-  general: {
-    title: "Assistente Geral",
-    description: "Informações gerais sobre a cidade e serviços municipais",
-    emoji: "🤖"
+  test: {
+    title: "Test Agent",
+    description: "Agente para testes e desenvolvimento",
+    emoji: "🤖",
+    endpoint: "/api/chat/agents"
   },
   events: {
     title: "Assistente de Eventos",
     description: "Descubra eventos, festivais e atividades culturais",
-    emoji: "📅"
+    emoji: "📅",
+    endpoint: "/api/chat/event_agent"
   },
   tourism: {
     title: "Guia Turístico",
     description: "Explore pontos turísticos e receba recomendações personalizadas",
-    emoji: "🗺️"
+    emoji: "🗺️",
+    endpoint: "/api/chat/tourism_agent"
   },
   transport: {
     title: "Assistente de Mobilidade",
     description: "Informações sobre transporte público e mobilidade urbana",
-    emoji: "🚌"
+    emoji: "🚌",
+    endpoint: "/api/chat/transport_agent"
   },
   services: {
     title: "Assistente de Serviços",
     description: "Ajuda com serviços municipais e documentação",
-    emoji: "🏛️"
+    emoji: "🏛️",
+    endpoint: "/api/chat/services_agent"
+  },
+  education: {
+    title: "Guia Educacional",
+    description: "Informações sobre escolas, universidades e cursos",
+    emoji: "📚",
+    endpoint: "/api/chat/education_agent"
+  },
+  local: {
+    title: "Assistente Local",
+    description: "Informações sobre comércio local e serviços próximos",
+    emoji: "🔍",
+    endpoint: "/api/chat/local_agent"
   },
   faq: {
     title: "FAQ Bot",
     description: "Respostas rápidas para perguntas frequentes",
-    emoji: "❓"
+    emoji: "❓",
+    endpoint: "/api/chat/faq_agent"
   }
 };
 
@@ -73,7 +91,7 @@ export default function AgentChatPage() {
       </div>
       <div className="flex-1 relative">
         <ChatWindow
-          endpoint={`api/chat/agents/${agentId}`}
+          endpoint={config.endpoint}
           emptyStateComponent={InfoCard}
           placeholder="Como posso ajudar você hoje?"
           emoji={config.emoji}
