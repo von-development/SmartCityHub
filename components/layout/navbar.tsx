@@ -13,6 +13,7 @@ const navigation = [
   { name: "Events", href: "/events" },
   { name: "Map", href: "/map" },
   { name: "Chat", href: "/chat" },
+  { name: "Agents", href: "/agents" },
 ];
 
 export function Navbar() {
