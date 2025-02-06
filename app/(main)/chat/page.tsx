@@ -33,18 +33,12 @@ export default function ChatPage() {
             <li>Documentos necessários para serviços</li>
           </ul>
         </li>
-        <li className="text-l">
-          👇
-          <span className="ml-2">
-            Digite sua mensagem abaixo para começar!
-          </span>
-        </li>
       </ul>
     </GuideInfoBox>
   );
 
   return (
-    <>
+    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       <div className="bg-muted py-12">
         <div className="container px-4">
           <h1 className="text-3xl font-bold mb-4">Chat com IA</h1>
@@ -53,7 +47,7 @@ export default function ChatPage() {
           </p>
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 relative">
         <ChatWindow
           endpoint="api/chat"
           emptyStateComponent={InfoCard}
@@ -62,6 +56,6 @@ export default function ChatPage() {
           showIntermediateStepsToggle={false}
         />
       </div>
-    </>
+    </div>
   );
 } 
