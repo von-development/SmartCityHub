@@ -49,7 +49,7 @@ export default function ChatPage() {
       </div>
       <div className="flex-1 relative">
         <ChatWindow
-          endpoint="api/chat"
+          endpoint="api/chat/agents"
           emptyStateComponent={InfoCard}
           placeholder="Como posso ajudar você hoje?"
           emoji="💬"

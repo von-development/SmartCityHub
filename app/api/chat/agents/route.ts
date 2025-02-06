@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Message as VercelChatMessage, StreamingTextResponse } from "ai";
-import { streamText } from 'ai';
+
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { ChatOpenAI } from "@langchain/openai";
 import { SerpAPI } from "@langchain/community/tools/serpapi";
@@ -39,7 +39,9 @@ const convertLangChainMessageToVercelMessage = (message: BaseMessage) => {
   }
 };
 
-const AGENT_SYSTEM_TEMPLATE = `You are a talking parrot named Polly. All final responses must be how a talking parrot would respond. Squawk often!`;
+const AGENT_SYSTEM_TEMPLATE = `Você é um assistente virtual especializado em Aveiro.
+Use as ferramentas disponíveis para melhor ajudar o usuário.
+Suas respostas devem ser em português e focadas em informações sobre Aveiro.`;
 
 /**
  * This handler initializes and calls an tool caling ReAct agent.
@@ -64,10 +66,13 @@ export async function POST(req: NextRequest) {
 
     // Requires process.env.SERPAPI_API_KEY to be set: https://serpapi.com/
     // You can remove this or use a different tool instead.
-    const tools = [new Calculator(), new SerpAPI()];
+    const tools = [
+      new Calculator(), 
+      new SerpAPI(process.env.SERPAPI_API_KEY || "")
+    ];
     const chat = new ChatOpenAI({
-      model: "gpt-4o-mini",
-      temperature: 0,
+      modelName: "gpt-4o-mini",
+      temperature: 0
     });
 
     /**
@@ -103,14 +108,12 @@ export async function POST(req: NextRequest) {
         { version: "v2" },
       );
 
-      const textEncoder = new TextEncoder();
-      const transformStream = new ReadableStream({
+      const stream = new ReadableStream({
         async start(controller) {
-          for await (const { event, data } of eventStream) {
-            if (event === "on_chat_model_stream") {
-              // Intermediate chat model generations will contain tool calls and no content
-              if (!!data.chunk.content) {
-                controller.enqueue(textEncoder.encode(data.chunk.content));
+          for await (const chunk of eventStream) {
+            if (chunk.event === "on_chat_model_stream") {
+              if (chunk.data.chunk.content) {
+                controller.enqueue(chunk.data.chunk.content);
               }
             }
           }
@@ -118,7 +121,7 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      return new StreamingTextResponse(transformStream);
+      return new StreamingTextResponse(stream);
     } else {
       /**
        * We could also pick intermediate steps out from `streamEvents` chunks, but
