@@ -1,6 +1,8 @@
 
 // MELHORAR O PROMPT PARA QUE TENHA MELHOR FORMATACAO E SEJA MAIS PRECISO
 // INCLUIR MARKDOWN
+// INCLUIR OUTROS WEBSITE
+// TODO
 
 
 import { NextRequest, NextResponse } from "next/server";

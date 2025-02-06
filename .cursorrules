@@ -24,9 +24,6 @@ frontend-smart-city/
 │   │   │   ├── page.tsx
 │   │   ├── project/
 │   │   │   ├── _components/
-│   │
-│   ├── temp/
-│   │   ├── agents/
 │   │   │   ├── page.tsx
 │   │   ├── ai_sdk/
 │   │   │   ├── agent/
