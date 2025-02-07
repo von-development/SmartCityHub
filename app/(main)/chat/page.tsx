@@ -1,6 +1,6 @@
 "use client";
 
-import { ChatWindow } from "@/components/chat/ChatWindow";
+import { ChatWindow_markdown } from "@/components/chat/ChatWindow_markdown";
 import { GuideInfoBox } from "@/components/guide/GuideInfoBox";
 
 export default function ChatPage() {
@@ -48,7 +48,7 @@ export default function ChatPage() {
         </div>
       </div>
       <div className="flex-1 relative">
-        <ChatWindow
+        <ChatWindow_markdown
           endpoint="api/chat/event_agent"
           emptyStateComponent={InfoCard}
           placeholder="Como posso ajudar você hoje?"

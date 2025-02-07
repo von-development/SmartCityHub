@@ -1,41 +1,11 @@
 
 
 **Project Overview**
-We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is now is updating the UI from the chat using the temp/temp_components folder as reference AI agents using the LangChain and LangGraph frameworks.
-
+We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is now is updating the UI from the chat.
 
 The temp folder contains reference code that will guide our development.
 We will extract and refine relevant concepts from this reference code to create our own solutions.
 The project is developed in React tsc and TypeScript.
-
-temp folder structure:
-components/temp/
-├── temp_components/
-│   ├── chat-interface/
-│   │   ├── chat-composer.tsx
-│   │   ├── chat-message-bubble.tsx
-│   │   ├── chat-message-list.tsx
-│   │   └── chat-window.tsx
-│   ├── assistant-ui/
-│   │   ├── markdown-text.tsx
-│   │   ├── syntax-highlighter.tsx
-│   │   └── tooltip-icon-button.tsx
-│   ├── icon/
-│   │   ├── langsmith.tsx
-|   ├── thread-history
-|   |   ├── index.tsx
-|   |   ├── thread-item.tsx
-|   |   ├── thread-list.tsx
-|   |   └── utils.ts
-|   ├── ChatLangChain.tsx
-|   ├── DocumentCard.tsx
-|   ├── DocumentDialog.tsx
-|   ├── AnswerHeaderToolUI.tsx
-|   ├── GeneratingQuestions.tsx
-|   ├── LangSmithLinkToolUI.tsx
-|   ├── RouterLogicToolUI.tsx
-|   ├── SelectedDocuments.tsx
-|   ├── SelectModel.tsx
 
 
 **Project Structure**
@@ -43,7 +13,6 @@ frontend-smart-city/
 │
 ├── app/
 │   ├── (main)/
-
 │   │   ├── events/
 │   │   │   ├── _components/
 │   │   │   ├── page.tsx
@@ -87,23 +56,25 @@ frontend-smart-city/
 │   ├── providers.tsx
 │
 ├── components/
+│   ├── chat/
+│   │   ├── ChatMessageBubble.tsx
+│   │   ├── ChatWindow.tsx
+│   │   ├── IntermediateStep.tsx
+│   │   ├── UploadDocumentsForm.tsx
 │   ├── guide/
 │   │   ├── GuideInfoBox.tsx
 │   ├── layout/
 │   │   ├── navbar.tsx
 │   │   ├── search-command.tsx
-│   ├── ui/
-│   │   ├── weather/
-│   │   │   ├── current-weather.tsx
-│   │   │   ├── weather-forecast.tsx
-│   │   │   ├── weather-icon.tsx
-│   ├── ChatMessageBubble.tsx
-│   ├── ChatWindow.tsx
-│   ├── IntermediateStep.tsx
-│   ├── UploadDocumentsForm.tsx
+│   ├── ui/ # shadcn components
+│   ├── weather/
+│   │   ├── current-weather.tsx
+│   │   ├── weather-forecast.tsx
+│   │   ├── weather-icon.tsx
 │
 ├── data/
 │   ├── DefaultRetrievalText.ts
+│   ├── municiplay_services.ts
 │
 ├── hooks/
 │   ├── weather/
