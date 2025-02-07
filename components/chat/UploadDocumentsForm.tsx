@@ -2,8 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import DEFAULT_RETRIEVAL_TEXT from "@/data/DefaultRetrievalText";
-import { Button } from "./ui/button";
-import { Textarea } from "./ui/textarea";
+import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
 
 export function UploadDocumentsForm() {
   const [isLoading, setIsLoading] = useState(false);

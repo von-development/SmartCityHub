@@ -7,11 +7,11 @@ import type { FormEvent, ReactNode } from "react";
 import { toast } from "sonner";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 
-import { ChatMessageBubble } from "@/components/ChatMessageBubble";
+import { ChatMessageBubble } from "@/components/chat/ChatMessageBubble";
 import { IntermediateStep } from "./IntermediateStep";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { ArrowDown, LoaderCircle, Paperclip } from "lucide-react";
-import { Checkbox } from "./ui/checkbox";
+import { Checkbox } from "../ui/checkbox";
 import { UploadDocumentsForm } from "./UploadDocumentsForm";
 import {
   Dialog,
@@ -20,7 +20,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "../ui/dialog";
 import { cn } from "@/utils/cn";
 
 function ChatMessages(props: {

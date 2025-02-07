@@ -1,6 +1,6 @@
 "use client";
 
-import { ChatWindow } from "@/components/ChatWindow";
+import { ChatWindow } from "@/components/chat/ChatWindow";
 import { GuideInfoBox } from "@/components/guide/GuideInfoBox";
 import { useParams } from "next/navigation";
 
