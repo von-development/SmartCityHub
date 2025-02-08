@@ -1,11 +1,9 @@
 
 
 **Project Overview**
-We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is now is to correct issue beetween the deployed version in vercel and the local test. Because the streamng values is having some isssue in the deployed version.
-
-The temp folder contains reference code that will guide our development.
-We will extract and refine relevant concepts from this reference code to create our own solutions.
-The project is developed in React tsc and TypeScript.
+We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is focus in the MAPS implementation from tomtom 
+to add Traffic API to our current implementation..
+The project is developed in React tsx and TypeScript.
 
 
 **Project Structure**
@@ -21,6 +19,9 @@ frontend-smart-city/
 │   │   │   ├── page.tsx
 │   │   ├── map/
 │   │   │   ├── _components/
+│   │   │   │   │   ├── map-header.tsx
+│   │   │   │   │   ├── map-sidebar.tsx
+│   │   │   │   │   ├── map-view.tsx
 │   │   │   ├── page.tsx
 │   │   ├── project/
 │   │   │   ├── _components/
