@@ -108,12 +108,15 @@ export async function POST(req: NextRequest) {
         { version: "v2" },
       );
 
+      const encoder = new TextEncoder();
+
       const stream = new ReadableStream({
         async start(controller) {
           for await (const chunk of eventStream) {
             if (chunk.event === "on_chat_model_stream") {
               if (chunk.data.chunk.content) {
-                controller.enqueue(chunk.data.chunk.content);
+                const bytes = encoder.encode(chunk.data.chunk.content);
+                controller.enqueue(bytes);
               }
             }
           }

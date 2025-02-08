@@ -1,6 +1,37 @@
 import { cn } from "@/utils/cn";
 import type { Message } from "ai/react";
 
+function formatText(text: string) {
+  return text
+  // Headers: ### text
+  .replace(/###\s+(.*?)(?:\n|$)/g, '<h3 class="text-lg font-semibold mt-4 mb-2">$1</h3>')
+  // Numbered lists: 1. text
+  .replace(/^\d+\.\s+(.*?)(?:\n|$)/gm, '<div class="ml-4">• $1</div>')
+  // Bullet lists: - text
+  .replace(/^-\s+(.*?)(?:\n|$)/gm, '<div class="ml-4">• $1</div>')
+  // Bold: **text**
+  .replace(/\*\*(.*?)\*\*/g, '<span class="font-bold">$1</span>')
+  // Italic: *text*
+  .replace(/\*(.*?)\*/g, '<span class="italic">$1</span>')
+  // Links: [text](url)
+  .replace(
+    /\[(.*?)\]\((.*?)\)/g, 
+    '<a href="$2" class="text-blue-500 hover:underline" target="_blank">$1</a>'
+  );
+  // Preserve line breaks
+}
+// Replace patterns in order: bold, italic, links
+// return text
+//   // Bold: **text**
+//   .replace(/\*\*(.*?)\*\*/g, '<span class="font-bold">$1</span>')
+//   // Italic: *text*
+//   .replace(/\*(.*?)\*/g, '<span class="italic">$1</span>')
+//   // Links: [text](url)
+//   .replace(
+//     /\[(.*?)\]\((.*?)\)/g,
+//     '<a href="$2" class="text-blue-500 hover:underline" target="_blank">$1</a>'
+//   );
+
 export function ChatMessageBubble(props: {
   message: Message;
   aiEmoji?: string;
@@ -23,7 +54,11 @@ export function ChatMessageBubble(props: {
       )}
 
       <div className="whitespace-pre-wrap flex flex-col">
-        <span>{props.message.content}</span>
+        <span 
+          dangerouslySetInnerHTML={{ 
+            __html: formatText(props.message.content) 
+          }} 
+        />
 
         {props.sources && props.sources.length ? (
           <>

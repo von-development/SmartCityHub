@@ -157,20 +157,19 @@ export async function POST(req: NextRequest) {
        * See: https://langchain-ai.github.io/langgraphjs/how-tos/stream-tokens/
        */
       const eventStream = await agent.streamEvents(
-        {
-          messages,
-        },
+        { messages },
         { version: "v2" },
       );
 
-      const textEncoder = new TextEncoder();
-      const transformStream = new ReadableStream({
+      const encoder = new TextEncoder();
+
+      const stream = new ReadableStream({
         async start(controller) {
-          for await (const { event, data } of eventStream) {
-            if (event === "on_chat_model_stream") {
-              // Intermediate chat model generations will contain tool calls and no content
-              if (!!data.chunk.content) {
-                controller.enqueue(textEncoder.encode(data.chunk.content));
+          for await (const chunk of eventStream) {
+            if (chunk.event === "on_chat_model_stream") {
+              if (chunk.data.chunk.content) {
+                const bytes = encoder.encode(chunk.data.chunk.content);
+                controller.enqueue(bytes);
               }
             }
           }
@@ -178,7 +177,7 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      return new StreamingTextResponse(transformStream);
+      return new StreamingTextResponse(stream);
     } else {
       /**
        * We could also pick intermediate steps out from `streamEvents` chunks, but
