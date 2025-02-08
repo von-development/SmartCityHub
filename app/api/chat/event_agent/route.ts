@@ -1,4 +1,3 @@
-
 // MELHORAR O PROMPT PARA QUE TENHA MELHOR FORMATACAO E SEJA MAIS PRECISO
 // INCLUIR MARKDOWN
 // INCLUIR OUTROS WEBSITE
@@ -96,12 +95,16 @@ export async function POST(req: NextRequest) {
         { version: "v2" },
       );
 
+      const encoder = new TextEncoder();
+
       const stream = new ReadableStream({
         async start(controller) {
           for await (const chunk of eventStream) {
             if (chunk.event === "on_chat_model_stream") {
               if (chunk.data.chunk.content) {
-                controller.enqueue(chunk.data.chunk.content);
+                // Encode the text content as bytes
+                const bytes = encoder.encode(chunk.data.chunk.content);
+                controller.enqueue(bytes);
               }
             }
           }
