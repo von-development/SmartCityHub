@@ -21,7 +21,8 @@ dist
 .DS_Store
 *.pem
 
-
+presentation.md
+docs/cost_analysis.md
 
 
 # debug
@@ -39,4 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-.cursorrules
+
+
+/.cursorrules
