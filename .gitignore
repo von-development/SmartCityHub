@@ -23,6 +23,7 @@ dist
 
 
 
+
 # debug
 npm-debug.log*
 yarn-debug.log*
@@ -31,10 +32,11 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
-
+/app/temp/
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.cursorrules

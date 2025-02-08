@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ const navigation = [
   { name: "Events", href: "/events" },
   { name: "Map", href: "/map" },
   { name: "Chat", href: "/chat" },
+  { name: "Agents", href: "/agents" },
 ];
 
 export function Navbar() {

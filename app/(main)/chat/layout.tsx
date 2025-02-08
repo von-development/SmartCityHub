@@ -1,13 +1,11 @@
-'use client'
-
-interface ChatLayoutProps {
+export default function ChatLayout({
+  children,
+}: {
   children: React.ReactNode
-}
-
-export default function ChatLayout({ children }: ChatLayoutProps) {
+}) {
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)]">
+    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       {children}
     </div>
-  )
+  );
 } 

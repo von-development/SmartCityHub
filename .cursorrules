@@ -1,0 +1,127 @@
+
+
+**Project Overview**
+We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is now is updating the UI from the chat.
+
+The temp folder contains reference code that will guide our development.
+We will extract and refine relevant concepts from this reference code to create our own solutions.
+The project is developed in React tsc and TypeScript.
+
+
+**Project Structure**
+frontend-smart-city/
+│
+├── app/
+│   ├── (main)/
+│   │   ├── events/
+│   │   │   ├── _components/
+│   │   │   ├── page.tsx
+│   │   ├── home/
+│   │   │   ├── _components/
+│   │   │   ├── page.tsx
+│   │   ├── map/
+│   │   │   ├── _components/
+│   │   │   ├── page.tsx
+│   │   ├── project/
+│   │   │   ├── _components/
+│   │   │   ├── page.tsx
+│   │   ├── ai_sdk/
+│   │   │   ├── agent/
+│   │   │   │   ├── actions.ts
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── README.md
+│   │   │   ├── tools/
+│   │   │   │   ├── actions.ts
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── README.md
+│   │   ├── api/
+│   │   │   ├── chat/
+│   │   │   │   ├── agents/
+│   │   │   │   │   ├── routes.ts
+│   │   │   │   ├── retrieval/
+│   │   │   │   │   ├── routes.ts
+│   │   │   │   ├── retrieval_agents/
+│   │   │   │   │   ├── routes.ts
+│   │   │   │   ├── structured_output/
+│   │   │   │   │   ├── routes.ts
+│   │   │   │   ├── retrieval_ingest/
+│   │   │   │   │   ├── routes.ts
+│   │   │   ├── retrieval/
+│   │   │   │   ├── ingest/
+│   │   │   │   │   ├── routes.ts
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── not-found.tsx
+│   ├── page.tsx
+│   ├── providers.tsx
+│
+├── components/
+│   ├── chat/
+│   │   ├── ChatMessageBubble.tsx
+│   │   ├── ChatWindow.tsx
+│   │   ├── IntermediateStep.tsx
+│   │   ├── UploadDocumentsForm.tsx
+│   ├── guide/
+│   │   ├── GuideInfoBox.tsx
+│   ├── layout/
+│   │   ├── navbar.tsx
+│   │   ├── search-command.tsx
+│   ├── ui/ # shadcn components
+│   ├── weather/
+│   │   ├── current-weather.tsx
+│   │   ├── weather-forecast.tsx
+│   │   ├── weather-icon.tsx
+│
+├── data/
+│   ├── DefaultRetrievalText.ts
+│   ├── municiplay_services.ts
+│
+├── hooks/
+│   ├── weather/
+│   │   ├── use-current-weather.ts
+│   │   ├── use-weather-forecast.ts
+│
+├── utils/
+│   ├── cn.ts
+│   ├── utils.ts
+│
+├── .env.local
+├── components.json
+├── package.json
+├── README.md
+├── tailwind.config.ts
+├── vercel.json
+
+
+1. TypeScript Best Practices
+Use TypeScript strictly – Avoid any type.
+Explicit types – Define types/interfaces for variables, functions, and API responses.
+Avoid magic numbers/strings – Use constants or enums.
+Use ESLint and Prettier – Maintain code consistency.
+2. Naming Conventions
+PascalCase for components (WeatherCard.tsx).
+camelCase for functions & variables (fetchWeatherData).
+kebab-case for file and directory names (weather-forecast.tsx).
+UPPER_CASE for environment variables (NEXT_PUBLIC_API_URL).
+Boolean variables should start with verbs (isLoading, hasError, canDelete).
+Start function names with a verb (getWeatherData, fetchUserDetails).
+
+
+React-Specific Rules
+1. Component Guidelines
+Use function components and React hooks.
+Keep components small – Single responsibility principle.
+Use React.memo to prevent unnecessary re-renders.
+2. State Management
+Use useState for local UI state.
+Use useReducer for complex state logic.
+Avoid prop drilling – Use Context API or Zustand/Recoil.
+3. API & Data Fetching
+Use fetch or Axios for API calls.
+Implement useEffect for side effects.
+Use React Query (TanStack) for caching.
+
+Performance Optimization
+Reduce useEffect dependencies to avoid unnecessary renders.
+Use lazy loading for components (React.lazy).
+Optimize images with next/image.

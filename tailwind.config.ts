@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import typography from '@tailwindcss/typography';
 
 const config: Config = {
     darkMode: ["class"],
@@ -55,9 +56,26 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		typography: {
+  			DEFAULT: {
+  				css: {
+  					'code::before': {
+  						content: '""'
+  					},
+  					'code::after': {
+  						content: '""'
+  					}
+  				}
+  			}
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    typography({
+      className: 'prose',
+    }),
+  ],
 };
 export default config;

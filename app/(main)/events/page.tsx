@@ -1,6 +1,6 @@
 import { EventFilters } from "./_components/event-filters";
 import { EventList } from "./_components/event-list";
-import { EventsHeader } from "./_components/events-header";
+import { EventsHeader } from "./_components/events-header"; 
 
 export default function EventsPage() {
   return (

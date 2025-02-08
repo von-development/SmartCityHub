@@ -1,7 +1,8 @@
 "use client";
 
-import { EventCard } from "@/components/cards";
+
 import type { Event } from "@/types";
+import { EventCard } from "./event-card";
 
 const EVENTS: Event[] = [
   {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCurrentWeather } from "@/hooks/weather/use-current-weather";
-import { Card } from "@/components/ui";
+import { Card } from "@/components/ui/card";
 import { WeatherIcon } from "./weather-icon";
 import { Thermometer, Droplets, Wind } from "lucide-react";
 
