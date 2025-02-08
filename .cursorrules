@@ -1,7 +1,7 @@
 
 
 **Project Overview**
-We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is now is updating the UI from the chat.
+We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is now is to correct issue beetween the deployed version in vercel and the local test. Because the streamng values is having some isssue in the deployed version.
 
 The temp folder contains reference code that will guide our development.
 We will extract and refine relevant concepts from this reference code to create our own solutions.
