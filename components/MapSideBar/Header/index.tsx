@@ -13,10 +13,11 @@ import {
   Building,
   Landmark,
   Zap,
-  Parking,
+  CircleParking,
   Camera,
   Bike,
   AlertTriangle
+
 } from "lucide-react"
 
 const mainCategories = [
@@ -45,7 +46,7 @@ const mainCategories = [
   },
   {
     id: "parking",
-    icon: Parking,
+    icon: CircleParking,
     label: "Estacionamento"
   },
   {

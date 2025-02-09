@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Providers } from "./providers";
+import '@tomtom-international/web-sdk-maps/dist/maps.css'
 
 const inter = Inter({ subsets: ["latin"] });
 

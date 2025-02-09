@@ -6,10 +6,14 @@ import { MapSidebarHeader } from "@/components/MapSideBar/Header"
 import { CategoryGrid } from "@/components/MapSideBar/Places/CategoryGrid"
 import { PlacesList } from "@/components/MapSideBar/Places/PlacesList"
 import { TrafficSection } from "@/components/MapSideBar/Traffic"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ChevronLeft, PanelLeftClose, PanelLeftOpen } from "lucide-react"
 import { cn } from "@/utils/cn"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import tt from '@tomtom-international/web-sdk-maps'
+import { useTrafficFlow } from '@/hooks/map/use-traffic-flow'
+import { TrafficFlow } from "@/components/MapSideBar/Traffic/TrafficFlow"
+import { FlowSegmentInfo } from "@/components/MapSideBar/Traffic/FlowSegmentInfo"
 
 // Sample data - Move to a separate file later
 const places = [
@@ -32,15 +36,45 @@ const places = [
   // Add more places as needed
 ]
 
-export function MapSidebar() {
+interface FlowSegmentData {
+  currentSpeed: number
+  freeFlowSpeed: number
+  currentTravelTime: number
+  freeFlowTravelTime: number
+  confidence: number
+  roadClosure: boolean
+  coordinates: {
+    latitude: number
+    longitude: number
+  }[]
+  frc: string
+}
+
+export interface MapSidebarProps {
+  map: tt.Map | null
+  flowSegmentData: FlowSegmentData | null
+  flowSegmentLoading: boolean
+  flowSegmentError: string | null
+}
+
+export function MapSidebar({ 
+  map, 
+  flowSegmentData,
+  flowSegmentLoading,
+  flowSegmentError 
+}: MapSidebarProps) {
   const [currentSection, setCurrentSection] = useState<string | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string>()
-  const [showTraffic, setShowTraffic] = useState(false)
-  const [showIncidents, setShowIncidents] = useState(false)
-  const [trafficStyle, setTrafficStyle] = useState<'relative' | 'absolute'>('relative')
   const [isCollapsed, setIsCollapsed] = useState(false)
-  
+
   const isMobile = useMediaQuery("(max-width: 768px)")
+
+  const {
+    showTraffic,
+    trafficStyle,
+    toggleTraffic,
+    changeTrafficStyle
+  } = useTrafficFlow({ map })
 
   // Auto collapse on mobile
   useEffect(() => {
@@ -69,15 +103,21 @@ export function MapSidebar() {
       
       case 'traffic':
         return (
-          <TrafficSection
-            showTraffic={showTraffic}
-            showIncidents={showIncidents}
-            trafficStyle={trafficStyle}
-            incidents={[]}
-            onToggleTraffic={setShowTraffic}
-            onToggleIncidents={setShowIncidents}
-            onChangeStyle={setTrafficStyle}
-          />
+          <>
+            <TrafficFlow
+              showTraffic={showTraffic}
+              trafficStyle={trafficStyle}
+              onToggleTraffic={toggleTraffic}
+              onChangeStyle={changeTrafficStyle}
+            />
+            {flowSegmentData && (
+              <FlowSegmentInfo
+                data={flowSegmentData}
+                isLoading={flowSegmentLoading}
+                error={flowSegmentError}
+              />
+            )}
+          </>
         )
 
       case 'bus-stops':

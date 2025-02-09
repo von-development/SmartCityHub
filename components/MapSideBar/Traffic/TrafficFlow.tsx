@@ -4,12 +4,13 @@ import { Switch } from "@/components/ui/switch"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Car, Layers } from "lucide-react"
+import type { TrafficStyle } from "@/hooks/map/use-traffic-flow"
 
 interface TrafficFlowProps {
   showTraffic: boolean
-  trafficStyle: 'relative' | 'absolute'
+  trafficStyle: TrafficStyle
   onToggleTraffic: (checked: boolean) => void
-  onChangeStyle: (style: 'relative' | 'absolute') => void
+  onChangeStyle: (style: TrafficStyle) => void
 }
 
 export function TrafficFlow({
@@ -18,6 +19,8 @@ export function TrafficFlow({
   onToggleTraffic,
   onChangeStyle,
 }: TrafficFlowProps) {
+  console.log('TrafficFlow render:', { showTraffic, trafficStyle }) // Debug log
+
   return (
     <Card className="p-4 space-y-4">
       <div className="flex items-center justify-between">
@@ -27,7 +30,10 @@ export function TrafficFlow({
         </div>
         <Switch
           checked={showTraffic}
-          onCheckedChange={onToggleTraffic}
+          onCheckedChange={(checked) => {
+            console.log('Switch toggled:', checked) // Debug log
+            onToggleTraffic(checked)
+          }}
         />
       </div>
 

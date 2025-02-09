@@ -4,15 +4,16 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { TrafficFlow } from "./TrafficFlow"
 import { TrafficIncidents } from "./TrafficIncidents"
 import { TrafficLegend } from "./TrafficLegend"
+import type { TrafficStyle } from "@/hooks/map/use-traffic-flow"
 
 interface TrafficSectionProps {
   showTraffic: boolean
   showIncidents: boolean
-  trafficStyle: 'relative' | 'absolute'
+  trafficStyle: TrafficStyle
   incidents: any[] // Replace with proper type
   onToggleTraffic: (checked: boolean) => void
   onToggleIncidents: (checked: boolean) => void
-  onChangeStyle: (style: 'relative' | 'absolute') => void
+  onChangeStyle: (style: TrafficStyle) => void
   isLoading?: boolean
 }
 
@@ -36,4 +37,6 @@ export function TrafficSection(props: TrafficSectionProps) {
       </div>
     </ScrollArea>
   )
-} 
+}
+
+export { TrafficFlow } from './TrafficFlow' 
