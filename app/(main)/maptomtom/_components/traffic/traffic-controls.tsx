@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
-import { Car, Layers, AlertTriangle, BatteryCharging } from "lucide-react"
+import { Car, Layers, AlertTriangle } from "lucide-react"
 import { 
   Tooltip,
   TooltipContent,
@@ -16,8 +16,6 @@ interface TrafficControlsProps {
   onToggleTraffic: () => void
   onToggleIncidents: () => void
   onToggleStyle: () => void
-  showChargingStations: boolean
-  onToggleChargingStations: () => void
 }
 
 export function TrafficControls({
@@ -27,8 +25,6 @@ export function TrafficControls({
   onToggleTraffic,
   onToggleIncidents,
   onToggleStyle,
-  showChargingStations,
-  onToggleChargingStations
 }: TrafficControlsProps) {
   return (
     <div className="absolute top-4 right-4 flex flex-col gap-2">
@@ -79,21 +75,6 @@ export function TrafficControls({
             </TooltipContent>
           </Tooltip>
         )}
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant={showChargingStations ? "default" : "outline"}
-              size="icon"
-              onClick={onToggleChargingStations}
-            >
-              <BatteryCharging className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Mostrar postos de carregamento</p>
-          </TooltipContent>
-        </Tooltip>
       </TooltipProvider>
     </div>
   )

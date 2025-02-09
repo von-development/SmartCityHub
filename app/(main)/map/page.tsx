@@ -6,10 +6,10 @@ import { MapSidebar } from "./_components/map-sidebar";
 
 // Dynamically import MapView with no SSR
 const MapView = dynamic(
-  () => import('./_components/map-view').then(mod => mod.MapView),
+  () => import('./_components/map-view').then(mod => mod.default),
   { 
-    ssr: false, // This is important
-    loading: () => <div className="flex-1 bg-muted" /> // Optional loading state
+    ssr: false,
+    loading: () => <div className="flex-1 bg-muted animate-pulse" />
   }
 )
 

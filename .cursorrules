@@ -64,11 +64,30 @@ frontend-smart-city/
 │   │   ├── UploadDocumentsForm.tsx
 │   ├── guide/
 │   │   ├── GuideInfoBox.tsx
+|   |   MapSideBar/
+|   |   ├── Header (Tabs Navigation)
+|   |   ├── Places/
+|   |   │   ├── CategoryGrid.tsx
+|   |   │   ├── PlacesList.tsx
+|   |   │   └── PlaceCard.tsx
+|   |   ├── Traffic/
+|   |   │   ├── TrafficFlow.tsx
+|   |   │   ├── TrafficIncidents.tsx
+|   |   │   └── TrafficLegend.tsx
+|   |   ├── BusStops/
+|   |   │   ├── StopSearch.tsx
+|   |   │   ├── NearbyStops.tsx
+|   |   │   └── StopDetails.tsx
+|   |   └── Routes/
+|   |       ├── RouteForm.tsx
+|   |       ├── RouteList.tsx
+|   |       └── RouteDetail.tsx
 │   ├── layout/
 │   │   ├── navbar.tsx
 │   │   ├── search-command.tsx
 │   ├── ui/ # shadcn components
 │   ├── weather/
+
 │   │   ├── current-weather.tsx
 │   │   ├── weather-forecast.tsx
 │   │   ├── weather-icon.tsx

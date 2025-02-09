@@ -1,6 +1,6 @@
 'use client'
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useEffect } from 'react'
 import L from 'leaflet'
@@ -21,6 +21,24 @@ const AVEIRO_CENTER = {
 } as const
 
 const center: LatLngExpression = [AVEIRO_CENTER.lat, AVEIRO_CENTER.lng]
+
+// This component handles map events and updates
+function MapEvents() {
+  const map = useMap()
+
+  useEffect(() => {
+    map.on('moveend', () => {
+      const bounds = map.getBounds()
+      console.log('Map bounds:', bounds)
+    })
+
+    return () => {
+      map.off('moveend')
+    }
+  }, [map])
+
+  return null
+}
 
 export function MapView() {
   useEffect(() => {
@@ -54,7 +72,10 @@ export function MapView() {
             Centro de Aveiro
           </Popup>
         </Marker>
+        <MapEvents />
       </MapContainer>
     </div>
   )
-} 
+}
+
+export default MapView 

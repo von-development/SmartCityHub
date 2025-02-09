@@ -7,8 +7,6 @@ import { useTrafficFlow } from '@/hooks/map/use-traffic-flow'
 import { useTrafficIncidents } from '@/hooks/map/use-traffic-incidents'
 import { TrafficControls } from './traffic/traffic-controls'
 import { AVEIRO_CENTER } from '@/utils/constants'
-import { useChargingStations } from '@/hooks/map/use-charging-stations'
-import { ChargingMarker } from './charging/charging-marker'
 import { createRoot } from 'react-dom/client'
 import { useFlowSegment } from '@/hooks/map/use-flow-segment'
 import { FlowInfo } from './traffic/flow-info'
@@ -21,7 +19,6 @@ export function MapView() {
   const [showIncidents, setShowIncidents] = useState(false)
   const [trafficStyle, setTrafficStyle] = useState<'relative' | 'absolute'>('relative')
   const [isStyleLoaded, setIsStyleLoaded] = useState(false)
-  const [showChargingStations, setShowChargingStations] = useState(false)
   const [selectedPoint, setSelectedPoint] = useState<tt.LngLat | null>(null)
   const [popup, setPopup] = useState<tt.Popup | null>(null)
   const { data: flowSegment, isLoading, error } = useFlowSegment(selectedPoint)
@@ -29,7 +26,7 @@ export function MapView() {
   // Get traffic data
   const { data: trafficFlow } = useTrafficFlow(bounds)
   const { data: trafficIncidents } = useTrafficIncidents(bounds)
-  const { data: chargingStations } = useChargingStations(bounds)
+
 
   // Function to close any existing popup
   const closePopup = () => {
@@ -184,29 +181,7 @@ export function MapView() {
     })
   }, [trafficIncidents, showIncidents])
 
-  // Add effect for charging stations
-  useEffect(() => {
-    if (!mapRef.current || !chargingStations?.stations || !showChargingStations) return
-
-    // Remove existing markers
-    const existingMarkers = document.querySelectorAll('.charging-station-marker')
-    existingMarkers.forEach(marker => marker.remove())
-
-    // Add new markers
-    chargingStations.stations.forEach(station => {
-      const element = document.createElement('div')
-      element.className = 'charging-station-marker'
-      
-      // Render the ChargingMarker component into the element
-      const root = createRoot(element)
-      root.render(<ChargingMarker station={station} />)
-
-      new tt.Marker({ element })
-        .setLngLat([station.location.lng, station.location.lat])
-        .addTo(mapRef.current!)
-    })
-  }, [chargingStations, showChargingStations])
-
+ 
   // Update popup content when flow data is loaded
   useEffect(() => {
     if (!mapRef.current || !popup || !flowSegment) return;
@@ -239,16 +214,13 @@ export function MapView() {
   return (
     <div className="flex-1 relative">
       <div ref={mapElement} className="h-full w-full" />
-      
-      <TrafficControls 
+      <TrafficControls
         showTraffic={showTraffic}
         showIncidents={showIncidents}
         trafficStyle={trafficStyle}
         onToggleTraffic={() => setShowTraffic(!showTraffic)}
         onToggleIncidents={() => setShowIncidents(!showIncidents)}
         onToggleStyle={() => setTrafficStyle(s => s === 'relative' ? 'absolute' : 'relative')}
-        showChargingStations={showChargingStations}
-        onToggleChargingStations={() => setShowChargingStations(!showChargingStations)}
       />
     </div>
   )
