@@ -5,12 +5,22 @@ export type TrafficStyle = 'absolute' | 'relative' | 'relative-delay'
 
 interface UseTrafficFlowOptions {
   map: tt.Map | null
+  showTraffic: boolean
+  trafficStyle: TrafficStyle
+  onToggle: (show: boolean) => void
+  onStyleChange: (style: TrafficStyle) => void
 }
 
 // Define the options interface to match TomTom's API
 interface TrafficFlowOptions {
   style?: TrafficStyle
   refresh?: number
+  thickness?: number
+  absoluteSpeedThresholds?: number[]
+  relativeSpeedThresholds?: number[]
+  baseSpeed?: number
+  grayscale?: boolean
+  opacity?: number
 }
 
 // Extend the tt.Map type to include the traffic methods
@@ -19,66 +29,109 @@ interface ExtendedMap extends tt.Map {
   hideTrafficFlow(): void
 }
 
-export function useTrafficFlow({ map }: UseTrafficFlowOptions) {
-  const [showTraffic, setShowTraffic] = useState(false)
-  const [trafficStyle, setTrafficStyle] = useState<TrafficStyle>('relative')
+export function useTrafficFlow({ 
+  map, 
+  showTraffic, 
+  trafficStyle,
+  onToggle,
+  onStyleChange 
+}: UseTrafficFlowOptions) {
+  console.log('useTrafficFlow received map:', {
+    hasMap: !!map,
+    mapType: map ? typeof map : 'null'
+  })
 
-  // Reset state when map changes
+  // Initialize traffic state when map changes
   useEffect(() => {
-    if (map) {
-      setShowTraffic(false);
-      const extendedMap = map as ExtendedMap;
-      try {
-        extendedMap.hideTrafficFlow();
-      } catch (error) {
-        console.error('Error hiding traffic on mount:', error)
+    console.log('useTrafficFlow effect triggered, map:', !!map)
+    if (!map) return
+
+    const extendedMap = map as ExtendedMap
+    try {
+      console.log('Initializing traffic state')
+      // Hide traffic initially
+      extendedMap.hideTrafficFlow()
+      onToggle(false)
+
+      // Cleanup when component unmounts or map changes
+      return () => {
+        try {
+          extendedMap.hideTrafficFlow()
+        } catch (error) {
+          console.error('Error cleaning up traffic flow:', error)
+        }
       }
+    } catch (error) {
+      console.error('Error initializing traffic flow:', error)
     }
-  }, [map])
+  }, [map, onToggle])
 
   const toggleTraffic = useCallback((checked: boolean) => {
-    if (!map) return;
+    console.log('Toggle traffic called:', { checked, hasMap: !!map })
+    if (!map) {
+      console.warn('Toggle called but no map instance available')
+      return
+    }
     
-    const extendedMap = map as ExtendedMap;
-    console.log('Toggle traffic:', checked);
-
+    const extendedMap = map as ExtendedMap
     try {
       if (checked) {
-        console.log('Showing traffic with style:', trafficStyle);
+        console.log('Showing traffic with style:', trafficStyle)
         extendedMap.showTrafficFlow({
           style: trafficStyle,
-          refresh: 300,
-        });
+          refresh: 30000,
+          thickness: 8,
+          absoluteSpeedThresholds: [0, 20, 40, 60, 80],
+          relativeSpeedThresholds: [0.2, 0.4, 0.6, 0.8],
+        })
       } else {
-        console.log('Hiding traffic');
-        extendedMap.hideTrafficFlow();
+        console.log('Hiding traffic')
+        extendedMap.hideTrafficFlow()
       }
-      setShowTraffic(checked);
+      onToggle(checked)
     } catch (error) {
-      console.error('Error toggling traffic:', error);
+      console.error('Error toggling traffic:', error)
     }
-  }, [map, trafficStyle])
+  }, [map, trafficStyle, onToggle])
 
   const changeTrafficStyle = useCallback((style: TrafficStyle) => {
-    if (!map) return;
+    console.log('Changing traffic style:', { style, showTraffic })
+    if (!map) return
 
-    const extendedMap = map as ExtendedMap;
+    const extendedMap = map as ExtendedMap
     try {
-      setTrafficStyle(style);
+      onStyleChange(style)
+      
       if (showTraffic) {
-        extendedMap.showTrafficFlow({
-          style,
-          refresh: 300,
-        });
+        // Hide current traffic layer first
+        try {
+          extendedMap.hideTrafficFlow()
+        } catch (error) {
+          console.error('Error hiding traffic flow:', error)
+        }
+        
+        // Wait a bit before showing new layer
+        setTimeout(() => {
+          try {
+            // Show new traffic layer with new style
+            extendedMap.showTrafficFlow({
+              style,
+              refresh: 30000,
+              thickness: 8, // Add thickness
+              absoluteSpeedThresholds: [0, 20, 40, 60, 80], // Add speed thresholds
+              relativeSpeedThresholds: [0.2, 0.4, 0.6, 0.8], // Add relative thresholds
+            })
+          } catch (error) {
+            console.error('Error showing traffic flow:', error)
+          }
+        }, 100)
       }
     } catch (error) {
-      console.error('Error changing traffic style:', error);
+      console.error('Error changing traffic style:', error)
     }
-  }, [map, showTraffic])
+  }, [map, showTraffic, onStyleChange])
 
   return {
-    showTraffic,
-    trafficStyle,
     toggleTraffic,
     changeTrafficStyle,
   }

@@ -11,9 +11,12 @@ import { ChevronLeft, PanelLeftClose, PanelLeftOpen } from "lucide-react"
 import { cn } from "@/utils/cn"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import tt from '@tomtom-international/web-sdk-maps'
-import { useTrafficFlow } from '@/hooks/map/use-traffic-flow'
 import { TrafficFlow } from "@/components/MapSideBar/Traffic/TrafficFlow"
-import { FlowSegmentInfo } from "@/components/MapSideBar/Traffic/FlowSegmentInfo"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { Spinner } from "@/components/ui/spinner"
+import { AlertTriangle } from "lucide-react"
+import { TrafficStyle } from "@/hooks/map/use-traffic-flow"
+
 
 // Sample data - Move to a separate file later
 const places = [
@@ -55,26 +58,31 @@ export interface MapSidebarProps {
   flowSegmentData: FlowSegmentData | null
   flowSegmentLoading: boolean
   flowSegmentError: string | null
+  onCloseSegment: () => void
+  showTraffic: boolean
+  trafficStyle: TrafficStyle
+  onToggleTraffic: (checked: boolean) => void
+  onChangeTrafficStyle: (style: TrafficStyle) => void
 }
 
 export function MapSidebar({ 
   map, 
   flowSegmentData,
   flowSegmentLoading,
-  flowSegmentError 
+  flowSegmentError,
+  onCloseSegment,
+  showTraffic,
+  trafficStyle,
+  onToggleTraffic,
+  onChangeTrafficStyle
 }: MapSidebarProps) {
+  console.log('MapSidebar received map:', !!map)
+
   const [currentSection, setCurrentSection] = useState<string | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string>()
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   const isMobile = useMediaQuery("(max-width: 768px)")
-
-  const {
-    showTraffic,
-    trafficStyle,
-    toggleTraffic,
-    changeTrafficStyle
-  } = useTrafficFlow({ map })
 
   // Auto collapse on mobile
   useEffect(() => {
@@ -107,15 +115,24 @@ export function MapSidebar({
             <TrafficFlow
               showTraffic={showTraffic}
               trafficStyle={trafficStyle}
-              onToggleTraffic={toggleTraffic}
-              onChangeStyle={changeTrafficStyle}
+              onToggleTraffic={onToggleTraffic}
+              onChangeStyle={onChangeTrafficStyle}
             />
-            {flowSegmentData && (
-              <FlowSegmentInfo
-                data={flowSegmentData}
-                isLoading={flowSegmentLoading}
-                error={flowSegmentError}
-              />
+            {flowSegmentLoading && (
+              <Card className="p-4 mt-4">
+                <div className="flex items-center gap-2">
+                  <Spinner className="h-4 w-4" />
+                  <p className="text-sm">Carregando dados do segmento...</p>
+                </div>
+              </Card>
+            )}
+            {flowSegmentError && (
+              <Card className="p-4 mt-4">
+                <div className="flex items-center gap-2 text-destructive">
+                  <AlertTriangle className="h-4 w-4" />
+                  <p className="text-sm">{flowSegmentError}</p>
+                </div>
+              </Card>
             )}
           </>
         )
@@ -142,44 +159,46 @@ export function MapSidebar({
   }
 
   return (
-    <div className="relative flex h-full">
-      <Card 
-        className={cn(
-          "border-r rounded-none transition-all duration-300",
-          isCollapsed ? "w-0 overflow-hidden" : "w-80"
-        )}
-      >
-        {currentSection && (
-          <div className="p-4 border-b">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="gap-2"
-              onClick={() => setCurrentSection(null)}
-            >
-              <ChevronLeft className="h-4 w-4" />
-              Voltar
-            </Button>
-          </div>
-        )}
-        {renderSection()}
-      </Card>
+    <TooltipProvider>
+      <div className="relative flex h-full">
+        <Card 
+          className={cn(
+            "border-r rounded-none transition-all duration-300",
+            isCollapsed ? "w-0 overflow-hidden" : "w-80"
+          )}
+        >
+          {currentSection && (
+            <div className="p-4 border-b">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-2"
+                onClick={() => setCurrentSection(null)}
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Voltar
+              </Button>
+            </div>
+          )}
+          {renderSection()}
+        </Card>
 
-      <Button
-        variant="secondary"
-        size="icon"
-        className={cn(
-          "absolute top-4 -right-10 transition-transform",
-          isCollapsed && "rotate-180"
-        )}
-        onClick={() => setIsCollapsed(!isCollapsed)}
-      >
-        {isCollapsed ? (
-          <PanelLeftOpen className="h-4 w-4" />
-        ) : (
-          <PanelLeftClose className="h-4 w-4" />
-        )}
-      </Button>
-    </div>
+        <Button
+          variant="secondary"
+          size="icon"
+          className={cn(
+            "absolute top-4 -right-10 transition-transform",
+            isCollapsed && "rotate-180"
+          )}
+          onClick={() => setIsCollapsed(!isCollapsed)}
+        >
+          {isCollapsed ? (
+            <PanelLeftOpen className="h-4 w-4" />
+          ) : (
+            <PanelLeftClose className="h-4 w-4" />
+          )}
+        </Button>
+      </div>
+    </TooltipProvider>
   )
 } 

@@ -1,8 +1,8 @@
 
 
 **Project Overview**
-We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is focus in the MAPS implementation from tomtom 
-to add Traffic API to our current implementation..
+We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is focus in the MAPS 
+implementation from tomtom to add Traffic API to our current implementation and correct the issue because the map is not displaying itself.
 The project is developed in React tsx and TypeScript.
 
 
@@ -87,7 +87,6 @@ frontend-smart-city/
 │   │   ├── search-command.tsx
 │   ├── ui/ # shadcn components
 │   ├── weather/
-
 │   │   ├── current-weather.tsx
 │   │   ├── weather-forecast.tsx
 │   │   ├── weather-icon.tsx
@@ -100,11 +99,15 @@ frontend-smart-city/
 │   ├── weather/
 │   │   ├── use-current-weather.ts
 │   │   ├── use-weather-forecast.ts
+├── map/
+│   │   ├── use-traffic-segment.ts
+│   │   ├── use-traffic-flow.ts
 │
 ├── utils/
 │   ├── cn.ts
 │   ├── utils.ts
 │
+
 ├── .env.local
 ├── components.json
 ├── package.json
