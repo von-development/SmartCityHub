@@ -6,6 +6,9 @@ import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import { useTrafficFlow } from '@/hooks/map/use-traffic-flow'
 import { FlowSegmentMarker } from "@/components/FlowSegment/FlowSegmentMarker"
 import { createFlowSegmentPopup } from '@/components/FlowSegment/FlowSegmentPopup'
+import { SearchBox } from '@/components/MapSideBar/Search/SearchBox'
+import { SearchResults } from '@/components/MapSideBar/Search/SearchResults'
+import { useSearch } from '@/hooks/map/use-search'
 
 const AVEIRO_CENTER = {
   lat: 40.6405,
@@ -35,6 +38,12 @@ export function MapView({
   const [isMapLoaded, setIsMapLoaded] = useState(false)
   const [activePopup, setActivePopup] = useState<tt.Popup | null>(null)
   const [lastClickCoords, setLastClickCoords] = useState<[number, number] | null>(null)
+  const { 
+    results: searchResults,
+    isLoading: isSearching,
+    searchPlace,
+    clearResults
+  } = useSearch({ map: mapInstance.current })
 
   // Effect to handle popup when flow data changes
   useEffect(() => {
@@ -227,6 +236,39 @@ export function MapView({
         className="absolute inset-0 w-full h-full"
         style={{ minHeight: '400px' }}
       />
+      
+      {/* Floating search container */}
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-md px-4 z-10">
+        <div className="bg-background rounded-lg shadow-lg">
+          <SearchBox
+            onSearch={searchPlace}
+            isLoading={isSearching}
+            onClear={clearResults}
+          />
+          {searchResults.length > 0 && (
+            <div className="mt-2">
+              <SearchResults
+                results={searchResults}
+                onSelectResult={(result) => {
+                  if (mapInstance.current && result.position) {
+                    const options: tt.AnimationOptions = {
+                      duration: 1000,
+                      essential: true
+                    }
+                    
+                    mapInstance.current.setCenter([result.position.lon, result.position.lat])
+                    mapInstance.current.setZoom(16)
+                    mapInstance.current.easeTo(options)
+                    clearResults() // Clear results after selection
+                  }
+                }}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Existing marker code */}
       {mapInstance.current && flowSegmentData && !activePopup && (
         <FlowSegmentMarker
           map={mapInstance.current}
