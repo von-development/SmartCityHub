@@ -36,6 +36,12 @@ function formatText(text: string) {
       /\[(.*?)\]$$(.*?)$$/g,
       '<a href="$2" class="text-blue-500 hover:underline hover:text-blue-600 transition-colors inline-flex items-center" target="_blank" rel="noopener noreferrer">$1<ExternalLink class="w-3 h-3 ml-1" /></a>',
     )
+    .replace(/\*(.*?)\*/g, '<span class="italic">$1</span>')
+    // Links: [text](url)
+    .replace(
+      /\[(.*?)\]\((.*?)\)/g,
+      '<a href="$2" class="text-blue-500 hover:underline" target="_blank">$1</a>'
+    )
     .split("\n")
     .filter(Boolean)
     .join('</p><p class="mb-3 font-outfit">')
