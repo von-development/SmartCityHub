@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 
 const agentConfigs = {
   test: {
-    title: "Test Agent",
+    title: "AGENETE DE TESTE",
     description: "Agente para testes e desenvolvimento",
     emoji: "🤖",
     endpoint: "/api/chat/agents"
@@ -18,10 +18,10 @@ const agentConfigs = {
     endpoint: "/api/chat/event_agent"
   },
   tourism: {
-    title: "Aveiro Servico online",
+    title: "AGEENDE DE TURISMO",
     description: "Explore pontos turísticos e receba recomendações personalizadas",
     emoji: "🗺️",
-    endpoint: "/api/chat/servicon_agent"
+    endpoint: "/api/chat/tourism_agent"
   },
   transport: {
     title: "TESTA ESSE AQUI",
@@ -39,7 +39,7 @@ const agentConfigs = {
     title: "Guia Educacional",
     description: "Informações sobre escolas, universidades e cursos",
     emoji: "📚",
-    endpoint: "/api/chat/education_agent"
+    endpoint: "/api/chat/tourism_agent"
   },
   local: {
     title: "Assistente Local",

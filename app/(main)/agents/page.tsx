@@ -8,7 +8,7 @@ import { Bot, Calendar, MapPin, Bus, Building2, Info, Search, Book } from "lucid
 const agents = [
   {
     id: "test",
-    name: "Test Agent",
+    name: "AGENTE DE TESTE",
     description: "Agente para testes e desenvolvimento",
     icon: Bot,
     gradient: "from-gray-500 to-gray-700",

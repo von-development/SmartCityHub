@@ -9,6 +9,7 @@ import { Message as VercelChatMessage, StreamingTextResponse } from "ai";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { ChatOpenAI } from "@langchain/openai";
 import { TavilySearchResults } from "@langchain/community/tools/tavily_search";
+
 import {
   AIMessage,
   BaseMessage,
@@ -44,16 +45,7 @@ const convertLangChainMessageToVercelMessage = (message: BaseMessage) => {
   }
 };
 
-// Specialized prompt for events agent
-const EVENT_AGENT_TEMPLATE = `Você é um assistente especializado em eventos em Aveiro, Portugal.
-Suas principais responsabilidades:
-1. Encontrar eventos atuais e futuros em Aveiro
-2. Fornecer detalhes sobre datas, locais e programação
-3. Recomendar eventos baseados nos interesses do usuário
-4. Informar sobre ingressos e reservas
 
-Use a ferramenta de busca para encontrar informações atualizadas.
-Responda sempre em português de forma clara e objetiva.`;
 
 export async function POST(req: NextRequest) {
   try {
@@ -66,27 +58,67 @@ export async function POST(req: NextRequest) {
       )
       .map(convertVercelMessageToLangChainMessage);
 
+    // Get the current date and time in a formatted string
+    const currentDateTime = new Date().toLocaleString("pt-PT", {
+      timeZone: "Europe/Lisbon",
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    // Define the system prompt for the agent
+    const systemPrompt = `Você é um assistente especializado em eventos na cidade de Aveiro, Portugal. Sua função é fornecer informações concisas e relevantes sobre eventos locais e notícias, evitando respostas longas e excessivas.
+
+**Data e Hora Atual em Aveiro:** ${currentDateTime}
+
+**Fontes principais para buscar eventos:**
+- Câmara Municipal de Aveiro (https://www.cm-aveiro.pt)
+- Notícias de Aveiro (https://www.noticiasdeaveiro.pt)
+- Diário de Aveiro (https://www.diarioaveiro.pt)
+
+Available Tool:
+web_search: Use to find current events or news in Portuguese. Example: "eventos aveiro fevereito 2025", "hackthons em aveiro 2025", "exposicoes de arte em aveiro 2025"
+
+**Instruções:**
+1. Responda com a frase: "Encontrei algumas notícias/eventos que possam interessar."
+2. Forneça um parágrafo com uma breve descrição do evento ou notícia, incluindo informações sobre onde e quando, se disponíveis. Se essas informações não estiverem disponíveis, você pode ignorá-las.
+3. Sempre compartilhe links úteis relacionados ao evento ou notícia, se houver.
+4. Não separe os eventos ou notícias por linhas em branco; mantenha cada noticia e/ou evento separado em paragraphos.
+5. Se o usuario nao especifcou um evento ou noticia especifico compartile 3 ou mais eventos e/ou noticias.
+6. Se o usuario nao especificou o tipo de noticia ou evento especifico que ele queira no final do prompt fale que voce pode forncer mais detalhes ou procurar eventos confrome seus gostos
+7. Use emojis para parecer mais animado e amigavel, mas nao abuse!
+
+**Exemplo de Resposta:**
+Encontrei algumas notícias/eventos que possam interessar. O **Festival de Música de Aveiro** acontecerá no **Teatro Aveirense** no dia **15 de dezembro, às 21h00**. É uma noite especial com músicos locais. Para mais informações, acesse [Programa completo](https://teatro-aveirense.pt/evento). A **Exposição de Arte Contemporânea** está em exibição até **20 de dezembro** no **Museu de Aveiro**, apresentando artistas portugueses contemporâneos. Para detalhes, visite [Detalhes da exposição](https://museu-aveiro.pt/expo).
+
+Se o usuario nao especificou o tipo de noticia ou evento especifico que ele queira no final do prompt fale que voce pode forncer mais detalhes ou procurar eventos confrome seus gostos!`;
+
+
     // Initialize Tavily Search tool
     
     const tools = [
       new TavilySearchResults({
         apiKey: process.env.NEXT_PUBLIC_TAVILY_API_KEY,
-        maxResults: 3,
-        includeDomains: ["cm-aveiro.pt", "visitaveiro.pt"]
-,
+        maxResults: 5,
+        includeDomains: ["cm-aveiro.pt", "noticiasdeaveiro.pt", "diarioaveiro.pt", "cm-aveiro.pt/visitantes/agenda-aveiro.pt"],
+        searchDepth: "deep",
+        includeImages: true,
       }),
     ];
 
     const chat = new ChatOpenAI({
       modelName: "gpt-4o-mini",
-      temperature: 0.7,
+      temperature: 0.5,
       streaming: true,
     });
 
     const agent = createReactAgent({
       llm: chat,
       tools,
-      messageModifier: new SystemMessage(EVENT_AGENT_TEMPLATE),
+      messageModifier: new SystemMessage(systemPrompt),
     });
 
     if (!returnIntermediateSteps) {
@@ -118,6 +150,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           messages: result.messages.map(convertLangChainMessageToVercelMessage),
+          systemPrompt,
         },
         { status: 200 },
       );
