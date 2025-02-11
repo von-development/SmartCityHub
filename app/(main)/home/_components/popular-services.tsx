@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { Card } from "@/components/ui/card"; 
-import { MapPin, Car, Building2 } from "lucide-react";
-import Link from "next/link";
-import { motion } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { MapPin, Car, Building2 } from "lucide-react"
+import Link from "next/link"
+import { motion } from "framer-motion"
 
 const popularServices = [
   {
@@ -34,7 +34,7 @@ const popularServices = [
     href: "/ecocentro",
     gradient: "from-purple-500 to-pink-500",
   },
-];
+]
 
 const container = {
   hidden: { opacity: 0 },
@@ -44,23 +44,19 @@ const container = {
       staggerChildren: 0.1,
     },
   },
-};
+}
 
 const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0 },
-};
+}
 
 export function PopularServices() {
   return (
-    <section className="container px-4">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="text-2xl font-bold mb-1">Serviços mais acessados</h2>
-          <p className="text-muted-foreground">
-            Acesse rapidamente os serviços mais utilizados
-          </p>
-        </div>
+    <section className="container px-4 py-6">
+      <div className="mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2">Serviços mais acessados</h2>
+        <p className="text-muted-foreground text-sm sm:text-base">Acesse rapidamente os serviços mais utilizados</p>
       </div>
       <motion.div
         variants={container}
@@ -69,30 +65,31 @@ export function PopularServices() {
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
       >
         {popularServices.map((service) => (
-          <motion.div key={service.title} variants={item}>
-            <Link href={service.href}>
-              <Card className="group relative h-full overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                <div className="relative p-6">
-                  <div className="flex flex-col gap-4">
-                    <div className="p-3 rounded-xl bg-white/10 text-primary group-hover:text-white transition-colors">
-                      <service.icon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2 group-hover:text-white transition-colors">
-                        {service.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground group-hover:text-white/90 transition-colors">
-                        {service.description}
-                      </p>
-                    </div>
+          <motion.div key={service.title} variants={item} className="h-full">
+            <Link href={service.href} className="block h-full">
+              <Card className="group relative h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                />
+                <CardHeader className="relative p-4">
+                  <div className="p-2.5 rounded-xl bg-white/10 text-primary group-hover:text-white transition-colors w-fit">
+                    <service.icon className="h-5 w-5" />
                   </div>
-                </div>
+                </CardHeader>
+                <CardContent className="relative pt-0 px-4 pb-4">
+                  <CardTitle className="font-semibold text-base mb-1.5 group-hover:text-white transition-colors">
+                    {service.title}
+                  </CardTitle>
+                  <p className="text-xs text-muted-foreground group-hover:text-white/90 transition-colors">
+                    {service.description}
+                  </p>
+                </CardContent>
               </Card>
             </Link>
           </motion.div>
         ))}
       </motion.div>
     </section>
-  );
-} 
+  )
+}
+

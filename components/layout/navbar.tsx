@@ -27,7 +27,7 @@ export function Navbar() {
     >
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
         <Link href="/" className="font-bold text-xl shrink-0">
-          Aveiro Smart
+          ConnectAveiro
         </Link>
 
         <SearchCommand />
