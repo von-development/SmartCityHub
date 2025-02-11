@@ -1,9 +1,9 @@
 
 
 **Project Overview**
-We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is focus in the MAPS 
-implementation from tomtom to add Traffic API to our current implementation and correct the issue because the map is not displaying itself.
-The project is developed in React tsx and TypeScript.
+We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is focus in the creating a presentation
+fot the hackthon this will be a look a like slide in powerpoint however we will develop it in react. 
+
 
 
 **Project Structure**

@@ -60,17 +60,17 @@ export function SearchCommand() {
             <CommandItem
               onSelect={() => runCommand(() => router.push("/events/featured"))}
             >
-              Featured Events
+              AI Assistant
             </CommandItem>
           </CommandGroup>
-          <CommandGroup heading="Places">
+          <CommandGroup heading="AI Assistant">
             <CommandItem
-              onSelect={() => runCommand(() => router.push("/map"))}
+              onSelect={() => runCommand(() => router.push("/agents"))}
             >
               City Map
             </CommandItem>
             <CommandItem
-              onSelect={() => runCommand(() => router.push("/map/attractions"))}
+              onSelect={() => runCommand(() => router.push("/map"))}
             >
               Tourist Attractions
             </CommandItem>
