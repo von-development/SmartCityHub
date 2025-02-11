@@ -1,46 +1,28 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-  Building2,
-  Coffee,
-  Hotel,
-  Landmark,
-  MapPin,
-  UtensilsCrossed,
-} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { MapSidebarHeader } from "@/components/MapSideBar/Header"
+import { CategoryGrid } from "@/components/MapSideBar/Places/CategoryGrid"
+import { PlacesList } from "@/components/MapSideBar/Places/PlacesList"
+import { TrafficSection } from "@/components/MapSideBar/Traffic"
+import { useState, useEffect, useRef } from "react"
+import { ChevronLeft, PanelLeftClose, PanelLeftOpen } from "lucide-react"
+import { cn } from "@/utils/cn"
+import { useMediaQuery } from "@/hooks/use-media-query"
+import tt from '@tomtom-international/web-sdk-maps'
+import { TrafficFlow } from "@/components/MapSideBar/Traffic/TrafficFlow"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { Spinner } from "@/components/ui/spinner"
+import { AlertTriangle } from "lucide-react"
+import { TrafficStyle } from "@/hooks/map/use-traffic-flow"
+import { SearchBox } from '@/components/MapSideBar/Search/SearchBox'
+import { SearchResults } from '@/components/MapSideBar/Search/SearchResults'
+import { useSearch } from '@/hooks/map/use-search'
+import { SearchResult } from '@/types/search'
 
-const categories = [
-  {
-    id: "attractions",
-    name: "Atrações",
-    icon: Landmark,
-  },
-  {
-    id: "restaurants",
-    name: "Restaurantes",
-    icon: UtensilsCrossed,
-  },
-  {
-    id: "hotels",
-    name: "Hotéis",
-    icon: Hotel,
-  },
-  {
-    id: "cafes",
-    name: "Cafés",
-    icon: Coffee,
-  },
-  {
-    id: "services",
-    name: "Serviços",
-    icon: Building2,
-  },
-]
 
+// Sample data - Move to a separate file later
 const places = [
   {
     id: "1",
@@ -61,67 +43,173 @@ const places = [
   // Add more places as needed
 ]
 
-export function MapSidebar() {
-  return (
-    <Card className="w-80 border-r rounded-none">
-      <Tabs defaultValue="places" className="h-full">
-        <div className="p-4 border-b">
-          <TabsList className="w-full">
-            <TabsTrigger value="places" className="flex-1">
-              Locais
-            </TabsTrigger>
-            <TabsTrigger value="routes" className="flex-1">
-              Rotas
-            </TabsTrigger>
-          </TabsList>
-        </div>
+interface FlowSegmentData {
+  currentSpeed: number
+  freeFlowSpeed: number
+  currentTravelTime: number
+  freeFlowTravelTime: number
+  confidence: number
+  roadClosure: boolean
+  coordinates: {
+    latitude: number
+    longitude: number
+  }[]
+  frc: string
+}
 
-        <TabsContent value="places" className="m-0">
-          <div className="p-4 border-b grid grid-cols-3 gap-2">
-            {categories.map((category) => (
-              <Button
-                key={category.id}
-                variant="ghost"
-                className="flex flex-col h-auto gap-2 p-2"
-              >
-                <category.icon className="h-4 w-4" />
-                <span className="text-xs">{category.name}</span>
-              </Button>
-            ))}
+export interface MapSidebarProps {
+  map: tt.Map | null
+  flowSegmentData: FlowSegmentData | null
+  flowSegmentLoading: boolean
+  flowSegmentError: string | null
+  onCloseSegment: () => void
+  showTraffic: boolean
+  trafficStyle: TrafficStyle
+  onToggleTraffic: (checked: boolean) => void
+  onChangeTrafficStyle: (style: TrafficStyle) => void
+}
+
+export function MapSidebar({ 
+  map, 
+  flowSegmentData,
+  flowSegmentLoading,
+  flowSegmentError,
+  onCloseSegment,
+  showTraffic,
+  trafficStyle,
+  onToggleTraffic,
+  onChangeTrafficStyle
+}: MapSidebarProps) {
+  console.log('MapSidebar received map:', !!map)
+
+  const [currentSection, setCurrentSection] = useState<string | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string>()
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
+  const isMobile = useMediaQuery("(max-width: 768px)")
+
+  // Auto collapse on mobile
+  useEffect(() => {
+    setIsCollapsed(isMobile)
+  }, [isMobile])
+
+  const { 
+    results: searchResults,
+    isLoading: isSearching,
+    searchPlace,
+    clearResults
+  } = useSearch({ map })
+
+  const renderSection = () => {
+    switch (currentSection) {
+      case 'places':
+        return (
+          <>
+            <CategoryGrid
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
+            <PlacesList
+              places={places.filter(place => 
+                !selectedCategory || place.category === selectedCategory
+              )}
+              onSelectPlace={(place) => {
+                console.log('Selected place:', place)
+              }}
+            />
+          </>
+        )
+      
+      case 'traffic':
+        return (
+          <>
+            <TrafficFlow
+              showTraffic={showTraffic}
+              trafficStyle={trafficStyle}
+              onToggleTraffic={onToggleTraffic}
+              onChangeStyle={onChangeTrafficStyle}
+            />
+            {flowSegmentLoading && (
+              <Card className="p-4 mt-4">
+                <div className="flex items-center gap-2">
+                  <Spinner className="h-4 w-4" />
+                  <p className="text-sm">Carregando dados do segmento...</p>
+                </div>
+              </Card>
+            )}
+            {flowSegmentError && (
+              <Card className="p-4 mt-4">
+                <div className="flex items-center gap-2 text-destructive">
+                  <AlertTriangle className="h-4 w-4" />
+                  <p className="text-sm">{flowSegmentError}</p>
+                </div>
+              </Card>
+            )}
+          </>
+        )
+
+      case 'bus-stops':
+        return (
+          <div className="p-4 text-center text-muted-foreground">
+            Funcionalidade de paragens em breve...
           </div>
+        )
 
-          <ScrollArea className="h-[calc(100vh-14rem)]">
-            <div className="p-4 space-y-4">
-              {places.map((place) => (
-                <Card key={place.id} className="p-4">
-                  <div className="flex gap-4">
-                    <div
-                      className="w-20 h-20 rounded-lg bg-cover bg-center"
-                      style={{ backgroundImage: `url(${place.image})` }}
-                    />
-                    <div className="flex-1">
-                      <h3 className="font-semibold">{place.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {place.description}
-                      </p>
-                      <div className="flex items-center text-xs text-muted-foreground">
-                        <MapPin className="h-3 w-3 mr-1" />
-                        {place.address}
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </ScrollArea>
-        </TabsContent>
-
-        <TabsContent value="routes" className="m-0 p-4">
-          <div className="text-center text-muted-foreground p-4">
+      case 'routes':
+        return (
+          <div className="p-4 text-center text-muted-foreground">
             Funcionalidade de rotas em breve...
           </div>
-        </TabsContent>
-      </Tabs>
-    </Card>
+        )
+
+      default:
+        return (
+          <MapSidebarHeader onSelectCategory={setCurrentSection} />
+        )
+    }
+  }
+
+  return (
+    <TooltipProvider>
+      <div className="relative flex h-full">
+        <Card 
+          className={cn(
+            "border-r rounded-none transition-all duration-300",
+            isCollapsed ? "w-0 overflow-hidden" : "w-80"
+          )}
+        >
+          {currentSection && (
+            <div className="p-4 border-b">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-2"
+                onClick={() => setCurrentSection(null)}
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Voltar
+              </Button>
+            </div>
+          )}
+          {renderSection()}
+        </Card>
+
+        <Button
+          variant="secondary"
+          size="icon"
+          className={cn(
+            "absolute top-4 -right-10 transition-transform",
+            isCollapsed && "rotate-180"
+          )}
+          onClick={() => setIsCollapsed(!isCollapsed)}
+        >
+          {isCollapsed ? (
+            <PanelLeftOpen className="h-4 w-4" />
+          ) : (
+            <PanelLeftClose className="h-4 w-4" />
+          )}
+        </Button>
+      </div>
+    </TooltipProvider>
   )
 } 

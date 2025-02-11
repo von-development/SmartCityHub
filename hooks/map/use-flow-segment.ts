@@ -1,95 +1,121 @@
-import { useQuery } from '@tanstack/react-query';
-import type { LngLat } from '@tomtom-international/web-sdk-maps';
+import { useState, useCallback } from 'react'
+import tt from '@tomtom-international/web-sdk-maps'
+import { debounce } from 'lodash'
+import type { TrafficStyle } from './use-traffic-flow'
 
 interface FlowSegmentData {
-  flowSegmentData: {
-    freeFlowSpeed: number;
-    currentSpeed: number;
-    currentTravelTime: number;
-    freeFlowTravelTime: number;
-    confidence: number;
-    roadClosure: boolean;
-    coordinates: {
-      coordinate: number[][];
-    };
-    street?: string;
-    name?: string; // Street name from API
-    properties?: {
-      speedLimit?: number;
-      roadType?: string;
-    };
-  };
+  currentSpeed: number
+  freeFlowSpeed: number
+  currentTravelTime: number
+  freeFlowTravelTime: number
+  confidence: number
+  roadClosure: boolean
+  coordinates: {
+    latitude: number
+    longitude: number
+  }[]
+  frc: string
+  streetName?: string
 }
 
-export async function getFlowSegmentData(point: LngLat): Promise<FlowSegmentData['flowSegmentData']> {
-  try {
-    // First get the flow segment data
-    const flowResponse = await fetch(
-      `https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/10/json?` +
-      `point=${point.lat},${point.lng}&` +
-      `key=${process.env.NEXT_PUBLIC_TOMTOM_API_KEY}&` +
-      `unit=KMPH&` +
-      `thickness=10` // Increase detection area
-    );
+interface UseFlowSegmentOptions {
+  map: tt.Map | null
+  style: TrafficStyle
+}
 
-    if (!flowResponse.ok) {
-      throw new Error('Failed to fetch flow segment data');
-    }
+export function useFlowSegment({ map, style }: UseFlowSegmentOptions) {
+  const [segmentData, setSegmentData] = useState<FlowSegmentData | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-    const data = await flowResponse.json() as FlowSegmentData;
-    console.log('Raw traffic flow response:', data);
+  const fetchSegmentData = useCallback(
+    debounce(async (latitude: number, longitude: number) => {
+      console.log('Fetching segment data:', { latitude, longitude, style })
+      if (!map) return
 
-    if (!data.flowSegmentData) {
-      throw new Error('No flow segment data available for this location');
-    }
+      setIsLoading(true)
+      setError(null)
 
-    // Get street name using reverse geocoding
-    const geoResponse = await fetch(
-      `https://api.tomtom.com/search/2/reverseGeocode/${point.lat},${point.lng}.json?` +
-      `key=${process.env.NEXT_PUBLIC_TOMTOM_API_KEY}&` +
-      `language=pt-BR`
-    );
+      try {
+        const zoom = Math.round(map.getZoom())
+        const apiKey = process.env.NEXT_PUBLIC_TOMTOM_API_KEY
 
-    if (geoResponse.ok) {
-      const geoData = await geoResponse.json();
-      const streetName = geoData.addresses?.[0]?.address?.streetName;
-      if (streetName) {
-        data.flowSegmentData.street = streetName;
+        console.log('Making geocode request...')
+        const geocodeResponse = await fetch(
+          `https://api.tomtom.com/search/2/reverseGeocode/${latitude},${longitude}.json?` +
+          `key=${apiKey}&language=pt-PT`
+        )
+
+        console.log('Geocode response:', await geocodeResponse.clone().json())
+
+        if (!geocodeResponse.ok) {
+          throw new Error('Failed to get location information')
+        }
+
+        const geocodeData = await geocodeResponse.json()
+        const streetName = geocodeData.addresses?.[0]?.address?.streetName
+
+        const flowResponse = await fetch(
+          `https://api.tomtom.com/traffic/services/4/flowSegmentData/${style}/${zoom}/json` +
+          `?key=${apiKey}` +
+          `&point=${latitude},${longitude}` +
+          `&unit=kmph`
+        )
+
+        if (!flowResponse.ok) {
+          throw new Error(`Traffic data error: ${flowResponse.statusText}`)
+        }
+
+        const flowData = await flowResponse.json()
+
+        if (!flowData.flowSegmentData) {
+          throw new Error('No traffic data available for this location')
+        }
+
+        const requiredFields = [
+          'currentSpeed',
+          'freeFlowSpeed',
+          'currentTravelTime',
+          'freeFlowTravelTime',
+          'confidence',
+          'coordinates'
+        ]
+
+        for (const field of requiredFields) {
+          if (!(field in flowData.flowSegmentData)) {
+            throw new Error(`Missing required field: ${field}`)
+          }
+        }
+
+        setSegmentData({
+          currentSpeed: flowData.flowSegmentData.currentSpeed,
+          freeFlowSpeed: flowData.flowSegmentData.freeFlowSpeed,
+          currentTravelTime: flowData.flowSegmentData.currentTravelTime,
+          freeFlowTravelTime: flowData.flowSegmentData.freeFlowTravelTime,
+          confidence: flowData.flowSegmentData.confidence,
+          roadClosure: flowData.flowSegmentData.roadClosure || false,
+          coordinates: flowData.flowSegmentData.coordinates.coordinate,
+          frc: flowData.flowSegmentData.frc,
+          streetName
+        })
+      } catch (err) {
+        console.error('Detailed error:', err)
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error'
+        console.error('Error fetching flow segment data:', err)
+        setError(errorMessage)
+        setSegmentData(null)
+      } finally {
+        setIsLoading(false)
       }
-    }
+    }, 1000),
+    [map, style]
+  )
 
-    // Process the speed data
-    const flowData = data.flowSegmentData;
-    const currentSpeed = flowData.currentSpeed;
-    const freeFlowSpeed = flowData.freeFlowSpeed;
-
-    // Log speeds for debugging
-    console.log('Speed data:', {
-      raw: { current: currentSpeed, freeFlow: freeFlowSpeed },
-      processed: {
-        current: currentSpeed > 100 ? currentSpeed / 3.6 : currentSpeed,
-        freeFlow: freeFlowSpeed > 100 ? freeFlowSpeed / 3.6 : freeFlowSpeed
-      }
-    });
-
-    return {
-      ...flowData,
-      // Convert speeds if they're not already in km/h (if in m/s)
-      currentSpeed: currentSpeed > 100 ? currentSpeed / 3.6 : currentSpeed,
-      freeFlowSpeed: freeFlowSpeed > 100 ? freeFlowSpeed / 3.6 : freeFlowSpeed,
-    };
-  } catch (error) {
-    console.error('Error fetching traffic data:', error);
-    throw error;
+  return {
+    segmentData,
+    setSegmentData,
+    isLoading,
+    error,
+    fetchSegmentData,
   }
-}
-
-export function useFlowSegment(point: LngLat | null) {
-  return useQuery({
-    queryKey: ['traffic', 'flow-segment', point?.toString()],
-    queryFn: () => point ? getFlowSegmentData(point) : null,
-    enabled: !!point,
-    retry: false, // Don't retry if there's no data for a location
-    staleTime: 30 * 1000, // Consider data stale after 30 seconds
-  });
 } 

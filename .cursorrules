@@ -1,9 +1,9 @@
 
 
 **Project Overview**
-We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is focus in the MAPS implementation from tomtom 
-to add Traffic API to our current implementation..
-The project is developed in React tsx and TypeScript.
+We are building a Smart City Hub, a platform that integrates various functionalities. Our primary focus is focus in the creating a presentation
+fot the hackthon this will be a look a like slide in powerpoint however we will develop it in react. 
+
 
 
 **Project Structure**
@@ -64,6 +64,24 @@ frontend-smart-city/
 │   │   ├── UploadDocumentsForm.tsx
 │   ├── guide/
 │   │   ├── GuideInfoBox.tsx
+|   |   MapSideBar/
+|   |   ├── Header (Tabs Navigation)
+|   |   ├── Places/
+|   |   │   ├── CategoryGrid.tsx
+|   |   │   ├── PlacesList.tsx
+|   |   │   └── PlaceCard.tsx
+|   |   ├── Traffic/
+|   |   │   ├── TrafficFlow.tsx
+|   |   │   ├── TrafficIncidents.tsx
+|   |   │   └── TrafficLegend.tsx
+|   |   ├── BusStops/
+|   |   │   ├── StopSearch.tsx
+|   |   │   ├── NearbyStops.tsx
+|   |   │   └── StopDetails.tsx
+|   |   └── Routes/
+|   |       ├── RouteForm.tsx
+|   |       ├── RouteList.tsx
+|   |       └── RouteDetail.tsx
 │   ├── layout/
 │   │   ├── navbar.tsx
 │   │   ├── search-command.tsx
@@ -81,11 +99,15 @@ frontend-smart-city/
 │   ├── weather/
 │   │   ├── use-current-weather.ts
 │   │   ├── use-weather-forecast.ts
+├── map/
+│   │   ├── use-traffic-segment.ts
+│   │   ├── use-traffic-flow.ts
 │
 ├── utils/
 │   ├── cn.ts
 │   ├── utils.ts
 │
+
 ├── .env.local
 ├── components.json
 ├── package.json

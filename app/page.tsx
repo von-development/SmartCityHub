@@ -48,11 +48,11 @@ export default function Home() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 shadow-sm">
             <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Aveiro Smart City Platform</span>
+            <span className="text-sm font-medium text-primary">ConnectAveiro</span>
             <ArrowRight className="h-4 w-4 text-primary" />
           </div>
           <h1 className="text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-900">
-            O Município Mais Perto de Você
+            O Município Mais Conectado com Você
           </h1>
           <p className="text-xl text-muted-foreground max-w-[600px] mx-auto">
             Bem-vindo à plataforma digital de Aveiro, conectando cidadãos aos serviços municipais 
@@ -70,15 +70,15 @@ export default function Home() {
             href="/home"
             className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-black text-white hover:bg-black/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
-            <span className="font-medium">Versão Demo</span>
+            <span className="font-medium">Demo Version</span>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <Link 
-            href="/project"
+            href="/presentation"
             className="group inline-flex items-center gap-2 px-8 py-4 rounded-full border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
             <FileText className="h-4 w-4 text-zinc-900" />
-            <span className="font-medium text-zinc-900">Estudo de Caso</span>
+            <span className="font-medium text-zinc-900">See presentation</span>
             <ArrowRight className="h-4 w-4 text-zinc-900 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </motion.div>
