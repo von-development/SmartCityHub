@@ -53,7 +53,7 @@ export default function ChatPage() {
           endpoint="api/chat/event_agent"
           emptyStateComponent={InfoCard}
           placeholder="Como posso ajudar você hoje?"
-          emoji="💬"
+
           showIntermediateStepsToggle={false}
         />
       </div>

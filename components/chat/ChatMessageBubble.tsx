@@ -6,6 +6,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
+// Add interface for source structure
+interface Source {
+  pageContent: string
+  metadata?: {
+    loc?: {
+      lines: {
+        from: number
+        to: number
+      }
+    }
+  }
+}
+
 function formatText(text: string) {
   return text
     .replace(/###\s+(.*?)(?:\n|$)/g, '<h3 class="text-xl font-semibold mt-6 mb-3 text-primary font-outfit">$1</h3>')
@@ -31,7 +44,7 @@ function formatText(text: string) {
 export function ChatMessageBubble(props: {
   message: Message
   agentIcon?: ReactNode
-  sources: any[]
+  sources: Source[]
 }) {
   const isUser = props.message.role === "user"
 
@@ -64,7 +77,7 @@ export function ChatMessageBubble(props: {
             />
           </div>
 
-          {/* Sources section */}
+          {/* Sources section with fixed quotes */}
           {!isUser && props.sources && props.sources.length > 0 && (
             <div className="mt-4 space-y-2 font-outfit">
               <Badge variant="outline" className="text-xs font-semibold font-outfit">
@@ -73,7 +86,7 @@ export function ChatMessageBubble(props: {
               <div className="space-y-2">
                 {props.sources.map((source, i) => (
                   <div key={`source:${i}`} className="text-sm bg-muted p-2 rounded-md font-outfit">
-                    <span className="font-medium text-primary">{i + 1}.</span> "{source.pageContent}"
+                    <span className="font-medium text-primary">{i + 1}.</span> &ldquo;{source.pageContent}&rdquo;
                     {source.metadata?.loc?.lines !== undefined && (
                       <div className="mt-1 text-xs text-muted-foreground">
                         Lines {source.metadata.loc.lines.from} to {source.metadata.loc.lines.to}

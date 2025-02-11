@@ -3,15 +3,15 @@
 import { useEffect, useRef, useCallback, useState } from 'react'
 import tt from '@tomtom-international/web-sdk-maps'
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
-import { useTrafficFlow } from '@/hooks/map/use-traffic-flow'
+
 import { FlowSegmentMarker } from "@/components/FlowSegment/FlowSegmentMarker"
 import { createFlowSegmentPopup } from '@/components/FlowSegment/FlowSegmentPopup'
 import { SearchBox } from '@/components/MapSideBar/Search/SearchBox'
 import { SearchResults } from '@/components/MapSideBar/Search/SearchResults'
 import { useSearch } from '@/hooks/map/use-search'
-import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { Car, MapPin, Bus, Navigation2 } from "lucide-react"
+
+import { TooltipProvider } from "@/components/ui/tooltip"
+
 import { TrafficControls } from "@/components/MapControls/TrafficControls"
 import { PlacesControls } from "@/components/MapControls/PlacesControls"
 import { TrafficStyle } from '@/hooks/map/use-traffic-flow'
@@ -83,7 +83,7 @@ export function MapView({
 
       if (showTraffic) {
         map.showTrafficFlow({
-          style: trafficStyle,
+          style: trafficStyle as TrafficFlowStyle,
           refresh: 30000 // Refresh every 30 seconds
         })
       } else {

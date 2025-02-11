@@ -2,7 +2,8 @@ import { useState, useCallback, useEffect } from 'react'
 import tt from '@tomtom-international/web-sdk-maps'
 import type { TrafficFlowStyle } from '@tomtom-international/web-sdk-maps'
 
-export type TrafficStyle = TrafficFlowStyle
+// Define the valid traffic style values explicitly
+export type TrafficStyle = 'relative' | 'absolute' | 'reduced-sensitivity' | 'relative-delay'
 
 interface UseTrafficFlowOptions {
   map: tt.Map | null
