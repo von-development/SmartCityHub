@@ -1,12 +1,11 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { MapHeader } from "./_components/map-header";
-import { MapSidebar } from "./_components/map-sidebar";
 import { useState } from 'react'
 import tt from '@tomtom-international/web-sdk-maps'
 import { useFlowSegment } from '@/hooks/map/use-flow-segment'
 import { TrafficStyle, useTrafficFlow } from '@/hooks/map/use-traffic-flow'
+
 
 // Dynamically import MapView with no SSR
 const MapView = dynamic(
@@ -65,26 +64,16 @@ export default function MapPage() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)]">
-      <MapHeader />
-      <div className="flex-1 flex">
-        <MapSidebar 
-          map={map}
-          flowSegmentData={segmentData}
-          flowSegmentLoading={isLoading}
-          flowSegmentError={error}
-          onCloseSegment={handleCloseSegment}
-          showTraffic={showTraffic}
-          trafficStyle={trafficStyle}
-          onToggleTraffic={toggleTraffic}
-          onChangeTrafficStyle={changeTrafficStyle}
-        />
-        <MapView 
-          onMapReady={handleMapReady}
-          onSegmentClick={handleSegmentClick}
-          flowSegmentData={segmentData}
-        />
-      </div>
+    <div className="relative h-[calc(100vh-4rem)]">
+      <MapView 
+        onMapReady={handleMapReady}
+        onSegmentClick={handleSegmentClick}
+        flowSegmentData={segmentData}
+        showTraffic={showTraffic}
+        trafficStyle={trafficStyle}
+        onToggleTraffic={toggleTraffic}
+        onChangeTrafficStyle={changeTrafficStyle}
+      />
     </div>
   );
 } 

@@ -4,6 +4,7 @@ import { GraphState } from "./state";
 import { shouldRetrieve, checkRelevance, createAgentNode, gradeDocuments, rewrite, generate } from "./nodes";
 import type { MunicipalServicesRetriever } from "./retriever";
 
+
 /**
  * Creates the workflow graph for the municipal services agent
  * @param retriever - The configured municipal services retriever

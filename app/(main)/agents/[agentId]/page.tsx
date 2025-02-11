@@ -1,103 +1,103 @@
 "use client";
 
 import { ChatWindow } from "@/components/chat/ChatWindow";
-import { GuideInfoBox } from "@/components/guide/GuideInfoBox";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
-const agentConfigs = {
+interface AgentConfig {
+  title: string;
+  description: string;
+  icon: string;
+  endpoint: string;
+  welcomeMessage: string;
+}
+
+const agentConfigs: Record<string, AgentConfig> = {
   test: {
-    title: "Test Agent",
-    description: "Agente para testes e desenvolvimento",
-    emoji: "🤖",
-    endpoint: "/api/chat/agents"
+    title: "Assistente Beta",
+    description: "Como posso ajudar você hoje?",
+    icon: "/chat/man_wb.svg",
+    endpoint: "/api/chat/agents",
+    welcomeMessage: "Olá! Sou o assistente beta, estou aqui para ajudar nos testes. Como posso ajudar você hoje?"
   },
   events: {
-    title: "Assistente de Eventos",
-    description: "Descubra eventos, festivais e atividades culturais",
-    emoji: "📅",
-    endpoint: "/api/chat/event_agent"
+    title: "Ana",
+    description: "Descubra eventos em Aveiro",
+    icon: "/chat/women_bb.svg",
+    endpoint: "/api/chat/event_agent",
+    welcomeMessage: "Olá! Sou Ana, sua guia de eventos em Aveiro. Estou aqui para ajudar você a descobrir eventos interessantes na cidade! Como posso ajudar?"
   },
   tourism: {
-    title: "Aveiro Servico online",
-    description: "Explore pontos turísticos e receba recomendações personalizadas",
-    emoji: "🗺️",
-    endpoint: "/api/chat/servicon_agent"
+    title: "Pedro - Guia Turístico",
+    description: "Como posso tornar sua visita a Aveiro mais especial?",
+    icon: "/chat/man_bw.svg",
+    endpoint: "/api/chat/tourism_agent",
+    welcomeMessage: "Olá! Sou Pedro, seu guia turístico em Aveiro. Estou aqui para ajudar você a tornar sua visita mais especial!"
   },
   transport: {
-    title: "TESTA ESSE AQUI",
-    description: "Informações sobre transporte público e mobilidade urbana",
-    emoji: "🚌",
-    endpoint: "/api/chat/servico_online"
+    title: "Maria - Mobilidade",
+    description: "Como posso ajudar com sua locomoção pela cidade?",
+    icon: "/chat/women_bbg.svg",
+    endpoint: "/api/chat/servico_online",
+    welcomeMessage: "Olá! Sou Maria, sua assistente de mobilidade. Estou aqui para ajudar você com sua locomoção pela cidade!"
   },
   services: {
-    title: "Assistente de Serviços",
-    description: "Ajuda com serviços municipais e documentação",
-    emoji: "🏛️",
-    endpoint: "/api/chat/services_agent"
+    title: "João - Serviços",
+    description: "Como posso auxiliar com serviços municipais hoje?",
+    icon: "/chat/man_ww.svg",
+    endpoint: "/api/chat/services_agent",
+    welcomeMessage: "Olá! Sou João, seu assistente de serviços municipais. Estou aqui para ajudar você com serviços municipais hoje!"
   },
   education: {
-    title: "Guia Educacional",
-    description: "Informações sobre escolas, universidades e cursos",
-    emoji: "📚",
-    endpoint: "/api/chat/education_agent"
+    title: "Sofia - Educação",
+    description: "Como posso ajudar com informações educacionais?",
+    icon: "/chat/women_cwb.svg",
+    endpoint: "/api/chat/tourism_agent",
+    welcomeMessage: "Olá! Sou Sofia, sua assistente de educação. Estou aqui para ajudar você com informações educacionais!"
   },
   local: {
-    title: "Assistente Local",
-    description: "Informações sobre comércio local e serviços próximos",
-    emoji: "🔍",
-    endpoint: "/api/chat/local_agent"
+    title: "Miguel - Guia Local",
+    description: "Como posso ajudar você a explorar nossa cidade?",
+    icon: "/chat/man_bb.svg",
+    endpoint: "/api/chat/local_agent",
+    welcomeMessage: "Olá! Sou Miguel, seu guia local em Aveiro. Estou aqui para ajudar você a explorar nossa cidade!"
   },
   faq: {
-    title: "FAQ Bot",
-    description: "Respostas rápidas para perguntas frequentes",
-    emoji: "❓",
-    endpoint: "/api/chat/faq_agent"
+    title: "Clara - FAQ",
+    description: "Como posso esclarecer suas dúvidas hoje?",
+    icon: "/chat/women_bb.svg",
+    endpoint: "/api/chat/faq_agent",
+    welcomeMessage: "Olá! Sou Clara, sua assistente de FAQ. Estou aqui para ajudar você a esclarecer suas dúvidas hoje!"
   }
 };
 
 export default function AgentChatPage() {
   const params = useParams();
   const agentId = params.agentId as string;
-  const config = agentConfigs[agentId as keyof typeof agentConfigs];
+  const config = agentConfigs[agentId];
 
-  const InfoCard = (
-    <GuideInfoBox>
-      <ul>
-        <li className="text-l">
-          {config.emoji}
-          <span className="ml-2">
-            Bem-vindo ao {config.title}! {config.description}
-          </span>
-        </li>
-        <li className="text-l">
-          💡
-          <span className="ml-2">
-            Como posso ajudar você hoje?
-          </span>
-        </li>
-      </ul>
-    </GuideInfoBox>
-  );
+  if (!config) {
+    return <div>Agent not found</div>;
+  }
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-      <div className="bg-muted py-12">
-        <div className="container px-4">
-          <h1 className="text-3xl font-bold mb-4">{config.title}</h1>
-          <p className="text-muted-foreground">
-            {config.description}
-          </p>
-        </div>
-      </div>
-      <div className="flex-1 relative">
-        <ChatWindow
-          endpoint={config.endpoint}
-          emptyStateComponent={InfoCard}
-          placeholder="Como posso ajudar você hoje?"
-          emoji={config.emoji}
-          showIntermediateStepsToggle={true}
-        />
-      </div>
+    <div className="flex-1 relative h-[calc(100vh-4rem)]">
+      <ChatWindow
+        endpoint={config.endpoint}
+        emptyStateComponent={null}
+        placeholder={config.description}
+        showIntermediateStepsToggle={true}
+        agentIcon={(
+          <Image
+            src={config.icon}
+            alt={config.title}
+            width={32}
+            height={32}
+            className="rounded-full hover:scale-110 transition-all duration-300"
+          />
+        )}
+        welcomeMessage={config.welcomeMessage}
+      />
     </div>
   );
 } 

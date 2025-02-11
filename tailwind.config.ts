@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import typography from '@tailwindcss/typography';
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
     darkMode: ["class"],
@@ -77,11 +78,26 @@ const config: Config = {
   				'50%': {
   					opacity: '1'
   				}
+  			},
+  			gradient: {
+  				'0%, 100%': {
+  					'background-size': '200% 200%',
+  					'background-position': 'left center'
+  				},
+  				'50%': {
+  					'background-size': '200% 200%',
+  					'background-position': 'right center'
+  				},
   			}
   		},
   		animation: {
-  			'spinner-leaf-fade': 'spinner-leaf-fade 800ms linear infinite'
-  		}
+  			'spinner-leaf-fade': 'spinner-leaf-fade 800ms linear infinite',
+  			'gradient-x': 'gradient 15s ease infinite',
+  		},
+  		fontFamily: {
+  			outfit: ["var(--font-outfit)", ...fontFamily.sans],
+  			inter: ["var(--font-inter)", ...fontFamily.sans],
+  		},
   	}
   },
   plugins: [

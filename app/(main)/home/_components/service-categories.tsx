@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
 
 const categories = [
   {
@@ -138,6 +138,8 @@ const categories = [
   },
 ];
 
+
+
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -146,107 +148,51 @@ const container = {
       staggerChildren: 0.1,
     },
   },
-};
+}
 
 const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0 },
-};
+}
 
 export function ServiceCategories() {
-  // Split categories into two rows
-  const firstRow = categories.slice(0, Math.ceil(categories.length / 2));
-  const secondRow = categories.slice(Math.ceil(categories.length / 2));
-
   return (
-    <section className="container px-4">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="text-2xl font-bold mb-1">Categorias de serviços</h2>
-          <p className="text-muted-foreground">
-            Explore todos os serviços disponíveis por categoria
-          </p>
-        </div>
+    <section className="container px-4 py-6">
+      <div className="mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2">Categorias de serviços</h2>
+        <p className="text-muted-foreground text-sm sm:text-base">
+          Explore todos os serviços disponíveis por categoria
+        </p>
       </div>
-      <div className="space-y-4">
-        <ScrollArea className="w-full pb-4">
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="flex gap-4 pb-4"
-          >
-            {firstRow.map((category) => (
-              <motion.div 
-                key={category.title} 
-                variants={item}
-                className="w-[250px] flex-shrink-0"
-              >
-                <Link href={category.href}>
-                  <Card className="group relative h-full overflow-hidden">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                    <div className="relative p-6">
-                      <div className="flex flex-col items-center text-center gap-3">
-                        <div className="p-3 rounded-xl bg-white/10 text-primary group-hover:text-white transition-colors">
-                          <category.icon className="h-6 w-6" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium text-sm md:text-base mb-1 group-hover:text-white transition-colors">
-                            {category.title}
-                          </h3>
-                          <p className="text-xs text-muted-foreground group-hover:text-white/90 transition-colors line-clamp-2">
-                            {category.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                </Link>
-              </motion.div>
-            ))}
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3"
+      >
+        {categories.map((category) => (
+          <motion.div key={category.title} variants={item}>
+            <Link href={category.href} className="block h-full">
+              <Card className="group relative h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                />
+                <div className="relative p-3 flex flex-col items-center text-center h-full">
+                  <div className="p-2.5 rounded-xl bg-white/10 text-primary group-hover:text-white transition-colors mb-2">
+                    <category.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-medium text-sm mb-1 group-hover:text-white transition-colors">
+                    {category.title}
+                  </h3>
+                  <p className="text-xs text-muted-foreground group-hover:text-white/90 transition-colors line-clamp-2 mt-1">
+                    {category.description}
+                  </p>
+                </div>
+              </Card>
+            </Link>
           </motion.div>
-          <ScrollBar orientation="horizontal" className="mt-2" />
-        </ScrollArea>
-
-        <ScrollArea className="w-full pb-4">
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="flex gap-4 pb-4"
-          >
-            {secondRow.map((category) => (
-              <motion.div 
-                key={category.title} 
-                variants={item}
-                className="w-[250px] flex-shrink-0"
-              >
-                <Link href={category.href}>
-                  <Card className="group relative h-full overflow-hidden">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                    <div className="relative p-6">
-                      <div className="flex flex-col items-center text-center gap-3">
-                        <div className="p-3 rounded-xl bg-white/10 text-primary group-hover:text-white transition-colors">
-                          <category.icon className="h-6 w-6" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium text-sm md:text-base mb-1 group-hover:text-white transition-colors">
-                            {category.title}
-                          </h3>
-                          <p className="text-xs text-muted-foreground group-hover:text-white/90 transition-colors line-clamp-2">
-                            {category.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-          <ScrollBar orientation="horizontal" className="mt-2" />
-        </ScrollArea>
-      </div>
+        ))}
+      </motion.div>
     </section>
-  );
-} 
+  )
+}

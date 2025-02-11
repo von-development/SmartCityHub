@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { MapSidebarHeader } from "@/components/MapSideBar/Header"
 import { CategoryGrid } from "@/components/MapSideBar/Places/CategoryGrid"
 import { PlacesList } from "@/components/MapSideBar/Places/PlacesList"
-import { TrafficSection } from "@/components/MapSideBar/Traffic"
+
 import { useState, useEffect, useRef } from "react"
 import { ChevronLeft, PanelLeftClose, PanelLeftOpen } from "lucide-react"
 import { cn } from "@/utils/cn"
@@ -16,10 +16,9 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { Spinner } from "@/components/ui/spinner"
 import { AlertTriangle } from "lucide-react"
 import { TrafficStyle } from "@/hooks/map/use-traffic-flow"
-import { SearchBox } from '@/components/MapSideBar/Search/SearchBox'
-import { SearchResults } from '@/components/MapSideBar/Search/SearchResults'
+
 import { useSearch } from '@/hooks/map/use-search'
-import { SearchResult } from '@/types/search'
+
 
 
 // Sample data - Move to a separate file later
