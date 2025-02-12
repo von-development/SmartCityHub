@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Providers } from "./providers";
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
+import { Viewport } from 'next'
 
 const inter = Inter({ subsets: ["latin"] });
 const outfit = Outfit({ subsets: ["latin"] });
@@ -11,8 +12,35 @@ const outfit = Outfit({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Aveiro Smart City",
   description: "Your digital gateway to Aveiro's urban experience",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" }
+  ],
+  manifest: "/manifest.json",
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "mobile-web-app-capable": "yes",
+  },
+  formatDetection: {
+    telephone: false
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+    viewportFit: 'cover'
+  }
 };
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover'
+}
 
 export default function RootLayout({
   children,
@@ -28,7 +56,7 @@ export default function RootLayout({
           href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css"
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-x-hidden overscroll-none`}>
         <Providers>
           <Navbar />
           <div className="flex flex-col min-h-[calc(100vh-4rem)] h-full">

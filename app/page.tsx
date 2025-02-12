@@ -18,7 +18,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center p-6 md:p-24 overflow-hidden bg-white">
+    <main className="relative min-h-screen flex flex-col items-center justify-center p-6 md:p-24 pt-safe-top overflow-hidden bg-white">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[url(/img/grid.svg)] opacity-[0.015]" />
       
@@ -39,12 +39,12 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="relative text-center space-y-6 md:space-y-12">
+      <div className="relative text-center space-y-6 md:space-y-12 mt-8 md:mt-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="space-y-6"
+          className="space-y-6 pt-4 md:pt-0"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 shadow-sm">
             <Sparkles className="h-4 w-4 text-primary" />

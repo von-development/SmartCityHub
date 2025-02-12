@@ -64,7 +64,11 @@
   
   html,
   body {
-    @apply h-full;
+    height: 100% !important;
+    min-height: 100% !important;
+    overflow-x: hidden;
+    position: fixed; /* Prevent bounce on iOS */
+    width: 100%;
   }
   
   body {
@@ -76,18 +80,10 @@
   }
 
   @supports (-webkit-touch-callout: none) {
-    .min-h-screen {
-      min-height: -webkit-fill-available;
+    html, body {
+      height: -webkit-fill-available;
     }
-  }
-
-  html {
-    height: 100%;
-    overflow-x: hidden;
-  }
-
-  @supports (-webkit-touch-callout: none) {
-    body {
+    .min-h-screen {
       min-height: -webkit-fill-available;
     }
   }

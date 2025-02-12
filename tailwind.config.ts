@@ -98,6 +98,23 @@ const config: Config = {
   			outfit: ["var(--font-outfit)", ...fontFamily.sans],
   			inter: ["var(--font-inter)", ...fontFamily.sans],
   		},
+  		screens: {
+  			'xs': '375px',
+  		},
+  		height: {
+  			screen: '100dvh',
+  			'screen-fallback': '100vh',
+  		},
+  		minHeight: {
+  			screen: '100dvh',
+  			'screen-fallback': '100vh',
+  		},
+  		spacing: {
+  			'safe-top': 'env(safe-area-inset-top)',
+  			'safe-bottom': 'env(safe-area-inset-bottom)',
+  			'safe-left': 'env(safe-area-inset-left)',
+  			'safe-right': 'env(safe-area-inset-right)',
+  		},
   	}
   },
   plugins: [

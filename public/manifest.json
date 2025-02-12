@@ -1,0 +1,10 @@
+{
+  "name": "ConnectAveiro",
+  "short_name": "ConnectAveiro",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+} 
