@@ -1,5 +1,5 @@
 'use client'
-
+// ajuste
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import tt from '@tomtom-international/web-sdk-maps'
