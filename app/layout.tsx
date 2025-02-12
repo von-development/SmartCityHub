@@ -11,6 +11,7 @@ const outfit = Outfit({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Aveiro Smart City",
   description: "Your digital gateway to Aveiro's urban experience",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 export default function RootLayout({
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <link 
           rel="stylesheet" 
@@ -30,7 +31,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Navbar />
-          <div className="flex flex-col min-h-[calc(100vh-4rem)]">
+          <div className="flex flex-col min-h-[calc(100vh-4rem)] h-full">
             {children}
           </div>
         </Providers>

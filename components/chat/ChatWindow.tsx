@@ -208,24 +208,24 @@ export function ChatWindow(props: {
       const showTypingEffect = async () => {
         setIsTyping(true);
         
-        // Wait a bit before starting to type
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // Minimal initial delay - just enough to show the transition
+        await new Promise(resolve => setTimeout(resolve, 50));
 
         const message = props.welcomeMessage || "";
         let currentText = "";
 
-        // Simulate typing
+        // Fast typing speed
         for (let i = 0; i < message.length; i++) {
           currentText += message[i];
           setWelcomeMessageContent(currentText);
-          // Faster typing speed
+          // Very fast typing (5-10ms per character)
           await new Promise(resolve => 
-            setTimeout(resolve, 20 + Math.random() * 30)
+            setTimeout(resolve, 5 + Math.random() * 5)
           );
         }
 
-        // Small delay before removing typing indicator
-        await new Promise(resolve => setTimeout(resolve, 300));
+        // Minimal end delay
+        await new Promise(resolve => setTimeout(resolve, 50));
         setIsTyping(false);
         setShowWelcomeMessage(true);
       };

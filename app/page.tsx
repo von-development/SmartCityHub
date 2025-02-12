@@ -18,7 +18,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center p-24 overflow-hidden bg-white">
+    <main className="relative min-h-screen flex flex-col items-center justify-center p-6 md:p-24 overflow-hidden bg-white">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[url(/img/grid.svg)] opacity-[0.015]" />
       
@@ -39,7 +39,7 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="relative text-center space-y-12">
+      <div className="relative text-center space-y-6 md:space-y-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,10 +51,10 @@ export default function Home() {
             <span className="text-sm font-medium text-primary">ConnectAveiro</span>
             <ArrowRight className="h-4 w-4 text-primary" />
           </div>
-          <h1 className="text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-900">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-900">
             O Município Mais Conectado com Você
           </h1>
-          <p className="text-xl text-muted-foreground max-w-[600px] mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-[600px] mx-auto px-4">
             Bem-vindo à plataforma digital de Aveiro, conectando cidadãos aos serviços municipais 
             e iniciativas inteligentes da cidade.
           </p>

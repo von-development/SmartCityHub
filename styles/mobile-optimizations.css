@@ -1,0 +1,21 @@
+@media (max-width: 640px) {
+  .map-controls {
+    font-size: 14px;
+  }
+
+  .search-box {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  /* Prevent pull-to-refresh */
+  html, body {
+    overscroll-behavior-y: contain;
+  }
+
+  /* Better touch targets */
+  .button, 
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
