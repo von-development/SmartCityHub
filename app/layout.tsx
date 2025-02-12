@@ -1,21 +1,28 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Providers } from "./providers";
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
-import { Viewport } from 'next'
 
 const inter = Inter({ subsets: ["latin"] });
 const outfit = Outfit({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Aveiro Smart City",
-  description: "Your digital gateway to Aveiro's urban experience",
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" }
   ],
+}
+
+export const metadata: Metadata = {
+  title: "Aveiro Smart City",
+  description: "Your digital gateway to Aveiro's urban experience",
   manifest: "/manifest.json",
   other: {
     "apple-mobile-web-app-capable": "yes",
@@ -24,23 +31,8 @@ export const metadata: Metadata = {
   },
   formatDetection: {
     telephone: false
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-    viewportFit: 'cover'
   }
 };
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  viewportFit: 'cover'
-}
 
 export default function RootLayout({
   children,
