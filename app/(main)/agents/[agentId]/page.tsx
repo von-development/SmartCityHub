@@ -40,37 +40,17 @@ const agentConfigs: Record<string, AgentConfig> = {
     title: "Maria - Mobilidade",
     description: "Como posso ajudar com sua locomoção pela cidade?",
     icon: "/chat/women_bbg.svg",
-    endpoint: "/api/chat/servico_online",
+    endpoint: "/api/chat/transport_agents",
     welcomeMessage: "🚌 Olá! Sou Maria, especialista em mobilidade urbana. Posso ajudar você com horários de ônibus, rotas mais rápidas, estacionamentos e aluguel de bicicletas. Como posso auxiliar sua locomoção hoje?"
   },
   services: {
     title: "João - Serviços",
     description: "Como posso auxiliar com serviços municipais hoje?",
     icon: "/chat/man_ww.svg",
-    endpoint: "/api/chat/services_agent",
+    endpoint: "/api/chat/servico_online",
     welcomeMessage: "🏛️ Olá! Sou João, seu assistente para serviços municipais. Posso ajudar com documentação, agendamentos, informações sobre taxas e serviços online. Qual serviço você precisa hoje?"
   },
-  education: {
-    title: "Sofia - Educação",
-    description: "Como posso ajudar com informações educacionais?",
-    icon: "/chat/women_cwb.svg",
-    endpoint: "/api/chat/tourism_agent",
-    welcomeMessage: "📚 Olá! Sou Sofia, sua consultora educacional. Posso ajudar com informações sobre escolas e universidades, cursos disponíveis, programas educacionais e bibliotecas públicas. Qual informação você procura?"
-  },
-  local: {
-    title: "Miguel - Guia Local",
-    description: "Como posso ajudar você a explorar nossa cidade?",
-    icon: "/chat/man_bb.svg",
-    endpoint: "/api/chat/local_agent",
-    welcomeMessage: "🌆 Olá! Sou Miguel, seu guia local em Aveiro. Conheço os melhores restaurantes locais, cafés escondidos, lojas tradicionais e lugares secretos da cidade. Quer descobrir o verdadeiro coração de Aveiro?"
-  },
-  faq: {
-    title: "Clara - FAQ",
-    description: "Como posso esclarecer suas dúvidas hoje?",
-    icon: "/chat/women_bb.svg",
-    endpoint: "/api/chat/faq_agent",
-    welcomeMessage: "💡 Olá! Sou Clara, especialista em respostas rápidas. Posso ajudar com dúvidas frequentes, informações práticas, horários de funcionamento e contatos importantes. Qual sua dúvida?"
-  }
+
 };
 
 export default function AgentChatPage() {

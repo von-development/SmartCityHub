@@ -96,7 +96,7 @@ export function FragmentedServicesSlide() {
           transition={{ delay: 0.2 }}
           className="text-lg text-white/70 text-center mb-24"
         >
-          Serviços fragmentados e desconectados
+          Possuimos dados, mas o desafio e conecto-los em uma manenria facil e rapida de ser acessada
         </motion.p>
 
         {/* Scattered Cards Container */}

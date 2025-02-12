@@ -11,7 +11,6 @@ import { UserCategoriesSlide } from './_components/slides/user-categories-slide'
 import { AveiroConnectSlide } from './_components/slides/aveiro-connect-slide'
 import { ShowcaseSlide } from './_components/slides/showcase-slide'
 import { ArchitectureSlide } from './_components/slides/architecture-slide'
-import { SystemDiagramSlide } from './_components/slides/system-diagram-slide'
 import { FragmentedServicesSlide } from './_components/slides/fragmented-services-slide'
 
 const slides = [
@@ -53,12 +52,7 @@ const slides = [
     component: ArchitectureSlide,
     gradient: "from-zinc-900 to-zinc-800"
   },
-  {
-    id: 7,
-    type: 'component' as const,
-    component: SystemDiagramSlide,
-    gradient: "from-zinc-900 to-zinc-800"
-  },
+
 ]
 
 export default function PresentationPage() {

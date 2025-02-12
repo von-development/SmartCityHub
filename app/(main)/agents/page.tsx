@@ -51,33 +51,6 @@ const agents = [
     href: "/agents/services",
     endpoint: "/api/chat/services_agent"
   },
-  {
-    id: "education",
-    name: "Sofia - Guia Educacional",
-    description: "Descubra oportunidades educacionais em Aveiro! Informações sobre escolas, universidades, cursos e programas educacionais.",
-    icon: "/chat/women_cwb.svg",
-    gradient: "from-yellow-500 to-orange-500",
-    href: "/agents/education",
-    endpoint: "/api/chat/education_agent"
-  },
-  {
-    id: "local",
-    name: "Miguel - Guia Local",
-    description: "Conheça o melhor do comércio local! Restaurantes, lojas, serviços e dicas exclusivas dos melhores lugares da cidade.",
-    icon: "/chat/man_bb.svg",
-    gradient: "from-green-500 to-emerald-500",
-    href: "/agents/local",
-    endpoint: "/api/chat/local_agent"
-  },
-  {
-    id: "faq",
-    name: "Clara - Assistente Rápido",
-    description: "Respostas instantâneas para suas dúvidas mais comuns sobre Aveiro. Informações rápidas e precisas quando você precisa.",
-    icon: "/chat/women_bb.svg",
-    gradient: "from-violet-500 to-purple-500",
-    href: "/agents/faq",
-    endpoint: "/api/chat/faq_agent"
-  }
 ];
 
 export default function AgentsPage() {

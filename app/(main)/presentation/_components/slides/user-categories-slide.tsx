@@ -6,14 +6,14 @@ import { cn } from '@/utils/cn'
 const personas = [
   {
     image: "/personas/student.svg",
-    question: "Onde posso encontrar eventos culturais?",
+    question: "Quais incetinvos o o municipio oferece para os estudantes?",
     description: "Esudantes",
     gradient: "from-blue-500/20 to-indigo-500/20",
     delay: 0.2
   },
   {
     image: "/personas/tourist.svg",
-    question: "Como chego aos pontos turísticos?",
+    question: "O que devo visitar em aveiro?",
     description: "Turistas",
     gradient: "from-emerald-500/20 to-teal-500/20",
     delay: 0.4
@@ -27,14 +27,14 @@ const personas = [
   },
   {
     image: "/personas/elder.svg",
-    question: "Quais serviços estão próximos?",
+    question: "Como eu emito uma licenca para construcao civil? quais documentos necessarios?",
     description: "Empreendedores",
     gradient: "from-purple-500/20 to-pink-500/20",
     delay: 0.8
   },
   {
     image: "/personas/resident.svg",
-    question: "Há eventos acontecendo hoje?",
+    question: "Quais eventos irao acontecer em aveiro este final de semena?",
     description: "Jovens",
     gradient: "from-rose-500/20 to-pink-500/20",
     delay: 1.0

@@ -60,7 +60,7 @@ FORMATO DE RESPOSTA:
 ## Recomendação
 Breve introdução personalizada baseada na solicitação do usuário.
 
-### Detalhes do Local
+ # Detalhes do Local
 🏛️ **[Nome do Local]**
 - **Endereço:** [Endereço completo]
 - **Horário:** [Horário de funcionamento]
@@ -68,17 +68,17 @@ Breve introdução personalizada baseada na solicitação do usuário.
 - **Avaliação:** ⭐ [Nota] ([Número de avaliações] avaliações)
 - **Tipo:** [Categoria do local]
 
-### Dicas e Informações
+# Dicas e Informações
 - [Dica relevante sobre o local]
 - [Informação sobre melhor horário para visita]
 - [Dica de transporte/acesso]
 
-### Próximos Pontos de Interesse
+# Próximos Pontos de Interesse
 1. 🏺 [Local relacionado próximo]
 2. 🍽️ [Restaurante recomendado na região]
 3. 🚶 [Outra atração nas proximidades]
 
-### Contexto Cultural
+# Contexto Cultural
 [Breve explicação sobre a importância histórica/cultural quando relevante]
 
 Lembre-se:
