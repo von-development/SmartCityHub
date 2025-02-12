@@ -275,9 +275,8 @@ export function MapView({
         className="absolute inset-0 w-full h-full"
       />
       
-      {/* Top Controls */}
-      <div className="absolute top-4 left-0 right-0 flex justify-center px-4 gap-2 z-10">
-        {/* Search Box */}
+      {/* Top Search Bar - Remains centered */}
+      <div className="absolute top-4 left-0 right-0 flex justify-center px-4 z-10">
         <div className="w-full max-w-md">
           <div className="bg-background rounded-lg shadow-lg">
             <SearchBox
@@ -304,20 +303,29 @@ export function MapView({
             )}
           </div>
         </div>
+      </div>
 
-        {/* Quick Actions */}
-        <div className="absolute top-4 right-4 flex flex-col gap-2 z-10">
-          <TooltipProvider>
-            <div className="flex gap-2">
+      {/* Left Side Control Panel - New positioning */}
+      <div className="absolute left-4 top-20 z-10">
+        <div className="bg-background/80 backdrop-blur-sm rounded-lg shadow-lg p-2 space-y-4">
+          {/* Traffic Controls Group */}
+          <div className="space-y-2">
+            <TooltipProvider>
               <TrafficControls
                 showTraffic={showTraffic}
                 trafficStyle={trafficStyle}
                 onToggleTraffic={handleTrafficToggle}
                 onChangeStyle={onChangeTrafficStyle}
               />
+            </TooltipProvider>
+          </div>
+
+          {/* Places Controls Group */}
+          <div className="space-y-2">
+            <TooltipProvider>
               <PlacesControls map={mapInstance.current} />
-            </div>
-          </TooltipProvider>
+            </TooltipProvider>
+          </div>
         </div>
       </div>
 
