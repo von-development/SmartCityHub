@@ -30,9 +30,6 @@ const nextConfig = {
     };
     return config;
   },
-  experimental: {
-    optimizeFonts: true,
-  },
   poweredByHeader: false,
   reactStrictMode: true,
   swcMinify: true,
