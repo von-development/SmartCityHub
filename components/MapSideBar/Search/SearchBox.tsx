@@ -12,7 +12,6 @@ interface SearchBoxProps {
   className?: string
 }
 
-
 export function SearchBox({ 
   onSearch, 
   isLoading, 
@@ -36,28 +35,33 @@ export function SearchBox({
   }
 
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn(
+      "relative w-full md:w-auto max-w-full md:max-w-md mx-auto md:mx-0",
+      className
+    )}>
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground z-10" />
         <Input
           ref={inputRef}
           placeholder="Procurar lugares..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="pl-10 pr-10 h-11 rounded-lg bg-background shadow-sm"
+          className="w-full pl-10 pr-12 h-12 md:h-11 rounded-lg bg-background shadow-md 
+            md:shadow-sm focus:shadow-lg transition-shadow duration-200 text-base md:text-sm"
         />
         {(isLoading || query) && (
           <Button
             variant="ghost"
             size="sm"
-            className="absolute right-1 top-1/2 -translate-y-1/2 h-8 px-2 hover:bg-accent"
+            className="absolute right-1 top-1/2 -translate-y-1/2 h-10 md:h-8 w-10 md:w-8 
+              p-0 hover:bg-accent touch-manipulation"
             onClick={handleClear}
             disabled={isLoading}
           >
             {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="h-5 w-5 md:h-4 md:w-4 animate-spin" />
             ) : (
-              <X className="h-4 w-4" />
+              <X className="h-5 w-5 md:h-4 md:w-4" />
             )}
           </Button>
         )}
