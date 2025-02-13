@@ -157,3 +157,12 @@
 .prose a {
   @apply text-primary underline underline-offset-4 hover:text-primary/80;
 }
+
+/* Add these base mobile styles */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+  }
+}

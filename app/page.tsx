@@ -7,15 +7,23 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [particles, setParticles] = useState<Array<{ x: number, y: number }>>([])
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
     // Initialize particles only after component mounts (client-side)
-    const particlesArray = [...Array(20)].map(() => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight
-    }))
-    setParticles(particlesArray)
+    if (typeof window !== 'undefined') {
+      const particlesArray = [...Array(20)].map(() => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight
+      }))
+      setParticles(particlesArray)
+    }
   }, [])
+
+  if (!isMounted) {
+    return null // or a loading state
+  }
 
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center p-6 md:p-24 pt-safe-top overflow-hidden bg-white">

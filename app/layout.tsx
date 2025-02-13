@@ -11,8 +11,8 @@ const outfit = Outfit({ subsets: ["latin"] });
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
   viewportFit: 'cover',
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -28,9 +28,8 @@ export const metadata: Metadata = {
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "mobile-web-app-capable": "yes",
-  },
-  formatDetection: {
-    telephone: false
+    "format-detection": "telephone=no",
+    "viewport-fit": "cover"
   }
 };
 
