@@ -2,6 +2,7 @@
   "name": "connect-aveiro",
   "version": "0.7.0",
   "private": true,
+  "buildDate": "${new Date().toISOString()}",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
