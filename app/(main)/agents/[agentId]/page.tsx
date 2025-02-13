@@ -1,103 +1,123 @@
 "use client";
 
+import { useEffect, useState } from 'react'
 import { ChatWindow } from "@/components/chat/ChatWindow";
-import { GuideInfoBox } from "@/components/guide/GuideInfoBox";
 import { useParams } from "next/navigation";
+import Image from "next/image";
+import { Skeleton } from '@/components/ui/skeleton'
 
-const agentConfigs = {
+interface AgentConfig {
+  title: string;
+  description: string;
+  icon: string;
+  endpoint: string;
+  welcomeMessage: string;
+}
+
+const agentConfigs: Record<string, AgentConfig> = {
   test: {
-    title: "Test Agent",
-    description: "Agente para testes e desenvolvimento",
-    emoji: "🤖",
-    endpoint: "/api/chat/agents"
+    title: "Assistente Beta",
+    description: "Como posso ajudar você hoje?",
+    icon: "/chat/man_wb.svg",
+    endpoint: "/api/chat/agents",
+    welcomeMessage: "👋 Olá! Sou o assistente beta. Estou aqui para testar novas funcionalidades e ajudar você a explorar o sistema. Como posso ajudar?"
   },
   events: {
-    title: "Assistente de Eventos",
-    description: "Descubra eventos, festivais e atividades culturais",
-    emoji: "📅",
-    endpoint: "/api/chat/event_agent"
+    title: "Ana",
+    description: "Descubra eventos em Aveiro",
+    icon: "/chat/women_bb.svg",
+    endpoint: "/api/chat/event_agent",
+    welcomeMessage: "🎉 Olá! Sou Ana, sua guia de eventos em Aveiro! Posso ajudar você a encontrar eventos acontecendo hoje, descobrir festivais e shows, localizar eventos culturais e saber sobre feiras e exposições. O que você gostaria de descobrir?"
   },
   tourism: {
-    title: "Aveiro Servico online",
-    description: "Explore pontos turísticos e receba recomendações personalizadas",
-    emoji: "🗺️",
-    endpoint: "/api/chat/servicon_agent"
+    title: "Pedro - Guia Turístico",
+    description: "Como posso tornar sua visita a Aveiro mais especial?",
+    icon: "/chat/man_bw.svg",
+    endpoint: "/api/chat/tourism_agent",
+    welcomeMessage: "🏖️ Bem-vindo(a) a Aveiro! Sou Pedro, seu guia turístico pessoal. Posso ajudar com pontos turísticos, melhores restaurantes, passeios de moliceiro e rotas turísticas. Como posso tornar sua visita inesquecível?"
   },
-  transport: {
-    title: "TESTA ESSE AQUI",
-    description: "Informações sobre transporte público e mobilidade urbana",
-    emoji: "🚌",
-    endpoint: "/api/chat/servico_online"
-  },
+  // transport: {
+  //   title: "Maria - Mobilidade",
+  //   description: "Como posso ajudar com sua locomoção pela cidade?",
+  //   icon: "/chat/women_bbg.svg",
+  //   endpoint: "/api/chat/servico_online",
+  //   welcomeMessage: "🚌 Olá! Sou Maria, especialista em mobilidade urbana. Posso ajudar você com horários de ônibus, rotas mais rápidas, estacionamentos e aluguel de bicicletas. Como posso auxiliar sua locomoção hoje?"
+  // },
   services: {
-    title: "Assistente de Serviços",
-    description: "Ajuda com serviços municipais e documentação",
-    emoji: "🏛️",
-    endpoint: "/api/chat/services_agent"
+    title: "João - Serviços",
+    description: "Como posso auxiliar com serviços municipais hoje?",
+    icon: "/chat/man_ww.svg",
+    endpoint: "/api/chat/servico_online",
+    welcomeMessage: "🏛️ Olá! Sou João, seu assistente para serviços municipais. Posso ajudar com documentação, agendamentos, informações sobre taxas e serviços online. Qual serviço você precisa hoje?"
   },
-  education: {
-    title: "Guia Educacional",
-    description: "Informações sobre escolas, universidades e cursos",
-    emoji: "📚",
-    endpoint: "/api/chat/education_agent"
-  },
-  local: {
-    title: "Assistente Local",
-    description: "Informações sobre comércio local e serviços próximos",
-    emoji: "🔍",
-    endpoint: "/api/chat/local_agent"
-  },
-  faq: {
-    title: "FAQ Bot",
-    description: "Respostas rápidas para perguntas frequentes",
-    emoji: "❓",
-    endpoint: "/api/chat/faq_agent"
-  }
+  // education: {
+  //   title: "Sofia - Educação",
+  //   description: "Como posso ajudar com informações educacionais?",
+  //   icon: "/chat/women_cwb.svg",
+  //   endpoint: "/api/chat/tourism_agent",
+  //   welcomeMessage: "📚 Olá! Sou Sofia, sua consultora educacional. Posso ajudar com informações sobre escolas e universidades, cursos disponíveis, programas educacionais e bibliotecas públicas. Qual informação você procura?"
+  // },
+  // local: {
+  //   title: "Miguel - Guia Local",
+  //   description: "Como posso ajudar você a explorar nossa cidade?",
+  //   icon: "/chat/man_bb.svg",
+  //   endpoint: "/api/chat/local_agent",
+  //   welcomeMessage: "🌆 Olá! Sou Miguel, seu guia local em Aveiro. Conheço os melhores restaurantes locais, cafés escondidos, lojas tradicionais e lugares secretos da cidade. Quer descobrir o verdadeiro coração de Aveiro?"
+  // },
+  // faq: {
+  //   title: "Clara - FAQ",
+  //   description: "Como posso esclarecer suas dúvidas hoje?",
+  //   icon: "/chat/women_bb.svg",
+  //   endpoint: "/api/chat/faq_agent",
+  //   welcomeMessage: "💡 Olá! Sou Clara, especialista em respostas rápidas. Posso ajudar com dúvidas frequentes, informações práticas, horários de funcionamento e contatos importantes. Qual sua dúvida?"
+  // }
 };
 
 export default function AgentChatPage() {
   const params = useParams();
-  const agentId = params.agentId as string;
-  const config = agentConfigs[agentId as keyof typeof agentConfigs];
+  const [isLoading, setIsLoading] = useState(true);
 
-  const InfoCard = (
-    <GuideInfoBox>
-      <ul>
-        <li className="text-l">
-          {config.emoji}
-          <span className="ml-2">
-            Bem-vindo ao {config.title}! {config.description}
-          </span>
-        </li>
-        <li className="text-l">
-          💡
-          <span className="ml-2">
-            Como posso ajudar você hoje?
-          </span>
-        </li>
-      </ul>
-    </GuideInfoBox>
-  );
+  const agentId = typeof params?.agentId === 'string' ? params.agentId : Array.isArray(params?.agentId) ? params.agentId[0] : '';
+  const agentConfig = agentConfigs[agentId];
+
+  useEffect(() => {
+    if (agentConfig) {
+      const timer = setTimeout(() => {
+        setIsLoading(false)
+      }, 500)
+      return () => clearTimeout(timer)
+    }
+  }, [agentConfig])
+
+  if (!agentConfig) {
+    return <div>Agent not found</div>
+  }
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-      <div className="bg-muted py-12">
-        <div className="container px-4">
-          <h1 className="text-3xl font-bold mb-4">{config.title}</h1>
-          <p className="text-muted-foreground">
-            {config.description}
-          </p>
+    <div className="flex-1 relative h-[calc(100vh-4rem)]">
+      {isLoading ? (
+        <div className="p-4 space-y-4">
+          <Skeleton className="h-12 w-3/4" />
+          <Skeleton className="h-4 w-1/2" />
+          <Skeleton className="h-32 w-full" />
         </div>
-      </div>
-      <div className="flex-1 relative">
+      ) : (
         <ChatWindow
-          endpoint={config.endpoint}
-          emptyStateComponent={InfoCard}
-          placeholder="Como posso ajudar você hoje?"
-          emoji={config.emoji}
-          showIntermediateStepsToggle={true}
+          endpoint={agentConfig.endpoint}
+          emptyStateComponent={
+            <div className="text-center text-muted-foreground">
+              <p>{agentConfig.welcomeMessage}</p>
+            </div>
+          }
+          placeholder={`Mensagem para ${agentConfig.title}...`}
+          welcomeMessage={agentConfig.welcomeMessage}
+          agentIcon={
+            <img src={agentConfig.icon} alt={agentConfig.title} className="w-6 h-6" />
+          }
+          showIngestForm={false}
+          showIntermediateStepsToggle={false}
         />
-      </div>
+      )}
     </div>
   );
 } 

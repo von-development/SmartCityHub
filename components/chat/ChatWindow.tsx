@@ -2,7 +2,7 @@
 
 import { type Message } from "ai";
 import { useChat } from "ai/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { toast } from "sonner";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
@@ -23,11 +23,18 @@ import {
 } from "../ui/dialog";
 import { cn } from "@/utils/cn";
 
+interface WelcomeMessage {
+  role: 'assistant';
+  content: string;
+  id: string;
+}
+
 function ChatMessages(props: {
   messages: Message[];
   emptyStateComponent: ReactNode;
   sourcesForMessages: Record<string, any>;
-  aiEmoji?: string;
+  agentIcon?: ReactNode;
+  isTyping?: boolean;
   className?: string;
 }) {
   return (
@@ -42,11 +49,24 @@ function ChatMessages(props: {
           <ChatMessageBubble
             key={m.id}
             message={m}
-            aiEmoji={props.aiEmoji}
-            sources={props.sourcesForMessages[sourceKey]}
+            agentIcon={props.agentIcon}
+            sources={props.sourcesForMessages[sourceKey] ?? []}
           />
         );
       })}
+
+      {props.isTyping && (
+        <div className="flex items-center gap-4 mb-8">
+          <div className="w-10 h-10 rounded-full border-2 border-secondary/30 bg-background flex items-center justify-center">
+            {props.agentIcon}
+          </div>
+          <div className="flex items-center gap-2 bg-secondary/20 px-4 py-2 rounded-2xl">
+            <div className="w-2 h-2 rounded-full bg-primary/50 animate-bounce" />
+            <div className="w-2 h-2 rounded-full bg-primary/50 animate-bounce [animation-delay:0.2s]" />
+            <div className="w-2 h-2 rounded-full bg-primary/50 animate-bounce [animation-delay:0.4s]" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -140,7 +160,8 @@ export function ChatWindow(props: {
   endpoint: string;
   emptyStateComponent: ReactNode;
   placeholder?: string;
-  emoji?: string;
+  agentIcon?: ReactNode;
+  welcomeMessage?: string;
   showIngestForm?: boolean;
   showIntermediateStepsToggle?: boolean;
 }) {
@@ -153,6 +174,10 @@ export function ChatWindow(props: {
   const [sourcesForMessages, setSourcesForMessages] = useState<
     Record<string, any>
   >({});
+
+  const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [welcomeMessageContent, setWelcomeMessageContent] = useState("");
 
   const chat = useChat({
     api: props.endpoint,
@@ -176,6 +201,50 @@ export function ChatWindow(props: {
         description: e.message,
       }),
   });
+
+  // Handle welcome message
+  useEffect(() => {
+    if (chat.messages.length === 0 && !showWelcomeMessage && props.welcomeMessage) {
+      const showTypingEffect = async () => {
+        setIsTyping(true);
+
+        // Minimal initial delay - just enough to show the transition
+        await new Promise(resolve => setTimeout(resolve, 50));
+
+        const message = props.welcomeMessage || "";
+        let currentText = "";
+
+        // Fast typing speed
+        for (let i = 0; i < message.length; i++) {
+          currentText += message[i];
+          setWelcomeMessageContent(currentText);
+          // Very fast typing (5-10ms per character)
+          await new Promise(resolve =>
+            setTimeout(resolve, 5 + Math.random() * 5)
+          );
+        }
+
+        // Minimal end delay
+        await new Promise(resolve => setTimeout(resolve, 50));
+        setIsTyping(false);
+        setShowWelcomeMessage(true);
+      };
+
+      showTypingEffect();
+    }
+  }, [chat.messages.length, showWelcomeMessage, props.welcomeMessage]);
+
+  // Create welcome message object
+  const welcomeMessageObj: WelcomeMessage = {
+    role: 'assistant',
+    content: welcomeMessageContent,
+    id: 'welcome-message',
+  };
+
+  // Combine welcome message with chat messages
+  const allMessages = showWelcomeMessage
+    ? [welcomeMessageObj, ...chat.messages]
+    : chat.messages;
 
   async function sendMessage(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -266,14 +335,15 @@ export function ChatWindow(props: {
         className="absolute inset-0"
         contentClassName="py-8 px-2"
         content={
-          chat.messages.length === 0 ? (
+          allMessages.length === 0 && !isTyping ? (
             <div>{props.emptyStateComponent}</div>
           ) : (
             <ChatMessages
-              aiEmoji={props.emoji}
-              messages={chat.messages}
+              messages={allMessages}
               emptyStateComponent={props.emptyStateComponent}
               sourcesForMessages={sourcesForMessages}
+              agentIcon={props.agentIcon}
+              isTyping={isTyping}
             />
           )
         }
