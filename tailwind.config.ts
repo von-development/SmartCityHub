@@ -81,7 +81,15 @@ const config: Config = {
   		},
   		animation: {
   			'spinner-leaf-fade': 'spinner-leaf-fade 800ms linear infinite'
-  		}
+  		},
+  		screens: {
+  			'xs': '375px',
+  			'sm': '640px',
+  			'md': '768px',
+  			'lg': '1024px',
+  			'xl': '1280px',
+  			'2xl': '1536px',
+  		},
   	}
   },
   plugins: [

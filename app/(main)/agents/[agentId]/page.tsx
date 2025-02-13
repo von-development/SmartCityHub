@@ -94,29 +94,38 @@ export default function AgentChatPage() {
   }
 
   return (
-    <div className="flex-1 relative h-[calc(100vh-4rem)]">
+    <div className="flex-1 relative h-[calc(100vh-4rem)] w-full max-w-full overflow-hidden">
       {isLoading ? (
-        <div className="p-4 space-y-4">
+        <div className="p-4 space-y-4 w-full">
           <Skeleton className="h-12 w-3/4" />
           <Skeleton className="h-4 w-1/2" />
           <Skeleton className="h-32 w-full" />
         </div>
       ) : (
-        <ChatWindow
-          endpoint={agentConfig.endpoint}
-          emptyStateComponent={
-            <div className="text-center text-muted-foreground">
-              <p>{agentConfig.welcomeMessage}</p>
-            </div>
-          }
-          placeholder={`Mensagem para ${agentConfig.title}...`}
-          welcomeMessage={agentConfig.welcomeMessage}
-          agentIcon={
-            <img src={agentConfig.icon} alt={agentConfig.title} className="w-6 h-6" />
-          }
-          showIngestForm={false}
-          showIntermediateStepsToggle={false}
-        />
+        <div className="h-full w-full">
+          <ChatWindow
+            endpoint={agentConfig.endpoint}
+            emptyStateComponent={
+              <div className="text-center text-muted-foreground p-4">
+                <p className="text-sm sm:text-base">{agentConfig.welcomeMessage}</p>
+              </div>
+            }
+            placeholder={`Mensagem para ${agentConfig.title}...`}
+            welcomeMessage={agentConfig.welcomeMessage}
+            agentIcon={
+              <Image
+                src={agentConfig.icon}
+                alt={agentConfig.title}
+                width={24}
+                height={24}
+                className="w-6 h-6 object-contain"
+                priority={true}
+              />
+            }
+            showIngestForm={false}
+            showIntermediateStepsToggle={false}
+          />
+        </div>
       )}
     </div>
   );
