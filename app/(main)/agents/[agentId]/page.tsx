@@ -24,10 +24,10 @@ const agentConfigs: Record<string, AgentConfig> = {
   },
   events: {
     title: "Ana",
-    description: "Descubra eventos em Aveiro",
+    description: "Descubra eventos e Noticiasem Aveiro",
     icon: "/chat/women_bb.svg",
     endpoint: "/api/chat/event_agent",
-    welcomeMessage: "🎉 Olá! Sou Ana, sua guia de eventos em Aveiro! Posso ajudar você a encontrar eventos acontecendo hoje, descobrir festivais e shows, localizar eventos culturais e saber sobre feiras e exposições. O que você gostaria de descobrir?"
+    welcomeMessage: "🎉 Olá! Sou Ana, sua guia de eventos e noticias em Aveiro! Posso ajudar você a encontrar eventos acontecendo hoje, descobrir festivais e shows, localizar eventos culturais e saber sobre feiras e exposições. O que você gostaria de descobrir?"
   },
   tourism: {
     title: "Pedro - Guia Turístico",
@@ -40,14 +40,14 @@ const agentConfigs: Record<string, AgentConfig> = {
     title: "Maria - Mobilidade",
     description: "Como posso ajudar com sua locomoção pela cidade?",
     icon: "/chat/women_bbg.svg",
-    endpoint: "/api/chat/servico_online",
-    welcomeMessage: "🚌 Olá! Sou Maria, especialista em mobilidade urbana. Posso ajudar você com horários de ônibus, rotas mais rápidas, estacionamentos e aluguel de bicicletas. Como posso auxiliar sua locomoção hoje?"
+    endpoint: "/api/chat/agents",
+    welcomeMessage: " ##Agente em configuracao! **Porfavor entre em contato com vivonvon@ua.pt para testar esse agente. Os agentes disponiveis atualmente sao  Joao (Servicos Online) Ana (Turismo) e Pedro (Guia Turistico)** "
   },
   services: {
     title: "João - Serviços",
     description: "Como posso auxiliar com serviços municipais hoje?",
     icon: "/chat/man_ww.svg",
-    endpoint: "/api/chat/services_agent",
+    endpoint: "/api/chat/servico_online",
     welcomeMessage: "🏛️ Olá! Sou João, seu assistente para serviços municipais. Posso ajudar com documentação, agendamentos, informações sobre taxas e serviços online. Qual serviço você precisa hoje?"
   },
   education: {
@@ -55,21 +55,21 @@ const agentConfigs: Record<string, AgentConfig> = {
     description: "Como posso ajudar com informações educacionais?",
     icon: "/chat/women_cwb.svg",
     endpoint: "/api/chat/tourism_agent",
-    welcomeMessage: "📚 Olá! Sou Sofia, sua consultora educacional. Posso ajudar com informações sobre escolas e universidades, cursos disponíveis, programas educacionais e bibliotecas públicas. Qual informação você procura?"
+    welcomeMessage: "##Agente em configuracao! **Porfavor entre em contato com vivonvon@ua.pt para testar esse agente. Os agentes disponiveis atualmente sao  Joao (Servicos Online) Ana (Turismo) e Pedro (Guia Turistico)**"
   },
   local: {
     title: "Miguel - Guia Local",
     description: "Como posso ajudar você a explorar nossa cidade?",
     icon: "/chat/man_bb.svg",
     endpoint: "/api/chat/local_agent",
-    welcomeMessage: "🌆 Olá! Sou Miguel, seu guia local em Aveiro. Conheço os melhores restaurantes locais, cafés escondidos, lojas tradicionais e lugares secretos da cidade. Quer descobrir o verdadeiro coração de Aveiro?"
+    welcomeMessage: "##Agente em configuracao! **Porfavor entre em contato com vivonvon@ua.pt para testar esse agente. Os agentes disponiveis atualmente sao  Joao (Servicos Online) Ana (Turismo) e Pedro (Guia Turistico)**?"
   },
   faq: {
     title: "Clara - FAQ",
     description: "Como posso esclarecer suas dúvidas hoje?",
     icon: "/chat/women_bb.svg",
     endpoint: "/api/chat/faq_agent",
-    welcomeMessage: "💡 Olá! Sou Clara, especialista em respostas rápidas. Posso ajudar com dúvidas frequentes, informações práticas, horários de funcionamento e contatos importantes. Qual sua dúvida?"
+    welcomeMessage: "##Agente em configuracao! **Porfavor entre em contato com vivonvon@ua.pt para testar esse agente. Os agentes disponiveis atualmente sao  Joao (Servicos Online) Ana (Turismo) e Pedro (Guia Turistico)**"
   }
 };
 

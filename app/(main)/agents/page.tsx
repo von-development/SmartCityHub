@@ -17,8 +17,8 @@ const agents = [
   },
   {
     id: "events",
-    name: "Ana - Guia de Eventos",
-    description: "Descubra os melhores eventos em Aveiro! De festivais culturais a shows, mantenha-se atualizado sobre tudo que acontece na cidade.",
+    name: "Ana - Guia de Eventos e Noticias",
+    description: "Descubra os melhores eventos e noticias em Aveiro! De festivais culturais a shows, mantenha-se atualizado sobre tudo que acontece na cidade.",
     icon: "/chat/women_bb.svg",
     gradient: "from-purple-500 to-pink-500",
     href: "/agents/events",
@@ -35,7 +35,7 @@ const agents = [
   },
   {
     id: "transport",
-    name: "Maria - Assistente de Mobilidade",
+    name: "Maria - Assistente de Mobilidade (Em desenvolvimento)",
     description: "Navegue pela cidade com facilidade! Informações em tempo real sobre ônibus, horários e melhores rotas para seu destino.",
     icon: "/chat/women_bbg.svg",
     gradient: "from-orange-500 to-red-500",
@@ -53,7 +53,7 @@ const agents = [
   },
   {
     id: "education",
-    name: "Sofia - Guia Educacional",
+    name: "Sofia - Guia Educacional (Em desenvolvimento)",
     description: "Descubra oportunidades educacionais em Aveiro! Informações sobre escolas, universidades, cursos e programas educacionais.",
     icon: "/chat/women_cwb.svg",
     gradient: "from-yellow-500 to-orange-500",
@@ -62,7 +62,7 @@ const agents = [
   },
   {
     id: "local",
-    name: "Miguel - Guia Local",
+    name: "Miguel - Guia Local (Em desenvolvimento)",
     description: "Conheça o melhor do comércio local! Restaurantes, lojas, serviços e dicas exclusivas dos melhores lugares da cidade.",
     icon: "/chat/man_bb.svg",
     gradient: "from-green-500 to-emerald-500",
@@ -71,7 +71,7 @@ const agents = [
   },
   {
     id: "faq",
-    name: "Clara - Assistente Rápido",
+    name: "Clara - Assistente Rápido (Em desenvolvimento)",
     description: "Respostas instantâneas para suas dúvidas mais comuns sobre Aveiro. Informações rápidas e precisas quando você precisa.",
     icon: "/chat/women_bb.svg",
     gradient: "from-violet-500 to-purple-500",
