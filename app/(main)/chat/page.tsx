@@ -11,14 +11,14 @@ export default function ChatPage() {
         <li className="text-l">
           👋
           <span className="ml-2">
-            Bem-vindo ao Chat do Smart City Hub! Aqui você pode conversar e tirar 
+            Bem-vindo ao Chat do Smart City Hub! Aqui você pode conversar e tirar
             dúvidas sobre a cidade.
           </span>
         </li>
         <li>
           🎯
           <span className="ml-2">
-            Este chat utiliza IA para fornecer informações precisas e atualizadas 
+            Este chat utiliza IA para fornecer informações precisas e atualizadas
             sobre Aveiro.
           </span>
         </li>
@@ -53,7 +53,7 @@ export default function ChatPage() {
           endpoint="api/chat/event_agent"
           emptyStateComponent={InfoCard}
           placeholder="Como posso ajudar você hoje?"
-          emoji="💬"
+
           showIntermediateStepsToggle={false}
         />
       </div>
