@@ -42,7 +42,7 @@ export function Vision() {
               <ArrowRight className="h-4 w-4 text-primary" />
             </div>
             <h2 className="text-3xl font-bold tracking-tight">
-              Como o SmartCity Hub Transforma Aveiro?
+              Como o ConnectAveiro Transforma Aveiro?
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Uma revolução na forma como cidadãos, turistas, empreendedores e gestores 

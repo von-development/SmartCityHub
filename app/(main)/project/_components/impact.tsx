@@ -51,7 +51,7 @@ export function Impact() {
               Benefícios para a Cidade
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              O impacto do SmartCity Hub transcende a tecnologia, refletindo-se 
+              O impacto do ConnectAveiro transcende a tecnologia, refletindo-se 
               diretamente no cotidiano da cidade
             </p>
           </motion.div>

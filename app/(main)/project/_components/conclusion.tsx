@@ -76,7 +76,7 @@ export function Conclusion() {
             className="max-w-4xl"
           >
             <p className="text-lg text-red-500 font-medium">
-              Estas limitações reforçam a necessidade de uma solução integrada como o SmartCity Hub, 
+              Estas limitações reforçam a necessidade de uma solução integrada como o ConnectAveiro, 
               que possa unificar estes serviços em uma única plataforma intuitiva e eficiente.
             </p>
           </motion.div>

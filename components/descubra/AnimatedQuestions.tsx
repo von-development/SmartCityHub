@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card"
 
 const questions = [
     {
-        text: "Quais eventos que irao acontecer neste final de semana?",
+        text: "Quais eventos que irão acontecer neste final de semana?",
         persona: "elder",
         label: "Idoso",
         color: "from-purple-500/20 to-purple-500/10",
@@ -100,7 +100,7 @@ export default function AnimatedQuestions() {
                                     `}
                                 >
                                     <p className="text-base md:text-lg font-medium text-gray-200 text-center leading-relaxed">
-                                        "{questions[currentIndex].text}"
+                                        &ldquo;{questions[currentIndex].text}&rdquo;
                                     </p>
                                     {/* Speech bubble triangle */}
                                     <div 

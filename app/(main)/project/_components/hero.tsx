@@ -73,7 +73,7 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10"
               >
-                <span className="text-sm font-medium text-primary">Aveiro Smart City Hub</span>
+                <span className="text-sm font-medium text-primary">ConnectAveiro</span>
                 <ArrowRight className="h-4 w-4 text-primary" />
               </motion.div>
               <motion.h1
@@ -98,7 +98,7 @@ export function Hero() {
               </p>
 
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                O SmartCity Hub já conta com uma interface intuitiva, inclusiva e eficiente, 
+                O ConnectAveiro Hub já conta com uma interface intuitiva, inclusiva e eficiente, 
                 integrada aos agentes de IA. O MVP foi projetado para oferecer:
               </p>
 

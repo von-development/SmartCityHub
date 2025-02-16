@@ -10,7 +10,7 @@ const cities = [
     name: 'Amsterdã',
     country: 'Holanda',
     description: 'Pioneira em soluções smart city, Amsterdã implementou uma plataforma digital que integra serviços municipais, mobilidade inteligente e participação cidadã. A cidade utiliza IoT e IA para melhorar a qualidade de vida dos cidadãos.',
-    image: 'https://images.unsplash.com/photo-1584003564911-a5a0d74c8c8b',
+    image: 'https://images.unsplash.com/photo-1583422409516-2895a77efded',
     gradient: 'from-blue-500 to-indigo-500'
   },
   {

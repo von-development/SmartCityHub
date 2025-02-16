@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: "Aveiro Smart City",
+  title: "Connect Aveiro",
   description: "Your digital gateway to Aveiro's urban experience",
   manifest: "/manifest.json",
   other: {
