@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card"
 
 const questions = [
     {
-        text: "Como faço para acessar os serviços municipais?",
+        text: "Quais eventos que irao acontecer neste final de semana?",
         persona: "elder",
         label: "Idoso",
         color: "from-purple-500/20 to-purple-500/10",
@@ -16,7 +16,7 @@ const questions = [
         borderColor: "border-purple-500/30"
     },
     {
-        text: "Qual o melhor caminho para a universidade?",
+        text: "Quais beneficios a cidade oferece para estudantes?",
         persona: "student",
         label: "Estudante",
         color: "from-blue-500/20 to-blue-500/10",
@@ -25,7 +25,7 @@ const questions = [
         borderColor: "border-blue-500/30"
     },
     {
-        text: "Onde encontro informações sobre eventos?",
+        text: "Onde devo visitar?",
         persona: "tourist",
         label: "Turista",
         color: "from-yellow-500/20 to-yellow-500/10",
@@ -36,7 +36,7 @@ const questions = [
     {
         text: "Como está o trânsito no centro?",
         persona: "localtraffic",
-        label: "Motorista",
+        label: "Locais",
         color: "from-red-500/20 to-red-500/10",
         textColor: "text-red-300",
         glowColor: "red",
