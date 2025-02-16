@@ -13,7 +13,11 @@ import {
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export function SearchCommand() {
+interface SearchCommandProps {
+  className?: string;
+}
+
+export function SearchCommand({ className }: SearchCommandProps) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
 
@@ -37,7 +41,7 @@ export function SearchCommand() {
     <>
       <Button
         variant="outline"
-        className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2"
+        className={`relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2 ${className || ''}`}
         onClick={() => setOpen(true)}
       >
         <Search className="h-4 w-4 xl:mr-2" aria-hidden="true" />

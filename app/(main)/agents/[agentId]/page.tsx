@@ -41,7 +41,7 @@ const agentConfigs: Record<string, AgentConfig> = {
     description: "Como posso ajudar com sua locomoção pela cidade?",
     icon: "/chat/women_bbg.svg",
     endpoint: "/api/chat/agents",
-    welcomeMessage: " ##Agente em configuracao! **Porfavor entre em contato com vivonvon@ua.pt para testar esse agente. Os agentes disponiveis atualmente sao  Joao (Servicos Online) Ana (Turismo) e Pedro (Guia Turistico)** "
+    welcomeMessage: " ** Agente em configuracao! Porfavor entre em contato com vivonvon@ua.pt para testar esse agente **"
   },
   services: {
     title: "João - Serviços",
@@ -55,22 +55,21 @@ const agentConfigs: Record<string, AgentConfig> = {
     description: "Como posso ajudar com informações educacionais?",
     icon: "/chat/women_cwb.svg",
     endpoint: "/api/chat/tourism_agent",
-    welcomeMessage: "##Agente em configuracao! **Porfavor entre em contato com vivonvon@ua.pt para testar esse agente. Os agentes disponiveis atualmente sao  Joao (Servicos Online) Ana (Turismo) e Pedro (Guia Turistico)**"
+    welcomeMessage: "** Agente em configuracao! Porfavor entre em contato com vivonvon@ua.pt para testar esse agente**"
   },
   local: {
     title: "Miguel - Guia Local",
     description: "Como posso ajudar você a explorar nossa cidade?",
     icon: "/chat/man_bb.svg",
     endpoint: "/api/chat/local_agent",
-    welcomeMessage: "##Agente em configuracao! **Porfavor entre em contato com vivonvon@ua.pt para testar esse agente. Os agentes disponiveis atualmente sao  Joao (Servicos Online) Ana (Turismo) e Pedro (Guia Turistico)**?"
+    welcomeMessage: "** Agente em configuracao! Porfavor entre em contato com vivonvon@ua.pt para testar esse agente**"
   },
   faq: {
     title: "Clara - FAQ",
     description: "Como posso esclarecer suas dúvidas hoje?",
     icon: "/chat/women_bb.svg",
     endpoint: "/api/chat/faq_agent",
-    welcomeMessage: "##Agente em configuracao! **Porfavor entre em contato com vivonvon@ua.pt para testar esse agente. Os agentes disponiveis atualmente sao  Joao (Servicos Online) Ana (Turismo) e Pedro (Guia Turistico)**"
-  }
+    welcomeMessage: "** Agente em configuracao! Porfavor entre em contato com vivonvon@ua.pt para testar esse agente**"  }
 };
 
 export default function AgentChatPage() {
