@@ -1,5 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+apre
 /docs/*
 
 *.txt
@@ -28,7 +28,7 @@ dist
 # misc
 .DS_Store
 *.pem
-
+apresentacao.md
 presentation.md
 docs/cost_analysis.md
 
