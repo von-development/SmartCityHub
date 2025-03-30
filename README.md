@@ -1,87 +1,49 @@
 # SmartCity Hub — Aveiro
 
-Centraliza serviços municipais, informações turísticas e eventos de Aveiro em uma única plataforma. Usa IA para personalizar a experiência de moradores, turistas e empreendedores.
+> **This repository is unmaintained.**  
+> Originally created during the Hackathon in Aveiro to showcase the idea of a unified hub for the city's information and services.
 
-[**Acessar Versão Demo**](https://frontend-smart-city.vercel.app/)
+## Project Overview
+
+The SmartCity Hub centralizes municipal services, tourist information, and events from the city of Aveiro into one platform. The aim is to simplify access to transportation data, city events, and other useful services, leveraging AI and various integrations. 
+
+**Agents)**:
+  - **CorrectiveRag**  
+  - **Tool Calling Agent**  
+  - **ReAct**  
+  - **Memory Agent**  
 
 
-## Visão Geral
+## APIs and Tools
 
-O **SmartCity Hub** simplifica o acesso a informações e serviços de Aveiro:
-- **Integração de Dados**: unifica dados municipais (transporte, eventos, serviços, etc.)
-- **Assistentes Virtuais IA**: cada agente tem foco específico (serviços públicos, turismo, empregos, licenciamento urbanístico, capacitação, startups e outros).
-- **Personalização**: recomendações e notificações adequadas ao perfil de cada usuário.
+- **React + Next.js**: Front-end framework for building dynamic user interfaces.
+- **Interactive Map**:
+  - **TomTom Traffic API**  
+  - **TomTom Places API**
+  - **TomTom Maps SDK** 
+- **Tool-Calling**: Integrations with:
+  - **Google Maps Directions**
+  - **Google Maps Geocoding** 
+  - **Google Maps Places**  
+  - **Generic SERP** (for search engine queries)
+- **OpenAI API**: Natural language processing for enhanced interactions with the agents.
+- **OpenWeatherMap API**: Real-time weather data.
+- **PostgreSQL**: Structured data storage.
+- **Tailwind CSS**: Responsive styling and layout.
 
-## Documentação
+## How to Install
 
-- [Estudo de Caso e Análise](./docs/overview_projeto.md) - Visão geral do projeto e análise das soluções existentes
-- [Requisitos do Produto](./docs/prd.md) - Detalhamento técnico e funcional do produto
-- [Estrutura do Banco de Dados](./docs/db_overview.md) - Modelagem e arquitetura dos dados
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/von-development/SmartCityHub.git
 
----
+2. **Install dependencies**:
+   ```bash
+   cd SmartCityHub
+   npm install
+3. **Start the development server**:
+   ```bash
+   npm run dev
 
-## Funcionalidades (MVP)
-
-1. **Interface Responsiva**  
-   - Layout otimizado para desktop e mobile.
-2. **Mapa Interativo**  
-   - Exibição de pontos de interesse e localizações relevantes.
-3. **Sistema de Eventos e Notícias**  
-   - Informações atualizadas sobre o que acontece em Aveiro.
-4. **Assistentes Virtuais**  
-   - **Ana** (Serviços Públicos e Eventos)  
-   - **João** (Guia Turístico)  
-   - **Carlos** (Oportunidades de Trabalho)  
-   - **Miguel** (Licenciamento Urbanístico)  
-   - **Julia** (Capacitação)  
-   - **Lucas** (Startups)  
-5. **Previsão do Tempo**  
-   - Dados atualizados via OpenWeatherMap.
-6. **Documentação**  
-   - Guia de uso e referências técnicas.
-
-**Os agentes da versao demo nao sao os agentes correc**
-
----
-
-## Próximos Passos
-
-### Validação com Stakeholders
-- Apresentação do MVP para gestores municipais
-- Coleta de feedback sobre funcionalidades implementadas
-- Identificação de necessidades específicas dos departamentos
-- Alinhamento com iniciativas existentes da cidade
-
-### Análise de Impacto
-- Avaliação da integração com sistemas atuais
-- Levantamento de recursos necessários
-- Estudo de viabilidade técnica
-- Definição de métricas de sucesso
-
-### Planejamento de Implementação
-- Priorização de funcionalidades baseada no feedback
-- Definição de cronograma realista
-- Estabelecimento de parcerias estratégicas
-- Plano de treinamento para servidores
-
----
-
-## Tecnologias
-
-- **Next.js 14**  
-- **React**  
-- **TypeScript**  
-- **Tailwind CSS**  
-- **OpenAI API**  
-- **OpenWeatherMap API**
-- **PostgreSQL**
-
----
-
-## Nota Importante
-
-Os agentes disponíveis na versão de demonstração são simplificados e não representam a implementação completa do sistema. Para acesso aos agentes com lógica avançada e ferramentas completas do projeto, entre em contato:
-
-📧 **vondevelopment@gmail.com**
-
----
+### Observation
+The project does not reflect the most recent versions of libraries or best development practices. For information about possibly resuming development or collaborating
